@@ -100,8 +100,6 @@ var index = (records, config) => {
         records: Array.from(matching_ids).map((i) => records[i])
       };
     },
-    records,
-    config: config || {},
     data: ix
   };
 };
