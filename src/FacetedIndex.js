@@ -5,20 +5,34 @@ Expectations:
 - all record values are simple primitives (string, number)
 - multi-value fields are not yet supported
 */
-var index = (records) => {
+var index = (records, config) => {
+  const expectedFacetIds =
+    !!config && Array.isArray(config.facet_fields)
+      ? new Set(config.facet_fields)
+      : undefined;
+
+  const allowableFacetId = (id) =>
+    !expectedFacetIds || expectedFacetIds.has(id);
+
   var ix = {};
   let i = 0;
   let all_ids = [];
   for (let r of records) {
     for (let k of Object.keys(r)) {
+      if (!allowableFacetId(k)) {
+        continue;
+      }
       ix[k] = ix[k] || {};
-      ix[k][r[k]] = ix[k][r[k]] || new Set();
-      ix[k][r[k]].add(i);
+      for (let term of Array.isArray(r[k]) ? r[k] : [r[k]]) {
+        ix[k][term] = ix[k][term] || new Set();
+        ix[k][term].add(i);
+      }
     }
     all_ids.push(i);
     i++;
   }
-  const facetIds = Object.keys(ix);
+
+  const facetIds = Object.keys(ix).filter(allowableFacetId);
   const intersectAll = (sets) => {
     var result = sets[0] || new Set();
     for (let s of sets.slice(1)) {
@@ -86,6 +100,8 @@ var index = (records) => {
         records: Array.from(matching_ids).map((i) => records[i])
       };
     },
+    records,
+    config: config || {},
     data: ix
   };
 };

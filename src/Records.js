@@ -1,15 +1,30 @@
 var randRange = (a, b) => Math.floor(a + Math.random() * (b - a));
 var randElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
+var randElements = (arr, n) =>
+  Array(Math.min(n, arr.length))
+    .fill()
+    .reduce(
+      (state) => {
+        //we want to avoid repeating terms, as that would be meaningless.
+        let arr = [...state.arr];
+        let i = Math.floor(Math.random() * state.arr.length);
+        arr.splice(i, 1);
+        return { arr, elems: [...state.elems, state.arr[i]] };
+      },
+      { arr: [...arr], elems: [] }
+    ).elems;
+
 const days = "Monday Tuesday Wednesday Thursday Friday".split(" ");
 const colors = "Red Orange Yellow Green Blue Indigo Violet".split(" ");
 const RECORD_COUNT = 1000;
-const localStorageKey = `TEST_RECORDS_${RECORD_COUNT}`;
+const localStorageKey = `RECORD_MIXEDd_${RECORD_COUNT}`;
 const priorities = "Low Medium High".split(" ");
 
 var generateRecords = (n) =>
   Array(n)
     .fill()
     .map((_, i) => ({
+      days: randElements(days, 2),
       day: randElement(days),
       color: randElement(colors),
       length: randRange(1, 6),

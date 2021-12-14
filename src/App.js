@@ -3,10 +3,29 @@ import FacetedIndex from "./FacetedIndex";
 import records from "./Records";
 import React from "react";
 
-var ix = FacetedIndex(records);
-
 export default function App() {
-  const [query, setQuery] = React.useState({ day: ["Thursday"] });
+  const [formJsonData, setFormJsonData] = React.useState("");
+  const [formJsonConfig, setFormJsonConfig] = React.useState("");
+  const [ix, setIx] = React.useState(
+    FacetedIndex(records, {
+      facet_fields: ["days", "color", "priority"]
+    })
+  );
+  React.useEffect(() => {
+    setFormJsonData(JSON.stringify(ix.records, null, 2));
+    setFormJsonConfig(JSON.stringify(ix.config, null, 2));
+  }, [ix]);
+  const changeData = () => {
+    var data = JSON.parse(formJsonData);
+    var cfg = JSON.parse(formJsonConfig);
+
+    if (!data || !Array.isArray(data) || !cfg) {
+      alert("sorry, invalid data");
+    } else {
+      setIx(FacetedIndex(data, cfg));
+    }
+  };
+  const [query, setQuery] = React.useState({});
 
   const searchResult = ix.search(query);
   const searchPerformed = Object.keys(searchResult.query).length > 0;
@@ -23,21 +42,24 @@ export default function App() {
     }
     setQuery(newQuery);
   };
+
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-3">
-          {searchResult.facets.map(({ facet_id, term_buckets }) => (
-            <div className="mb-3">
-              <h4>{facet_id}</h4>
-              {term_buckets.map((t) => (
-                <div onClick={() => toggleSearchTerm(facet_id, t.term)}>
-                  <input type="checkbox" checked={t.in_query} /> {t.term} (
-                  {t.count})
-                </div>
-              ))}
-            </div>
-          ))}
+          {searchResult.facets
+            .filter((f) => f.term_buckets.length > 0)
+            .map(({ facet_id, term_buckets }) => (
+              <div className="mb-3">
+                <h4>{facet_id}</h4>
+                {term_buckets.map((t) => (
+                  <div onClick={() => toggleSearchTerm(facet_id, t.term)}>
+                    <input type="checkbox" checked={t.in_query} /> {t.term} (
+                    {t.count})
+                  </div>
+                ))}
+              </div>
+            ))}
           <pre>{JSON.stringify(searchResult.query, null, 2)}</pre>
         </div>
         <div className="col-9">
@@ -59,6 +81,36 @@ export default function App() {
               </div>
             </div>
           ))}
+        </div>
+        <div className="row">
+          <div className="col-6">
+            <label>Records data</label>
+            <textarea
+              className="form-control"
+              rows={20}
+              placeholder="[records]"
+              value={formJsonData}
+              onChange={(e) => setFormJsonData(e.target.value)}
+            ></textarea>
+          </div>
+          <div className="col-6">
+            <label>Index Config</label>
+            <textarea
+              className="form-control"
+              rows={20}
+              placeholder="{config}"
+              value={formJsonConfig}
+              onChange={(e) => setFormJsonConfig(e.target.value)}
+            ></textarea>
+          </div>
+        </div>
+        <div className="d-grid my-2">
+          <button
+            className="btn btn-primary"
+            onClick={() => changeData(formJsonData)}
+          >
+            Update Index
+          </button>
         </div>
       </div>
     </div>
