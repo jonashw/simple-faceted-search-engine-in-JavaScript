@@ -24,7 +24,7 @@ const Settings = ({ settings, rebuildIndex }) => {
     <div>
       <div className="row">
         <div className="col-6">
-          <label className="form-label">Records</label>
+          <label className="form-label">Records (JSON)</label>
           <textarea
             className="form-control"
             rows={20}
@@ -34,7 +34,7 @@ const Settings = ({ settings, rebuildIndex }) => {
           ></textarea>
         </div>
         <div className="col-6">
-          <label className="form-label">Config</label>
+          <label className="form-label">Config (JSON)</label>
           <textarea
             className="form-control"
             rows={20}
