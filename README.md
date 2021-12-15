@@ -10,4 +10,10 @@ Requirements:
 
 - all record keys are strings
 - all record values are simple primitives (string, number)
-- all record values are single-value (multi-value properties are not yet supported)
+
+Features:
+
+- record values can be single-value or multi-value (a primitive or an array of primitives)
+- The UI allows you to paste your own records data in JSON format and configure the search index appropriately to your data
+
+Try it out: https://jo9dv.csb.app/
