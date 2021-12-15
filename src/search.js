@@ -40,13 +40,20 @@ const Search = ({ ix }) => {
         {searchResult.facets
           .filter((f) => f.term_buckets.length > 0)
           .map(({ facet_id, term_buckets }) => (
-            <div className="mb-3">
+            <div className="mb-3" key={facet_id}>
               <h4>{facet_id}</h4>
               {term_buckets.map((t) => (
-                <div onClick={() => toggleSearchTerm(facet_id, t.term)}>
-                  <input type="checkbox" checked={t.in_query} /> {t.term} (
-                  {t.count})
-                </div>
+                <label className="form-check" key={t.term}>
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    checked={t.in_query}
+                    onChange={() => toggleSearchTerm(facet_id, t.term)}
+                  />
+                  <span className="form-check-label">
+                    {t.term} ({t.count})
+                  </span>
+                </label>
               ))}
             </div>
           ))}
@@ -62,8 +69,8 @@ const Search = ({ ix }) => {
           </button>
         )}
         <h5>Results: {searchResult.records.length}</h5>
-        {searchResult.records.map((r) => (
-          <div className="card mb-3">
+        {searchResult.records.map((r, i) => (
+          <div className="card mb-3" key={i}>
             <div className="card-body">
               <div className="card-text">
                 <pre>{JSON.stringify(r, null, 2)}</pre>

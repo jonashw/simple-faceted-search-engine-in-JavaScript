@@ -39,9 +39,9 @@ export default function App() {
             ["Search", "/"],
             ["Settings", "/settings"]
           ].map(([label, path]) => (
-            <li className="nav-item">
+            <li className="nav-item" key={label}>
               <NavLink
-                activeClassName="active"
+                activeclassname="active"
                 className="nav-link"
                 to={path + (!!qs ? "?" + qs : "")}
               >
