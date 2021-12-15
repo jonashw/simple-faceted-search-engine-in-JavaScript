@@ -1,10 +1,25 @@
 import React from "react";
-
+import { useSearchParams } from "react-router-dom";
 const Search = ({ ix }) => {
-  const [query, setQuery] = React.useState({});
+  let [searchParams, setSearchParams] = useSearchParams();
+  const urlQuery = Array.from(searchParams.entries()).reduce(
+    (dict, [key, value]) => {
+      (dict[key] = dict[key] || []).push(value);
+      return dict;
+    },
+    {}
+  );
+  const [query, setQuery] = React.useState(urlQuery);
 
   const searchResult = ix.search(query);
   const searchPerformed = Object.keys(searchResult.query).length > 0;
+
+  React.useEffect(() => {
+    let pairs = Object.entries(query).flatMap(([key, values]) =>
+      values.map((v) => [key, v])
+    );
+    setSearchParams(new URLSearchParams(pairs));
+  }, [query, setSearchParams]);
 
   const toggleSearchTerm = (facetKey, term) => {
     let existingFacetTerms = query[facetKey] || [];
@@ -18,6 +33,7 @@ const Search = ({ ix }) => {
     }
     setQuery(newQuery);
   };
+
   return (
     <div className="row">
       <div className="col-3">
