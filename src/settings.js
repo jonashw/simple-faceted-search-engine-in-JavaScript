@@ -20,6 +20,17 @@ const Settings = ({ settings, rebuildIndex }) => {
     }
   };
 
+  const loadFromUrl = async () => {
+    let urlString = prompt("JSON data URL:");
+    try {
+      var url = new URL(urlString);
+      let data = await fetch(url).then((r) => r.json());
+      setRecordsJson(JSON.stringify(data, null, 2));
+    } catch (e) {
+      alert("invalid URL or JSON data");
+    }
+  };
+
   return (
     <div>
       <div className="row">
@@ -47,6 +58,9 @@ const Settings = ({ settings, rebuildIndex }) => {
       <div className="d-grid my-2">
         <button className="btn btn-primary" onClick={() => submit()}>
           Update Index
+        </button>
+        <button className="btn btn-outline-primary mt-2" onClick={loadFromUrl}>
+          Load Records data from URL
         </button>
       </div>
     </div>

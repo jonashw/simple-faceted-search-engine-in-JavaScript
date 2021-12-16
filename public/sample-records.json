@@ -1,0 +1,6002 @@
+[
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Orange",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Orange",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Orange",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Red",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Green",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Yellow",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Yellow",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Blue",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Orange",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Red",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Yellow",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Yellow",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Blue",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Violet",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Indigo",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Red",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Red",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Yellow",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Red",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Violet",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Indigo",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Blue",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Blue",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Yellow",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Blue",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Violet",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Green",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Red",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Orange",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Orange",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Indigo",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Violet",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Red",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Orange",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Indigo",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Green",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Orange",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Red",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Red",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Indigo",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Violet",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Blue",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Orange",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Red",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Green",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Yellow",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Indigo",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Yellow",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Violet",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Orange",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Violet",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Violet",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Red",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Green",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Orange",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Red",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Indigo",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Orange",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Red",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Red",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Violet",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Red",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Orange",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Indigo",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Indigo",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Green",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Red",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Blue",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Indigo",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Blue",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Red",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Red",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Red",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Red",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Blue",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Red",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Green",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Blue",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Orange",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Indigo",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Indigo",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Red",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Orange",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Green",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Orange",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Red",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Red",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Violet",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Red",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Orange",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Orange",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Red",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Green",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Green",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Violet",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Orange",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Orange",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Blue",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Red",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Blue",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Orange",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Violet",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Orange",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Blue",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Indigo",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Orange",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Indigo",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Green",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Blue",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Orange",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Red",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Orange",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Green",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Red",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Indigo",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Orange",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Yellow",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Red",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Green",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Yellow",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Green",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Blue",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Yellow",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Yellow",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Indigo",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Violet",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Violet",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Red",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Red",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Red",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Green",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Orange",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Orange",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Red",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Orange",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Violet",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Blue",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Red",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Orange",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Red",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Yellow",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Blue",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Yellow",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Orange",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Violet",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Blue",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Indigo",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Violet",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Violet",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Indigo",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Orange",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Indigo",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Green",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Red",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Orange",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Yellow",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Yellow",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Yellow",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Orange",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Indigo",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Green",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Yellow",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Orange",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Orange",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Indigo",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Red",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Red",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Red",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Orange",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Yellow",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Orange",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Indigo",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Green",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Yellow",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Red",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Indigo",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Green",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Blue",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Violet",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Orange",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Green",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Green",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Red",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Blue",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Violet",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Red",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Yellow",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Red",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Orange",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Violet",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Orange",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Green",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Orange",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Friday"],
+    "color": "Orange",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Green",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Orange",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Red",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Red",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Orange",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Green",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Blue",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Tuesday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Red",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Violet",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Orange",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Yellow",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Yellow",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Blue",
+    "length": 4,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Orange",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Blue",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Blue",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Violet",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Violet",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Orange",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Blue",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Monday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Indigo",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Thursday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Wednesday"],
+    "color": "Red",
+    "length": 2,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Violet",
+    "length": 5,
+    "priority": "Low"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Violet",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Violet",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Monday"],
+    "color": "Yellow",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Green",
+    "length": 2,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Blue",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Violet",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Orange",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Indigo",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Friday"],
+    "color": "Red",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Monday"],
+    "color": "Yellow",
+    "length": 4,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Green",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Indigo",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Friday"],
+    "color": "Blue",
+    "length": 3,
+    "priority": "High"
+  },
+  {
+    "days": ["Wednesday", "Monday"],
+    "color": "Yellow",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Wednesday", "Tuesday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Yellow",
+    "length": 5,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Yellow",
+    "length": 3,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Tuesday", "Thursday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Tuesday"],
+    "color": "Red",
+    "length": 1,
+    "priority": "Low"
+  },
+  {
+    "days": ["Wednesday", "Friday"],
+    "color": "Green",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Wednesday"],
+    "color": "Blue",
+    "length": 1,
+    "priority": "Medium"
+  },
+  {
+    "days": ["Friday", "Thursday"],
+    "color": "Indigo",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Monday", "Wednesday"],
+    "color": "Orange",
+    "length": 3,
+    "priority": "Low"
+  },
+  {
+    "days": ["Thursday", "Tuesday"],
+    "color": "Green",
+    "length": 5,
+    "priority": "High"
+  },
+  {
+    "days": ["Monday", "Thursday"],
+    "color": "Green",
+    "length": 4,
+    "priority": "High"
+  },
+  {
+    "days": ["Friday", "Wednesday"],
+    "color": "Orange",
+    "length": 1,
+    "priority": "High"
+  }
+]

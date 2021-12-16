@@ -2,23 +2,27 @@ import React from "react";
 import { useSearchParams } from "react-router-dom";
 const Search = ({ ix }) => {
   let [searchParams, setSearchParams] = useSearchParams();
-  const urlQuery = Array.from(searchParams.entries()).reduce(
-    (dict, [key, value]) => {
+  const urlQuery = Array.from(searchParams.entries())
+    .filter(([key, value]) => key.indexOf("q_") === 0)
+    .map(([key, value]) => [key.replace("q_", ""), value])
+    .reduce((dict, [key, value]) => {
       (dict[key] = dict[key] || []).push(value);
       return dict;
-    },
-    {}
-  );
+    }, {});
   const [query, setQuery] = React.useState(urlQuery);
 
   const searchResult = ix.search(query);
   const searchPerformed = Object.keys(searchResult.query).length > 0;
 
   React.useEffect(() => {
-    let pairs = Object.entries(query).flatMap(([key, values]) =>
-      values.map((v) => [key, v])
+    let existingPairs = Array.from(searchParams.entries()).filter(
+      ([key, value]) => key.indexOf("q_") === -1
     );
-    setSearchParams(new URLSearchParams(pairs));
+    let pairs = Object.entries(query).flatMap(([key, values]) =>
+      values.map((v) => ["q_" + key, v])
+    );
+
+    setSearchParams(new URLSearchParams(existingPairs.concat(pairs)));
   }, [query, setSearchParams]);
 
   const toggleSearchTerm = (facetKey, term) => {
