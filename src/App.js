@@ -13,6 +13,7 @@ import Settings from "./settings";
 
 export default function App() {
   const [settings, setSettings] = React.useState({ records: [], config: {} });
+  const [debug, setDebug] = React.useState(false);
   const [ix, setIx] = React.useState(FacetedIndex([], { facet_fields: [] }));
   const [searchParams] = useSearchParams();
   const qs = searchParams.toString();
@@ -46,6 +47,7 @@ export default function App() {
     };
     if (searchParamsObject.records_url && searchParamsObject.facet_fields) {
       init(searchParamsObject.records_url, searchParamsObject.facet_fields);
+      setDebug(!!searchParamsObject.debug);
     } else {
       //the app should work with JSON data stored at any URL but we also want a nice introduction to newcomers with sample data
       reload("/sample-records.json", ["days", "color"]);
@@ -82,7 +84,7 @@ export default function App() {
           path="/settings"
           element={<Settings {...{ settings, rebuildIndex }} />}
         />
-        <Route path="/" element={<Search ix={ix} />} />
+        <Route path="/" element={<Search debug={debug} ix={ix} />} />
       </Routes>
     </div>
   );
