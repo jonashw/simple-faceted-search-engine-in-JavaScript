@@ -16,4 +16,4 @@ Features:
 - record values can be single-value or multi-value (a primitive or an array of primitives)
 - The UI allows you to paste your own records data in JSON format and configure the search index appropriately to your data
 
-Try it out: https://jo9dv.csb.app/
+Try it out: https://faceted-search.netlify.app/

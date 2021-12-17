@@ -6,12 +6,18 @@ import {
   Routes,
   Route,
   NavLink,
+  useNavigate,
   useSearchParams
 } from "react-router-dom";
 import Search from "./search";
 import Settings from "./settings";
 
 export default function App() {
+  const navigateViaRouter = useNavigate();
+  const navigateViaBrowser = (path) => window.location.href = window.location.origin + path;
+  const useRouterNav = false;
+  const navigate = useRouterNav ? navigateViaRouter : navigateViaBrowser;
+
   const [settings, setSettings] = React.useState({ records: [], config: {} });
   const [debug, setDebug] = React.useState(false);
   const [ix, setIx] = React.useState(FacetedIndex([], { facet_fields: [] }));
@@ -25,13 +31,12 @@ export default function App() {
     {}
   );
   const reload = (records_url, facet_fields) => {
-    window.location.href =
-      window.location.origin +
-      "?" +
+    
+    navigate('?' +
       new URLSearchParams([
         ["records_url", records_url],
         ...facet_fields.map((f) => ["facet_fields", f])
-      ]);
+      ]));
   };
 
   React.useEffect(() => {
@@ -50,7 +55,7 @@ export default function App() {
       setDebug(!!searchParamsObject.debug);
     } else {
       //the app should work with JSON data stored at any URL but we also want a nice introduction to newcomers with sample data
-      reload("/sample-records.json", ["days", "color"]);
+      reload("sample-records.json", ["days", "color"]);
     }
   }, []);
 
@@ -60,7 +65,8 @@ export default function App() {
   };
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid mt-3">
+      {/*
       <nav className="my-3">
         <ul className="nav nav-tabs">
           {[
@@ -79,12 +85,13 @@ export default function App() {
           ))}
         </ul>
       </nav>
+      */}
       <Routes>
         <Route
           path="/settings"
           element={<Settings {...{ settings, rebuildIndex }} />}
         />
-        <Route path="/" element={<Search debug={debug} ix={ix} />} />
+        <Route path="/" element={<Search {...{ix,debug}} />} />
       </Routes>
     </div>
   );

@@ -2,30 +2,25 @@ import React from "react";
 import { useSearchParams } from "react-router-dom";
 import Select from 'react-select'
 
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' }
-]
-
-const MyComponent = () => (
-  <Select options={options} />
-)
 const Search = ({ ix,debug }) => {
   let [searchParams, setSearchParams] = useSearchParams();
-  const urlQuery = Array.from(searchParams.entries())
-    .filter(([key, value]) => key.indexOf("q_") === 0)
-    .map(([key, value]) => [key.replace("q_", ""), value])
-    .reduce((dict, [key, value]) => {
-      (dict[key] = dict[key] || []).push(value);
-      return dict;
-    }, {});
-  const [query, setQuery] = React.useState(urlQuery);
+  const [query, setQuery] = React.useState({});
 
   const searchResult = ix.search(query);
   const searchPerformed = Object.keys(searchResult.query).length > 0;
 
   React.useEffect(() => {
+    const urlQuery = Array.from(searchParams.entries())
+      .filter(([key, value]) => key.indexOf("q_") === 0)
+      .map(([key, value]) => [key.replace("q_", ""), value])
+      .reduce((dict, [key, value]) => {
+        (dict[key] = dict[key] || []).push(value);
+        return dict;
+      }, {});
+      setQuery(urlQuery);
+  }, [searchParams]);
+
+  const setQueryFromUI = (query) => {
     let existingPairs = Array.from(searchParams.entries()).filter(
       ([key, value]) => key.indexOf("q_") === -1
     );
@@ -34,7 +29,7 @@ const Search = ({ ix,debug }) => {
     );
 
     setSearchParams(new URLSearchParams(existingPairs.concat(pairs)));
-  }, [query, setSearchParams]);
+  };
 
   const toggleSearchTerm = (facetKey, term) => {
     let existingFacetTerms = query[facetKey] || [];
@@ -46,7 +41,7 @@ const Search = ({ ix,debug }) => {
     if (newQuery[facetKey].length === 0) {
       delete newQuery[facetKey];
     }
-    setQuery(newQuery);
+    setQueryFromUI(newQuery);
   };
 
   const setFacetQueryTerms = (facet_id, terms) => {
@@ -54,7 +49,7 @@ const Search = ({ ix,debug }) => {
     if (newQuery[facet_id].length === 0) {
       delete newQuery[facet_id];
     }
-    setQuery(newQuery);
+    setQueryFromUI(newQuery);
   };
 
   const TermBucketSelectMenu = ({facet_id, term_buckets}) => {
