@@ -1,68 +1,115 @@
 import React from "react";
+import './settings.css';
 
-const Settings = ({ settings, rebuildIndex }) => {
-  const [recordsJson, setRecordsJson] = React.useState([]);
-  const [configJson, setConfigJson] = React.useState({});
-
-  React.useEffect(() => {
-    setRecordsJson(JSON.stringify(settings.records, null, 2));
-    setConfigJson(JSON.stringify(settings.config, null, 2));
-  }, [settings]);
-
-  const submit = () => {
-    var records = JSON.parse(recordsJson);
-    var config = JSON.parse(configJson);
-
-    if (!records || !Array.isArray(records) || !config) {
-      alert("sorry, invalid data");
+const getJson = async url => {
+  try {
+    let records = await fetch(url).then((r) => r.json());
+    if (!records || !Array.isArray(records)) {
+      return [];
     } else {
-      rebuildIndex({ records, config });
+      return records;
     }
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+const Settings = ({makeUrl}) => {
+  const [recordsUrl, setRecordsUrl] = React.useState('sample-records.json');
+  const [records, setRecords] = React.useState();
+  const [url,setUrl] = React.useState();
+  const [fieldNames,setFieldNames] = React.useState();
+  const [selectedFieldNames, setSelectedFieldNames] = React.useState(new Set());
+
+  const reset = () => {
+    setFieldNames();
+    setSelectedFieldNames(new Set());
   };
 
-  const loadFromUrl = async () => {
-    let urlString = prompt("JSON data URL:");
-    try {
-      var url = new URL(urlString);
-      let data = await fetch(url).then((r) => r.json());
-      setRecordsJson(JSON.stringify(data, null, 2));
-    } catch (e) {
+  const loadUrl = async () => {
+    setRecords(undefined);
+    var records = await getJson(recordsUrl);
+    if(!records){
       alert("invalid URL or JSON data");
+      return;
     }
+    var fieldNames = new Set();
+    for(let r of records){
+      for(let k of Object.keys(r)){
+        fieldNames.add(k);
+      }
+    }
+    setFieldNames(Array.from(fieldNames));
+    setRecords(records);
   };
 
   return (
-    <div>
-      <div className="row">
-        <div className="col-6">
-          <label className="form-label">Records (JSON)</label>
-          <textarea
-            className="form-control"
-            rows={20}
-            placeholder="[records]"
-            value={recordsJson}
-            onChange={(e) => setRecordsJson(e.target.value)}
-          ></textarea>
+    <div className="card">
+      <h5 className="card-header">
+        Faceted Index Configuration: Data and fields
+      </h5>
+      <div className="card-body">
+        <div className="input-group input-group-lg">
+          <div className="form-floating form-floating-group flex-grow-1">
+              <input type="text"
+                id="json_url"
+                disabled={!!fieldNames}
+                className="form-control"
+                value={recordsUrl}
+                onChange={e => setRecordsUrl(e.target.value) 
+              }/>
+              <label htmlFor="json_url">URL to JSON data</label>
+          </div>
+          {!fieldNames
+          ?
+          <button className="btn btn-success"
+            onClick={() => loadUrl()}
+          >Continue with JSON data</button>
+          :
+          <button className="btn btn-danger"
+            onClick={reset}
+          >Clear</button>
+          }
         </div>
-        <div className="col-6">
-          <label className="form-label">Config (JSON)</label>
-          <textarea
-            className="form-control"
-            rows={20}
-            placeholder="{config}"
-            value={configJson}
-            onChange={(e) => setConfigJson(e.target.value)}
-          ></textarea>
-        </div>
+
+        {!!fieldNames && 
+          <div className="mt-3">
+          <label className="form-label">
+            Available Fields
+          </label>
+          {fieldNames.map(f => 
+            <label className="form-check" key={f}>
+              <input
+                className="form-check-input"
+                type="checkbox"
+                checked={selectedFieldNames.has(f)}
+                onChange={() => {
+                  let newFNs = new Set(selectedFieldNames);
+                  if(selectedFieldNames.has(f)){
+                    newFNs.delete(f);
+                  } else {
+                    newFNs.add(f);
+                  }
+                  setSelectedFieldNames(newFNs);
+                  setUrl(makeUrl(recordsUrl,Array.from(newFNs)));
+                }}
+              />
+              <span className="form-check-label">
+                {f}
+              </span>
+            </label>)}
+          </div>
+        }
       </div>
-      <div className="d-grid my-2">
-        <button className="btn btn-primary" onClick={() => submit()}>
-          Update Index
-        </button>
-        <button className="btn btn-outline-primary mt-2" onClick={loadFromUrl}>
-          Load Records data from URL
-        </button>
+      {!!fieldNames && <div className="card-footer d-grid">
+        <a
+        className={`btn btn-success btn-lg ${(selectedFieldNames.size === 0 ? "disabled" : "")}`}
+        href={url}>
+          Begin Faceted Search
+        </a>
+        {selectedFieldNames.size === 0 && <div className="mt-2"><code>&lt;!&gt;</code> Select at least one field to continue</div>}
       </div>
+      }
     </div>
   );
 };

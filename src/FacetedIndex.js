@@ -6,6 +6,7 @@ Expectations:
 - multi-value fields are not yet supported
 */
 var index = (records, config) => {
+  const candidate_facet_fields = new Set();
   const expectedFacetIds =
     !!config && Array.isArray(config.facet_fields)
       ? new Set(config.facet_fields)
@@ -19,6 +20,7 @@ var index = (records, config) => {
   let all_ids = [];
   for (let r of records) {
     for (let k of Object.keys(r)) {
+      candidate_facet_fields.add(k);
       if (!allowableFacetId(k)) {
         continue;
       }
@@ -100,6 +102,7 @@ var index = (records, config) => {
         records: Array.from(matching_ids).map((i) => records[i])
       };
     },
+    candidate_facet_fields,
     data: ix
   };
 };

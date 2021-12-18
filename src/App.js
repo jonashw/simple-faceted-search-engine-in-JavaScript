@@ -12,15 +12,21 @@ import {
 import Search from "./search";
 import Settings from "./settings";
 
+const qs_cfg = {
+  facet_fields: 'ff',
+  records_url: 'url'
+}
+
 export default function App() {
+  const useRouterNav = false;
   const navigateViaRouter = useNavigate();
   const navigateViaBrowser = (path) => window.location.href = window.location.origin + path;
-  const useRouterNav = false;
   const navigate = useRouterNav ? navigateViaRouter : navigateViaBrowser;
+  const [settingsVisible, setSettingsVisible] = React.useState(false);
 
-  const [settings, setSettings] = React.useState({ records: [], config: {} });
+  const [settings, setSettings] = React.useState({ records: [], config: {}, candidate_facet_fields: [] });
   const [debug, setDebug] = React.useState(false);
-  const [ix, setIx] = React.useState(FacetedIndex([], { facet_fields: [] }));
+  const [ix, setIx] = React.useState(FacetedIndex([], { [qs_cfg.facet_fields]: [] }));
   const [searchParams] = useSearchParams();
   const qs = searchParams.toString();
   const searchParamsObject = Array.from(searchParams.entries()).reduce(
@@ -30,13 +36,17 @@ export default function App() {
     },
     {}
   );
+
+  const makeUrl = (records_url, facet_fields) =>
+  '?' +
+    new URLSearchParams([
+      [qs_cfg.records_url, records_url],
+      ...facet_fields.map((f) => [qs_cfg.facet_fields, f])
+    ]);
+
   const reload = (records_url, facet_fields) => {
-    
-    navigate('?' +
-      new URLSearchParams([
-        ["records_url", records_url],
-        ...facet_fields.map((f) => ["facet_fields", f])
-      ]));
+    let url = makeUrl(records_url, facet_fields);
+    navigate(url);
   };
 
   React.useEffect(() => {
@@ -44,55 +54,37 @@ export default function App() {
       let r = await fetch(url);
       let records = await r.json();
       rebuildIndex({
+        records_url: url,
         records,
         config: {
           facet_fields
         }
       });
     };
-    if (searchParamsObject.records_url && searchParamsObject.facet_fields) {
-      init(searchParamsObject.records_url, searchParamsObject.facet_fields);
+    if (searchParamsObject[qs_cfg.records_url] && searchParamsObject[qs_cfg.facet_fields]) {
+      init(searchParamsObject[qs_cfg.records_url][0], searchParamsObject[qs_cfg.facet_fields]);
       setDebug(!!searchParamsObject.debug);
+      setSettingsVisible(false);
     } else {
       //the app should work with JSON data stored at any URL but we also want a nice introduction to newcomers with sample data
-      reload("sample-records.json", ["days", "color"]);
+      //reload("sample-records.json", ["days", "color"]);
+      setSettingsVisible(true);
     }
   }, []);
 
   const rebuildIndex = (s) => {
-    setSettings(s);
-    setIx(FacetedIndex(s.records, s.config));
+    let ix = FacetedIndex(s.records, s.config);
+    setSettings({...s, candidate_facet_fields: ix.candidate_facet_fields});
+    setIx(ix);
   };
 
-  return (
-    <div className="container-fluid mt-3">
-      {/*
-      <nav className="my-3">
-        <ul className="nav nav-tabs">
-          {[
-            ["Search", "/"],
-            ["Settings", "/settings"]
-          ].map(([label, path]) => (
-            <li className="nav-item" key={label}>
-              <NavLink
-                activeclassname="active"
-                className="nav-link"
-                to={path + (!!qs ? "?" + qs : "")}
-              >
-                {label}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-      </nav>
-      */}
-      <Routes>
-        <Route
-          path="/settings"
-          element={<Settings {...{ settings, rebuildIndex }} />}
-        />
-        <Route path="/" element={<Search {...{ix,debug}} />} />
-      </Routes>
-    </div>
-  );
+  return settingsVisible 
+    ?
+      <div className="container mt-3">
+        <Settings {...{ settings, rebuildIndex, makeUrl }} />
+      </div>
+    : <div className="container-fluid mt-3">
+        <button type="button" className="btn-close" aria-label="Close" style={{float:'right'}} onClick={() => setSettingsVisible(true)}></button>
+        <Search {...{ix,debug}} />
+      </div>;
 }
