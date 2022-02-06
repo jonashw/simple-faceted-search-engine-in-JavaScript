@@ -12,12 +12,25 @@ var index = (records, config) => {
       ? new Set(config.facet_fields)
       : undefined;
 
+  const convertToDisplayRecord = (() => {
+    if(!config || !Array.isArray(config.display_fields) || config.display_fields.length === 0){
+      return r => r;
+    }
+    var dfields = new Set(config.display_fields);
+    console.log('dfields',dfields);
+    return r => {
+      var displayEntries = Object.entries(r).filter(([k,v]) => dfields.has(k));
+      return Object.fromEntries(displayEntries);
+    };
+  })();
+
   const allowableFacetId = (id) =>
     !expectedFacetIds || expectedFacetIds.has(id);
 
   var ix = {};
   let i = 0;
   let all_ids = [];
+  let display_records = [];
   for (let r of records) {
     for (let k of Object.keys(r)) {
       candidate_facet_fields.add(k);
@@ -30,6 +43,7 @@ var index = (records, config) => {
         ix[k][term].add(i);
       }
     }
+    display_records.push(convertToDisplayRecord(r));
     all_ids.push(i);
     i++;
   }
@@ -99,7 +113,7 @@ var index = (records, config) => {
       return {
         query: { ...query },
         facets,
-        records: Array.from(matching_ids).map((i) => records[i])
+        records: Array.from(matching_ids).map((i) => display_records[i])
       };
     },
     candidate_facet_fields,

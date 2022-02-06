@@ -117,7 +117,7 @@ const Search = ({ ix,debug }) => {
           <div className="card mb-3" key={i}>
             <div className="card-body">
               <div className="card-text">
-                <pre>{JSON.stringify(r, null, 2)}</pre>
+                <pre className="mb-0">{JSON.stringify(r, null, 2)}</pre>
               </div>
             </div>
           </div>

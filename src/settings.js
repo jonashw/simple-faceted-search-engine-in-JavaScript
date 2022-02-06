@@ -19,7 +19,15 @@ const Settings = ({makeUrl}) => {
   const [records, setRecords] = React.useState();
   const [url,setUrl] = React.useState();
   const [fieldNames,setFieldNames] = React.useState();
-  const [selectedFieldNames, setSelectedFieldNames] = React.useState(new Set());
+  const [selectedFacetFieldNames, setSelectedFacetFieldNames] = React.useState(new Set());
+  const [selectedDisplayFieldNames, setSelectedDisplayFieldNames] = React.useState(new Set());
+
+  React.useEffect(() => {
+    setUrl(makeUrl(recordsUrl, Array.from(selectedFacetFieldNames), Array.from(selectedDisplayFieldNames)));
+  },[
+    selectedFacetFieldNames,
+    selectedDisplayFieldNames
+  ])
 
   const reset = () => {
     setFieldNames();
@@ -40,8 +48,46 @@ const Settings = ({makeUrl}) => {
       }
     }
     setFieldNames(Array.from(fieldNames));
+    setSelectedDisplayFieldNames(new Set(fieldNames));
     setRecords(records);
   };
+
+  const FieldsToggle = ({
+    label,
+    description,
+    fieldNames,
+    selectedFieldNames,
+    setSelectedFieldNames
+  }) => (
+    <div>
+      <label className="form-label">
+        {label}
+      </label>
+      <p>
+        {description}
+      </p>
+      {fieldNames.map(f =>
+        <label className="form-check" key={f}>
+          <input
+            className="form-check-input"
+            type="checkbox"
+            checked={selectedFieldNames.has(f)}
+            onChange={() => {
+              let newFNs = new Set(selectedFieldNames);
+              if (selectedFieldNames.has(f)) {
+                newFNs.delete(f);
+              } else {
+                newFNs.add(f);
+              }
+              setSelectedFieldNames(newFNs);
+            }}
+          />
+          <span className="form-check-label">
+            {f}
+          </span>
+        </label>)}
+    </div>
+    );
 
   return (
     <div className="card">
@@ -73,41 +119,35 @@ const Settings = ({makeUrl}) => {
         </div>
 
         {!!fieldNames && 
-          <div className="mt-3">
-          <label className="form-label">
-            Available Fields
-          </label>
-          {fieldNames.map(f => 
-            <label className="form-check" key={f}>
-              <input
-                className="form-check-input"
-                type="checkbox"
-                checked={selectedFieldNames.has(f)}
-                onChange={() => {
-                  let newFNs = new Set(selectedFieldNames);
-                  if(selectedFieldNames.has(f)){
-                    newFNs.delete(f);
-                  } else {
-                    newFNs.add(f);
-                  }
-                  setSelectedFieldNames(newFNs);
-                  setUrl(makeUrl(recordsUrl,Array.from(newFNs)));
-                }}
+          <div className="row mt-3">
+            <div className="col">
+              <FieldsToggle 
+                label="Facet Fields"
+                description="Select the fields that should be used as facets"
+                fieldNames={fieldNames}
+                selectedFieldNames={selectedFacetFieldNames}
+                setSelectedFieldNames={setSelectedFacetFieldNames}
               />
-              <span className="form-check-label">
-                {f}
-              </span>
-            </label>)}
+            </div>
+            <div className="col">
+              <FieldsToggle 
+                label="Display Fields"
+                description="Select the fields that should be displayed in search results"
+                fieldNames={fieldNames}
+                selectedFieldNames={selectedDisplayFieldNames}
+                setSelectedFieldNames={setSelectedDisplayFieldNames}
+              />
+            </div>
           </div>
         }
       </div>
       {!!fieldNames && <div className="card-footer d-grid">
         <a
-        className={`btn btn-success btn-lg ${(selectedFieldNames.size === 0 ? "disabled" : "")}`}
+        className={`btn btn-success btn-lg ${(selectedFacetFieldNames.size === 0 ? "disabled" : "")}`}
         href={url}>
           Begin Faceted Search
         </a>
-        {selectedFieldNames.size === 0 && <div className="mt-2"><code>&lt;!&gt;</code> Select at least one field to continue</div>}
+        {selectedFacetFieldNames.size === 0 && <div className="mt-2"><code>&lt;!&gt;</code> Select at least one field to continue</div>}
       </div>
       }
     </div>
