@@ -27,9 +27,8 @@ export default function App() {
 
   const [settings, setSettings] = React.useState({ records: [], config: {}, candidate_facet_fields: [] });
   const [debug, setDebug] = React.useState(false);
-  const [ix, setIx] = React.useState(FacetedIndex([], { [qs_cfg.facet_fields]: [] }));
+  const [ix, setIx] = React.useState(FacetedIndex([], { facet_fields: [] }));
   const [searchParams] = useSearchParams();
-  const qs = searchParams.toString();
   const searchParamsObject = Array.from(searchParams.entries()).reduce(
     (dict, [key, value]) => {
       (dict[key] = dict[key] || []).push(value);
