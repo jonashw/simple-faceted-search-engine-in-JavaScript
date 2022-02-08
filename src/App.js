@@ -1,6 +1,7 @@
 import "./styles.css";
-import FacetedIndex from "./FacetedIndex";
+import {FacetedIndex} from "./FacetedIndex";
 import React from "react";
+import SimpleDemo from "./SimpleDemo";
 import {
   BrowserRouter as Router,
   Routes,
@@ -36,6 +37,8 @@ export default function App() {
     },
     {}
   );
+
+  const demo = !!searchParams.get('demo');
 
   const makeUrl = (records_url, facet_fields, display_fields) =>
   '?' +
@@ -80,7 +83,9 @@ export default function App() {
     setIx(ix);
   };
 
-  return settingsVisible 
+  return demo 
+    ? <SimpleDemo />
+    : settingsVisible 
     ?
       <div className="container mt-3">
         <Settings {...{ settings, rebuildIndex, makeUrl }} />

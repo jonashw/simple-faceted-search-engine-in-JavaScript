@@ -2,10 +2,22 @@ import React from "react";
 import Select from 'react-select';
 
 const SearchFilters = ({ix,query,setQuery,debug,searchResult,setSearchResult}) => {
+  const [activeTerms,setActiveTerms] = React.useState({});
+  const term_is_selected = t => t in activeTerms;
+
   React.useEffect(() => {
-    let r = ix.search(query);
-    setSearchResult(r);
-    console.log('searching',query,r);
+    let allTerms = Object.entries(query).flatMap(([facet,terms]) => terms);
+    setActiveTerms(Object.fromEntries(allTerms.map(t => [t,true])));
+  }, [query])
+
+  React.useEffect(() => {
+    new Promise((resolve) => {
+        setTimeout(() => {
+            let r = ix.search(query);
+            setSearchResult(r);
+            //console.log('searching',query,r);
+        }, 0);
+    })
   }, [query])
 
   const toggleSearchTerm = (facetKey, term) => {
@@ -29,7 +41,7 @@ const SearchFilters = ({ix,query,setQuery,debug,searchResult,setSearchResult}) =
     setQuery(newQuery);
   };
 
-  const TermBucketSelectMenu = ({facet_id, term_buckets}) => {
+  const TermBucketSelectMenu = ({facet_id, term_buckets, term_is_selected}) => {
     let options = term_buckets.map(t => ({
         value: t.term,
         in_query: t.in_query,
@@ -39,19 +51,20 @@ const SearchFilters = ({ix,query,setQuery,debug,searchResult,setSearchResult}) =
     return <Select 
       onChange={selectedOptions => setFacetQueryTerms(facet_id, selectedOptions.map(v => v.value) ) }
       getOptionValue={o => o.value}
+      isOptionSelected={o => term_is_selected(o.value) }
       hideSelectedOptions={true}
       value={selectedOptions}
       options={options}
       isMulti={true} />;
   };
 
-  const TermBucketCheckBoxes = ({facet_id, term_buckets}) =>
+  const TermBucketCheckBoxes = ({facet_id, term_buckets, term_is_selected}) =>
     term_buckets.map((t) => (
       <label className="form-check" key={t.term}>
         <input
           className="form-check-input"
           type="checkbox"
-          checked={t.in_query}
+          checked={term_is_selected(t.term)}
           onChange={() => toggleSearchTerm(facet_id, t.term)}
         />
         <span className="form-check-label">
@@ -68,14 +81,17 @@ const SearchFilters = ({ix,query,setQuery,debug,searchResult,setSearchResult}) =
         <div className="mb-3" key={facet_id}>
           <h4>{facet_id}</h4>
           { term_buckets.length > 10  
-            ? <TermBucketSelectMenu {...{facet_id, term_buckets}} />
-            : <TermBucketCheckBoxes {...{facet_id, term_buckets}} />
+            ? <TermBucketSelectMenu {...{facet_id, term_buckets, term_is_selected}} />
+            : <TermBucketCheckBoxes {...{facet_id, term_buckets, term_is_selected}} />
           }
         </div>
       );
     })}
     {!!debug &&
-      <pre>{JSON.stringify(searchResult.query, null, 2)}</pre>
+          <>
+              <pre>{JSON.stringify(searchResult.query, null, 2)}</pre>
+              <pre>{JSON.stringify(activeTerms, null, 2)}</pre>
+          </>
     }
   </>);
 };

@@ -1,3 +1,10 @@
+const GetDefaultSearchResult = () => 
+({
+  query: {},
+  records: [],
+  facets: []
+});
+
 /*
 Expectations:
 - all records have simple key-value pairs.  
@@ -5,7 +12,7 @@ Expectations:
 - all record values are simple primitives (string, number)
 - multi-value fields are not yet supported
 */
-var index = (records, config) => {
+const FacetedIndex = (records, config) => {
   const candidate_facet_fields = new Set();
   const expectedFacetIds =
     !!config && Array.isArray(config.facet_fields)
@@ -17,7 +24,7 @@ var index = (records, config) => {
       return r => r;
     }
     var dfields = new Set(config.display_fields);
-    console.log('dfields',dfields);
+    //console.log('dfields',dfields);
     return r => {
       var displayEntries = Object.entries(r).filter(([k,v]) => dfields.has(k));
       return Object.fromEntries(displayEntries);
@@ -120,4 +127,5 @@ var index = (records, config) => {
     data: ix
   };
 };
-export default index;
+
+export {GetDefaultSearchResult, FacetedIndex};

@@ -7,7 +7,7 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(
   <StrictMode>
     <Router>
-      <App />
+      <App/>
     </Router>
   </StrictMode>,
   rootElement

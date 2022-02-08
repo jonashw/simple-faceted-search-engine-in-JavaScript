@@ -1,10 +1,11 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 import SearchFilters from "./SearchFilters";
+import {GetDefaultSearchResult} from './FacetedIndex';
 
 const Search = ({ ix,debug }) => {
   const [query, setQuery] = React.useState({});
-  const [searchResult, setSearchResult] = React.useState({query:{},records:[], facets: []});
+  const [searchResult, setSearchResult] = React.useState(GetDefaultSearchResult());
   const [searchParams, setSearchParams] = useSearchParams();
   const searchPerformed = Object.keys(searchResult.query).length > 0;
   
