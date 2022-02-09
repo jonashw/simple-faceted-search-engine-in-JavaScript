@@ -3,6 +3,7 @@ import React from "react";
 import records from "./Records";
 import {
     SearchFilters,
+    ActiveFilters,
     RecordTermTable
 } from "./ui";
 
@@ -24,7 +25,7 @@ const SimpleDemo = ({}) => {
     }, [query]);
 
     return (
-        <div className="container-fluid">
+        <div className="container-fluid py-3">
         <div className="row">
             <div className="col-2">
                 <SearchFilters
@@ -39,15 +40,9 @@ const SimpleDemo = ({}) => {
                 />
             </div>
             <div className="col-10">
-                {searchPerformed && (
-                    <button
-                        className="btn float-end btn-link btn-sm"
-                        onClick={() => setQuery({})}
-                    >
-                        Reset
-                    </button>
-                )}
-                <h5>Results: {searchResult.records.length}</h5>
+                <ActiveFilters query={query} setQuery={setQuery} ix={ix}/>
+
+                <h5 className="mt-3">Results: {searchResult.records.length}</h5>
                 <div className="row row-cols-2">
                     {searchResult.records.map((r, i) => (
                         <div className="col" key={i}>

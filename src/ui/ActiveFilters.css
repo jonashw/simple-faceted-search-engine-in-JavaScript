@@ -1,0 +1,4 @@
+.btn:hover > .btn-close {
+    filter: invert(1);
+    transition: 0.15s;
+}

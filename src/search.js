@@ -1,6 +1,6 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
-import SearchFilters from "./ui/SearchFilters";
+import {SearchFilters,ActiveFilters} from "./ui";
 import {GetDefaultSearchResult} from './FacetedIndex';
 
 const Search = ({ ix,debug }) => {
@@ -47,15 +47,9 @@ const Search = ({ ix,debug }) => {
         />
       </div>
       <div className="col-9">
-        {searchPerformed && (
-          <button
-            className="btn float-end btn-link btn-sm"
-            onClick={() => setQuery({})}
-          >
-            Reset
-          </button>
-        )}
-        <h5>Results: {searchResult.records.length}</h5>
+
+        <ActiveFilters query={query} setQuery={setQuery} ix={ix}/>
+        <h5 className="mt-3">Results: {searchResult.records.length}</h5>
         {searchResult.records.map((r, i) => (
           <div className="card mb-3" key={i}>
             <div className="card-body">
