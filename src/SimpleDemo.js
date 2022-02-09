@@ -17,8 +17,10 @@ const SimpleDemo = ({}) => {
     const debug = true;
 
     React.useEffect(() => {
-        console.log('query changed:', Object.fromEntries(Object.entries(query).map(([k,v]) => [k, v.join(", ")])), query);
-        console.log(ix);
+        if(debug){
+            console.log('query changed:', Object.fromEntries(Object.entries(query).map(([k,v]) => [k, v.join(", ")])), query);
+            console.log(ix);
+        }
     }, [query]);
 
     return (
@@ -48,11 +50,10 @@ const SimpleDemo = ({}) => {
                 <h5>Results: {searchResult.records.length}</h5>
                 <div className="row row-cols-2">
                     {searchResult.records.map((r, i) => (
-                        <div className="col">
+                        <div className="col" key={i}>
                             <RecordTermTable 
                                 thWidth="200px"
                                 className="mb-3"
-                                key={i}
                                 record={r}
                                 facetIds={ix.actual_facet_fields}
                                 facetTermCount={searchResult.facetTermCount}
