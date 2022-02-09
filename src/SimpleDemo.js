@@ -16,20 +16,6 @@ const SimpleDemo = ({}) => {
     const searchPerformed = Object.keys(searchResult.query).length > 0;
     const debug = true;
 
-    const toggleFacetTerm = (query, facetId, term) => {
-        //Isn't this a re-implementation?  TODO: Share the best one via context or similar.
-        let prevFacetTerms = query[facetId] || [];
-        let nextFacetTerms = 
-            prevFacetTerms.indexOf(term) === -1
-            ? [...prevFacetTerms, term ]
-            : prevFacetTerms.filter(p => p !== term);
-        let nextQuery = 
-            nextFacetTerms.length === 0
-            ? Object.fromEntries(Object.entries(query).filter(([k,v]) => k !== facetId))
-            : {...query, [facetId]: nextFacetTerms}
-        setQuery(nextQuery);
-    }
-
     React.useEffect(() => {
         console.log('query changed:', Object.fromEntries(Object.entries(query).map(([k,v]) => [k, v.join(", ")])), query);
         console.log(ix);
@@ -71,7 +57,8 @@ const SimpleDemo = ({}) => {
                                 facetIds={ix.actual_facet_fields}
                                 facetTermCount={searchResult.facetTermCount}
                                 onClick={(facetId,term) => {
-                                    toggleFacetTerm(query, facetId, term);
+                                    let nextQuery = ix.toggleQueryTerm(query, facetId, term);
+                                    setQuery(nextQuery);
                                 }}
                             />
                         </div>

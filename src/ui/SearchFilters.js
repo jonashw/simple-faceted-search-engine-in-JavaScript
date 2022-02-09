@@ -21,19 +21,6 @@ const SearchFilters = ({ix,query,setQuery,debug,searchResult,setSearchResult}) =
     })
   }, [query])
 
-  const toggleSearchTerm = (facetKey, term) => {
-    let existingFacetTerms = query[facetKey] || [];
-    let newFacetTerms =
-      existingFacetTerms.indexOf(term) > -1
-        ? existingFacetTerms.filter((t) => t !== term)
-        : [...existingFacetTerms, term];
-    let newQuery = { ...query, [facetKey]: newFacetTerms };
-    if (newQuery[facetKey].length === 0) {
-      delete newQuery[facetKey];
-    }
-    setQuery(newQuery);
-  };
-
   const setFacetQueryTerms = (facet_id, terms) => {
     let newQuery = { ...query, [facet_id]: terms }
     if (newQuery[facet_id].length === 0) {
@@ -66,7 +53,10 @@ const SearchFilters = ({ix,query,setQuery,debug,searchResult,setSearchResult}) =
           className="form-check-input"
           type="checkbox"
           checked={term_is_selected(t.term)}
-          onChange={() => toggleSearchTerm(facet_id, t.term)}
+          onChange={() => {
+            let newQuery = ix.toggleQueryTerm(query, facet_id, t.term);
+            setQuery(newQuery);
+          }}
         />
         <span className="form-check-label">
           {t.term} 

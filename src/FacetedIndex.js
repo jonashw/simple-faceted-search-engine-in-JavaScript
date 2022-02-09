@@ -136,6 +136,18 @@ const FacetedIndex = (records, config) => {
   return {
     search,
     actual_facet_fields: facetIds,
+    toggleQueryTerm: (query, facetKey, term) => {
+      let existingFacetTerms = query[facetKey] || [];
+      let newFacetTerms =
+        existingFacetTerms.indexOf(term) > -1
+          ? existingFacetTerms.filter((t) => t !== term)
+          : [...existingFacetTerms, term];
+      let newQuery = { ...query, [facetKey]: newFacetTerms };
+      if (newQuery[facetKey].length === 0) {
+        delete newQuery[facetKey];
+      }
+      return newQuery;
+    },
     display_fields: 
     candidate_facet_fields,
     data: ix
