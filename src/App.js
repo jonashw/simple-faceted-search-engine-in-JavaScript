@@ -84,13 +84,13 @@ export default function App() {
   };
 
   return demo 
-    ? <SimpleDemo />
+    ? <div className="bg-light"><SimpleDemo /></div>
     : settingsVisible 
     ?
       <div className="container mt-3">
         <Settings {...{ settings, rebuildIndex, makeUrl }} />
       </div>
-    : <div className="container-fluid mt-3">
+    : <div className="container-fluid bg-light pt-3">
         <button type="button" className="btn-close" aria-label="Close" style={{float:'right'}} onClick={() => setSettingsVisible(true)}></button>
         <Search {...{ix,debug}} />
       </div>;

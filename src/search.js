@@ -44,7 +44,7 @@ const Search = ({ ix,debug }) => {
 
   return (
     <div className="row">
-      <div className="col-3">
+      <div className="col-2">
         <KeywordInput {...{ix,query,setQuery}} />
         <SearchFilters 
           {...{
@@ -57,20 +57,24 @@ const Search = ({ ix,debug }) => {
           }}
         />
       </div>
-      <div className="col-9">
+      <div className="col-10">
 
         <ActiveFilters query={query} setQuery={setQuery} ix={ix}/>
         <h5 className="mt-3">Results: {searchResult.records.length}</h5>
         {pagination}
-        {ix.getResultsPage(searchResult.records, currentPageNumber, pageSize).map((r, i) => (
-          <div className="card mb-3" key={i}>
-            <div className="card-body">
-              <div className="card-text">
-                <pre className="mb-0">{JSON.stringify(r, null, 2)}</pre>
+        <div className="row row-cols-2">
+          {ix.getResultsPage(searchResult.records, currentPageNumber, pageSize).map((r, i) => (
+            <div className="col" key={i}>
+              <div className="card mb-3">
+                <div className="card-body">
+                  <div className="card-text">
+                    <pre className="mb-0">{JSON.stringify(r, null, 2)}</pre>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
         {pagination}
       </div>
     </div>

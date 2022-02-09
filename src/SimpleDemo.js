@@ -54,7 +54,7 @@ const SimpleDemo = ({}) => {
                         <div className="col" key={i}>
                             <RecordTermTable 
                                 thWidth="200px"
-                                className="mb-3"
+                                className="mb-3 bg-white"
                                 record={r}
                                 facetIds={ix.actual_facet_fields}
                                 facetTermCount={searchResult.facetTermCount}

@@ -1,7 +1,7 @@
 import React from "react";
 
-const RecordTermTable = ({record,facetIds,onClick,facetTermCount,thWidth}) =>
-    <table className="table table-bordered">
+const RecordTermTable = ({record,facetIds,onClick,facetTermCount,thWidth,className}) =>
+    <table className={"table table-bordered " + (className || "")}>
         <tbody>
             {facetIds.map(f => {
                 let terms = !record[f] ? [] : Array.isArray(record[f]) ? record[f] : [record[f]];
