@@ -136,6 +136,10 @@ const FacetedIndex = (records, config) => {
   return {
     search,
     actual_facet_fields: facetIds,
+    getResultsPage: (results, pageNumber, pageSize) => 
+      results.slice(
+        (pageNumber-1)*pageSize,
+        (pageNumber-0)*pageSize),
     toggleQueryTerm: (query, facetKey, term) => {
       let existingFacetTerms = query[facetKey] || [];
       let newFacetTerms =

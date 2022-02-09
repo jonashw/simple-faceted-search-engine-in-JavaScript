@@ -4,8 +4,11 @@ import records from "./Records";
 import {
     SearchFilters,
     ActiveFilters,
-    RecordTermTable
+    RecordTermTable,
+    KeywordInput,
+    Pagination
 } from "./ui";
+
 
 const SimpleDemo = ({}) => {
     let ix = FacetedIndex(records, {
@@ -14,7 +17,8 @@ const SimpleDemo = ({}) => {
     });
     const [query, setQuery] = React.useState({"days":["Monday"]});
     const [searchResult, setSearchResult] = React.useState(GetDefaultSearchResult());
-    const searchPerformed = Object.keys(searchResult.query).length > 0;
+    const pageSize = 10;
+    const [currentPageNumber,setCurrentPageNumber] = React.useState(1);
     const debug = true;
 
     React.useEffect(() => {
@@ -28,6 +32,7 @@ const SimpleDemo = ({}) => {
         <div className="container-fluid py-3">
         <div className="row">
             <div className="col-2">
+                <KeywordInput {...{ix,query,setQuery}} />
                 <SearchFilters
                     {...{
                         ix,
@@ -43,8 +48,9 @@ const SimpleDemo = ({}) => {
                 <ActiveFilters query={query} setQuery={setQuery} ix={ix}/>
 
                 <h5 className="mt-3">Results: {searchResult.records.length}</h5>
+                <Pagination recordCount={searchResult.records.length} {...{pageSize, currentPageNumber, setCurrentPageNumber}} />
                 <div className="row row-cols-2">
-                    {searchResult.records.map((r, i) => (
+                    {ix.getResultsPage(searchResult.records, currentPageNumber, pageSize).map((r, i) => (
                         <div className="col" key={i}>
                             <RecordTermTable 
                                 thWidth="200px"
