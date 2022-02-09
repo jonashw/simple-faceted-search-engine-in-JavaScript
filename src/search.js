@@ -12,7 +12,8 @@ const Search = ({ ix,debug }) => {
   const [query, setQuery] = React.useState({});
   const [searchResult, setSearchResult] = React.useState(GetDefaultSearchResult());
   const [searchParams, setSearchParams] = useSearchParams();
-  const pageSize = 10;
+  const [pageSize,setPageSize] = React.useState(20);
+  const pageSizeOptions = [10,20,50,100];
   const [currentPageNumber,setCurrentPageNumber] = React.useState(1);
   
   React.useEffect(() => {
@@ -39,7 +40,7 @@ const Search = ({ ix,debug }) => {
   };
 
   const pagination = 
-    <Pagination recordCount={searchResult.records.length} {...{pageSize, currentPageNumber, setCurrentPageNumber}} />;
+    <Pagination recordCount={searchResult.records.length} {...{pageSize, setPageSize, pageSizeOptions, currentPageNumber, setCurrentPageNumber}} />;
 
   return (
     <div className="row">

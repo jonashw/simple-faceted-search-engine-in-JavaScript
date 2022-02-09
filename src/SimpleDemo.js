@@ -17,7 +17,8 @@ const SimpleDemo = ({}) => {
     });
     const [query, setQuery] = React.useState({"days":["Monday"]});
     const [searchResult, setSearchResult] = React.useState(GetDefaultSearchResult());
-    const pageSize = 10;
+    const pageSizeOptions = [10,20,50,100];
+    const [pageSize,setPageSize] = React.useState(pageSizeOptions[0]);
     const [currentPageNumber,setCurrentPageNumber] = React.useState(1);
     const debug = true;
 
@@ -48,7 +49,6 @@ const SimpleDemo = ({}) => {
                 <ActiveFilters query={query} setQuery={setQuery} ix={ix}/>
 
                 <h5 className="mt-3">Results: {searchResult.records.length}</h5>
-                <Pagination recordCount={searchResult.records.length} {...{pageSize, currentPageNumber, setCurrentPageNumber}} />
                 <div className="row row-cols-2">
                     {ix.getResultsPage(searchResult.records, currentPageNumber, pageSize).map((r, i) => (
                         <div className="col" key={i}>
@@ -66,6 +66,7 @@ const SimpleDemo = ({}) => {
                         </div>
                     ))}
                 </div>
+                <Pagination recordCount={searchResult.records.length} {...{pageSize, setPageSize, pageSizeOptions, currentPageNumber, setCurrentPageNumber}} />
             </div>
         </div>
         </div>
