@@ -46,37 +46,61 @@ const SearchFilters = ({ix,query,setQuery,debug,searchResult,setSearchResult}) =
       isMulti={true} />;
   };
 
-  const TermBucketCheckBoxes = ({facet_id, term_buckets, term_is_selected}) =>
-    term_buckets.map((t) => (
-      <label className="form-check" key={t.term}>
-        <input
-          className="form-check-input"
-          type="checkbox"
-          checked={term_is_selected(t.term)}
-          onChange={() => {
+  const TermBucketLinks = ({facet_id, term_buckets, term_is_selected}) =>
+    term_buckets.map((t) => {
+      let selected = term_is_selected(t.term);
+      return (
+        <a key={t.term}
+          href="javascript:void(0)"
+          className="link-primary pb-1" 
+          style={{ textDecoration: 'none', fontWeight: selected ? '700' : 'normal', display:'block'}}
+          onClick={() => {
             let newQuery = ix.toggleQueryTerm(query, facet_id, t.term);
             setQuery(newQuery);
           }}
-        />
-        <span className="form-check-label">
-          {t.term} 
-        </span>
-        <span className="badge rounded-pill bg-light text-dark float-end">
-        {t.count}
-        </span>
-      </label>
-    ));
+        >
+          {t.term}
+          <span className={"badge rounded-pill float-end " + (selected ? "bg-success" : "bg-light text-dark")}>
+            {t.count}
+          </span>
+        </a>
+      );
+    });
 
+  const TermBucketCheckBoxes = ({facet_id, term_buckets, term_is_selected}) =>
+    term_buckets.map((t) => {
+      let selected = term_is_selected(t.term);
+      return (
+        <label className="form-check" key={t.term}>
+          <input
+            className="form-check-input"
+            type="checkbox"
+            checked={selected}
+            onChange={() => {
+              let newQuery = ix.toggleQueryTerm(query, facet_id, t.term);
+              setQuery(newQuery);
+            }}
+          />
+          <span className="form-check-label">
+            {t.term}
+          </span>
+          <span className={"badge rounded-pill float-end " + (selected ? "bg-success" : "bg-light text-dark")}>
+            {t.count}
+          </span>
+        </label>
+      );
+    });
+      
   return (<>
     {searchResult.facets
       .filter((f) => f.term_buckets.length > 0)
       .map(({ facet_id, term_buckets }) => {
         return (
         <div className="mb-3" key={facet_id}>
-          <h4>{facet_id}</h4>
+          <div className="mb-1"><strong>{facet_id}</strong></div>
           { term_buckets.length > 10  
             ? <TermBucketSelectMenu {...{facet_id, term_buckets, term_is_selected}} />
-            : <TermBucketCheckBoxes {...{facet_id, term_buckets, term_is_selected}} />
+            : <TermBucketLinks {...{facet_id, term_buckets, term_is_selected}} />
           }
         </div>
       );

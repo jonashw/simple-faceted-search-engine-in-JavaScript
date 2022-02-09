@@ -24,9 +24,9 @@ const SimpleDemo = ({}) => {
     }, [query]);
 
     return (
-        <div className="container">
+        <div className="container-fluid">
         <div className="row">
-            <div className="col-3">
+            <div className="col-2">
                 <SearchFilters
                     {...{
                         ix,
@@ -38,7 +38,7 @@ const SimpleDemo = ({}) => {
                     }}
                 />
             </div>
-            <div className="col-9">
+            <div className="col-10">
                 {searchPerformed && (
                     <button
                         className="btn float-end btn-link btn-sm"
