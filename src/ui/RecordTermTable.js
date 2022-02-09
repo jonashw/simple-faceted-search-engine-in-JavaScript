@@ -1,13 +1,15 @@
 import React from "react";
 
-const RecordTermTable = ({record,facetIds,onClick,facetTermCount}) =>
+const RecordTermTable = ({record,facetIds,onClick,facetTermCount,thWidth}) =>
     <table className="table table-bordered">
         <tbody>
             {facetIds.map(f => {
                 let terms = !record[f] ? [] : Array.isArray(record[f]) ? record[f] : [record[f]];
                 return (
-                    <tr>
-                        <th>{f}</th>
+                    <tr key={f}>
+                        <th style={{width: !thWidth ? "" : thWidth}}>
+                            {f}
+                        </th>
                         <td>
                             {terms.map(t => 
                                 <span key={t}

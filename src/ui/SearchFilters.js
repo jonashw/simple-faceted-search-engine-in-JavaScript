@@ -2,12 +2,12 @@ import React from "react";
 import Select from 'react-select';
 
 const SearchFilters = ({ix,query,setQuery,debug,searchResult,setSearchResult}) => {
-  const [activeTerms,setActiveTerms] = React.useState({});
-  const term_is_selected = t => t in activeTerms;
+  const [activeTerms,setActiveTerms] = React.useState(new Set());
+  const term_is_selected = t => activeTerms.has(t);
 
   React.useEffect(() => {
-    let allTerms = Object.entries(query).flatMap(([facet,terms]) => terms);
-    setActiveTerms(Object.fromEntries(allTerms.map(t => [t,true])));
+    let allTerms = Object.values(query).flatMap(terms => terms);
+    setActiveTerms(new Set(allTerms));
   }, [query])
 
   React.useEffect(() => {
@@ -15,6 +15,7 @@ const SearchFilters = ({ix,query,setQuery,debug,searchResult,setSearchResult}) =
         setTimeout(() => {
             let r = ix.search(query);
             setSearchResult(r);
+            resolve(r);
             //console.log('searching',query,r);
         }, 0);
     })
@@ -68,7 +69,10 @@ const SearchFilters = ({ix,query,setQuery,debug,searchResult,setSearchResult}) =
           onChange={() => toggleSearchTerm(facet_id, t.term)}
         />
         <span className="form-check-label">
-          {t.term} ({t.count})
+          {t.term} 
+        </span>
+        <span className="badge rounded-pill bg-light text-dark float-end">
+        {t.count}
         </span>
       </label>
     ));
@@ -89,8 +93,8 @@ const SearchFilters = ({ix,query,setQuery,debug,searchResult,setSearchResult}) =
     })}
     {!!debug &&
           <>
-              <pre>{JSON.stringify(searchResult.query, null, 2)}</pre>
-              <pre>{JSON.stringify(activeTerms, null, 2)}</pre>
+              <pre>{JSON.stringify(query, null, 2)}</pre>
+              <pre>{JSON.stringify(Array.from(activeTerms), null, 2)}</pre>
           </>
     }
   </>);

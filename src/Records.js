@@ -17,7 +17,7 @@ var randElements = (arr, n) =>
 const days = "Monday Tuesday Wednesday Thursday Friday".split(" ");
 const colors = "Red Orange Yellow Green Blue Indigo Violet".split(" ");
 const RECORD_COUNT = 1000;
-const localStorageKey = `RECORDS${RECORD_COUNT}`;
+const localStorageKey = `RECORDS_100_${RECORD_COUNT}`;
 const priorities = "Low Medium High".split(" ");
 
 var generateRecords = (n) =>
@@ -26,7 +26,7 @@ var generateRecords = (n) =>
     .map((_, i) => ({
       days: randElements(days, 2),
       color: randElement(colors),
-      length: randRange(1, 6),
+      length: randRange(1, 30),
       priority: randElement(priorities)
     }));
 

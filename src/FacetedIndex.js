@@ -116,13 +116,19 @@ const FacetedIndex = (records, config) => {
         .filter((term) => term.count > 0 || term.in_query);
       return { facet_id, term_buckets };
     });
+
+    let term_buckets_by_facet_id = Object.fromEntries((facets || []).map(f => [
+      f.facet_id,
+      Object.fromEntries(f.term_buckets.map(tb => [tb.term, tb]))
+    ]));
+
     return {
       query: { ...query },
       facets: facets || [],
-      term_buckets_by_facet_id: Object.fromEntries((facets || []).map(f => [
-        f.facet_id, 
-        Object.fromEntries(f.term_buckets.map(tb => [tb.term,tb]))
-      ])),
+      term_buckets_by_facet_id,
+      facetTermCount: (facet,term) => 
+        //((ix.data[facet] || new Set())[term]  || new Set()).size;
+        ((term_buckets_by_facet_id[facet] || {})[term]  || {count:0}).count,
       records: Array.from(matching_ids).map((i) => display_records[i])
     };
   };

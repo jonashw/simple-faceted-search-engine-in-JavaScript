@@ -1,8 +1,10 @@
 import {FacetedIndex,GetDefaultSearchResult} from "./FacetedIndex";
 import React from "react";
 import records from "./Records";
-import SearchFilters from "./SearchFilters";
-import RecordTermTable from './RecordTermTable';
+import {
+    SearchFilters,
+    RecordTermTable
+} from "./ui";
 
 const SimpleDemo = ({}) => {
     let ix = FacetedIndex(records, {
@@ -27,10 +29,6 @@ const SimpleDemo = ({}) => {
             : {...query, [facetId]: nextFacetTerms}
         setQuery(nextQuery);
     }
-
-    const facetTermCount = (facet,term) => 
-        //((ix.data[facet] || new Set())[term]  || new Set()).size;
-        ((searchResult.term_buckets_by_facet_id[facet] || {})[term]  || {count:0}).count;
 
     React.useEffect(() => {
         console.log('query changed:', Object.fromEntries(Object.entries(query).map(([k,v]) => [k, v.join(", ")])), query);
@@ -62,23 +60,23 @@ const SimpleDemo = ({}) => {
                     </button>
                 )}
                 <h5>Results: {searchResult.records.length}</h5>
-                {searchResult.records.map((r, i) => (
-                    <div className="card mb-3" key={i}>
-                        <div className="card-body">
-                            <div className="card-text">
-                                <RecordTermTable 
-                                    record={r}
-                                    facetIds={ix.actual_facet_fields}
-                                    facetTermCount={facetTermCount}
-                                    onClick={(facetId,term) => {
-                                        toggleFacetTerm(query, facetId, term);
-                                    }}
-                                />
-                                <pre className="mb-0">{JSON.stringify(r, null, 2)}</pre>
-                            </div>
+                <div className="row row-cols-2">
+                    {searchResult.records.map((r, i) => (
+                        <div className="col">
+                            <RecordTermTable 
+                                thWidth="200px"
+                                className="mb-3"
+                                key={i}
+                                record={r}
+                                facetIds={ix.actual_facet_fields}
+                                facetTermCount={searchResult.facetTermCount}
+                                onClick={(facetId,term) => {
+                                    toggleFacetTerm(query, facetId, term);
+                                }}
+                            />
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
         </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
-import SearchFilters from "./SearchFilters";
+import SearchFilters from "./ui/SearchFilters";
 import {GetDefaultSearchResult} from './FacetedIndex';
 
 const Search = ({ ix,debug }) => {
