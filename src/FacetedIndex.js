@@ -17,7 +17,7 @@ const FacetedIndex = (records, config) => {
   const expectedFacetIds =
     !!config && Array.isArray(config.facet_fields)
       ? new Set(config.facet_fields)
-      : undefined;
+      : new Set();
 
   const convertToDisplayRecord = (() => {
     if(!config || !Array.isArray(config.display_fields) || config.display_fields.length === 0){
@@ -32,7 +32,7 @@ const FacetedIndex = (records, config) => {
   })();
 
   const allowableFacetId = (id) =>
-    !expectedFacetIds || expectedFacetIds.has(id);
+    expectedFacetIds.size === 0 || expectedFacetIds.has(id);
 
   var ix = {};
   let i = 0;
@@ -88,41 +88,49 @@ const FacetedIndex = (records, config) => {
     );
   };
 
+  const search = (query) => {
+    var matching_ids =
+      Object.keys(query).length === 0
+        ? new Set(all_ids)
+        : record_ids_matching_query(query);
+    var matching_ids_independent_of_facet = Object.fromEntries(
+      Object.keys(ix).map((facet_id) => {
+        var query_minus_this_facet = Object.fromEntries(
+          Object.entries(query).filter(([k, v]) => k !== facet_id)
+        );
+        return [facet_id, record_ids_matching_query(query_minus_this_facet)];
+      })
+    );
+    var facets = Object.entries(ix).map(([facet_id, ids_by_term]) => {
+      let term_buckets = Object.entries(ids_by_term)
+        .map(([term, ids_matching_term]) => ({
+          term: term,
+          in_query: facet_id in query && query[facet_id].indexOf(term) > -1,
+          count: intersectAll(
+            [
+              matching_ids_independent_of_facet[facet_id],
+              ids_matching_term
+            ].filter((s) => s.size > 0)
+          ).size
+        }))
+        .filter((term) => term.count > 0 || term.in_query);
+      return { facet_id, term_buckets };
+    });
+    return {
+      query: { ...query },
+      facets: facets || [],
+      term_buckets_by_facet_id: Object.fromEntries((facets || []).map(f => [
+        f.facet_id, 
+        Object.fromEntries(f.term_buckets.map(tb => [tb.term,tb]))
+      ])),
+      records: Array.from(matching_ids).map((i) => display_records[i])
+    };
+  };
+
   return {
-    search: (query) => {
-      var matching_ids =
-        Object.keys(query).length === 0
-          ? new Set(all_ids)
-          : record_ids_matching_query(query);
-      var matching_ids_independent_of_facet = Object.fromEntries(
-        Object.keys(ix).map((facet_id) => {
-          var query_minus_this_facet = Object.fromEntries(
-            Object.entries(query).filter(([k, v]) => k !== facet_id)
-          );
-          return [facet_id, record_ids_matching_query(query_minus_this_facet)];
-        })
-      );
-      var facets = Object.entries(ix).map(([facet_id, ids_by_term]) => {
-        let term_buckets = Object.entries(ids_by_term)
-          .map(([term, ids_matching_term]) => ({
-            term: term,
-            in_query: facet_id in query && query[facet_id].indexOf(term) > -1,
-            count: intersectAll(
-              [
-                matching_ids_independent_of_facet[facet_id],
-                ids_matching_term
-              ].filter((s) => s.size > 0)
-            ).size
-          }))
-          .filter((term) => term.count > 0 || term.in_query);
-        return { facet_id, term_buckets };
-      });
-      return {
-        query: { ...query },
-        facets,
-        records: Array.from(matching_ids).map((i) => display_records[i])
-      };
-    },
+    search,
+    actual_facet_fields: facetIds,
+    display_fields: 
     candidate_facet_fields,
     data: ix
   };
