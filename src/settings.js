@@ -3,11 +3,12 @@ import './settings.css';
 
 const getJson = async url => {
   try {
-    let records = await fetch(url).then((r) => r.json());
-    if (!records || !Array.isArray(records)) {
+    let response = await fetch(url);
+    let data = await response.json();
+    if (!data) {
       return [];
     } else {
-      return records;
+      return data;
     }
   } catch (e) {
     console.error(e);
@@ -16,6 +17,7 @@ const getJson = async url => {
 
 const Settings = ({makeUrl}) => {
   const [recordsUrl, setRecordsUrl] = React.useState('sample-records.json');
+  const [recordsKey, setRecordsKey] = React.useState();
   const [records, setRecords] = React.useState();
   const [url,setUrl] = React.useState();
   const [fieldNames,setFieldNames] = React.useState();
@@ -23,7 +25,7 @@ const Settings = ({makeUrl}) => {
   const [selectedDisplayFieldNames, setSelectedDisplayFieldNames] = React.useState(new Set());
 
   React.useEffect(() => {
-    setUrl(makeUrl(recordsUrl, Array.from(selectedFacetFieldNames), Array.from(selectedDisplayFieldNames)));
+    setUrl(makeUrl(recordsUrl, recordsKey, Array.from(selectedFacetFieldNames), Array.from(selectedDisplayFieldNames)));
   },[
     selectedFacetFieldNames,
     selectedDisplayFieldNames
@@ -31,12 +33,16 @@ const Settings = ({makeUrl}) => {
 
   const reset = () => {
     setFieldNames();
-    setSelectedFieldNames(new Set());
+    setSelectedFacetFieldNames(new Set());
+    setSelectedDisplayFieldNames(new Set());
   };
 
   const loadUrl = async () => {
     setRecords(undefined);
-    var records = await getJson(recordsUrl);
+    let data = await getJson(recordsUrl);
+    console.log('data',data);
+    let records = !!recordsKey ? (data[recordsKey] || []) : data;
+    console.log('records',records);
     if(!records){
       alert("invalid URL or JSON data");
       return;
@@ -105,6 +111,16 @@ const Settings = ({makeUrl}) => {
                 onChange={e => setRecordsUrl(e.target.value) 
               }/>
               <label htmlFor="json_url">URL to JSON data</label>
+          </div>
+          <div className="form-floating form-floating-group flex-grow-1">
+              <input type="text"
+                id="json_records_key"
+                disabled={!!fieldNames}
+                className="form-control"
+                value={recordsKey}
+                onChange={e => setRecordsKey(e.target.value) 
+              }/>
+              <label htmlFor="json_records_key">Key for records array (leave blank for top-level)</label>
           </div>
           {!fieldNames
           ?

@@ -16,7 +16,8 @@ import Settings from "./settings";
 const qs_cfg = {
   facet_fields: 'ff',
   display_fields: 'df',
-  records_url: 'url'
+  records_url: 'url',
+  records_key: 'key'
 }
 
 export default function App() {
@@ -40,23 +41,20 @@ export default function App() {
 
   const demo = !!searchParams.get('demo');
 
-  const makeUrl = (records_url, facet_fields, display_fields) =>
+  const makeUrl = (records_url, records_key, facet_fields, display_fields) =>
   '?' +
     new URLSearchParams([
       [qs_cfg.records_url, records_url],
+      [qs_cfg.records_key, records_key],
       ...facet_fields.map((f) => [qs_cfg.facet_fields, f]),
       ...display_fields.map((f) => [qs_cfg.display_fields, f])
-    ]);
-
-  const reload = (records_url, facet_fields, display_fields) => {
-    let url = makeUrl(records_url, facet_fields, display_fields);
-    navigate(url);
-  };
+    ].filter(([k,v]) => !!v));
 
   React.useEffect(() => {
-    const init = async (url, facet_fields, display_fields) => {
+    const init = async (url, records_key, facet_fields, display_fields) => {
       let r = await fetch(url);
-      let records = await r.json();
+      let data = await r.json();
+      let records = !!records_key ? data[records_key] : data;
       rebuildIndex({
         records_url: url,
         records,
@@ -67,7 +65,11 @@ export default function App() {
       });
     };
     if (searchParamsObject[qs_cfg.records_url] && searchParamsObject[qs_cfg.facet_fields]) {
-      init(searchParamsObject[qs_cfg.records_url][0], searchParamsObject[qs_cfg.facet_fields], searchParamsObject[qs_cfg.display_fields]);
+      init(
+        searchParamsObject[qs_cfg.records_url][0],
+        !!searchParamsObject[qs_cfg.records_key] ? searchParamsObject[qs_cfg.records_key][0] : undefined,
+        searchParamsObject[qs_cfg.facet_fields],
+        searchParamsObject[qs_cfg.display_fields]);
       setDebug(!!searchParamsObject.debug);
       setSettingsVisible(false);
     } else {
