@@ -25,7 +25,7 @@ const Pagination = ({recordCount,pageSize,setPageSize,pageSizeOptions,currentPag
     //console.log('pagination',paginationModel);
     return <div className="d-flex justify-content-between mb-3">
         <nav aria-label="Results pages">
-            <ul class="pagination mb-0">
+            <ul className="pagination mb-0">
                 {paginationModel.map((p, i) => {
                     const onClick = () => setCurrentPageNumber(p.value);
                     switch (p.type) {
@@ -33,11 +33,11 @@ const Pagination = ({recordCount,pageSize,setPageSize,pageSizeOptions,currentPag
                         //case 'NEXT_PAGE_LINK'    : return <Pagination.Next {...props}/>
                         case 'PAGE':
                             return <li className={"page-item " + (p.isActive ? "active" : "")} key={i}>
-                                <a class="page-link" href="javascript:void(0)" onClick={onClick}>{p.value}</a>
+                                <a className="page-link" href="javascript:void(0)" onClick={onClick}>{p.value}</a>
                             </li>;
                         case 'ELLIPSIS':
                             return <li className={"page-item " + (p.isActive ? "active" : "")} key={i}>
-                                <a class="page-link" href="javascript:void(0)" onClick={onClick}>...</a>
+                                <a className="page-link" href="javascript:void(0)" onClick={onClick}>...</a>
                             </li>;
                         default: return undefined;
                     }
@@ -49,7 +49,7 @@ const Pagination = ({recordCount,pageSize,setPageSize,pageSizeOptions,currentPag
             Results per page:
             </span>
             <select onChange={e => setPageSize(e.target.value)} className="form-select">
-                {pageSizeOptions.map(ps => <option value={ps} selected={ps === pageSize}>{ps}</option>)}
+                {pageSizeOptions.map(ps => <option key={ps} value={ps} selected={ps === pageSize}>{ps}</option>)}
             </select>
         </div>
     </div>;
