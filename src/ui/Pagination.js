@@ -1,6 +1,6 @@
 import React from "react";
 import ultimatePagination from 'ultimate-pagination';
-const Pagination = ({recordCount,pageSize,setPageSize,pageSizeOptions,currentPageNumber,setCurrentPageNumber}) => {
+const Pagination = ({recordCount,pageSize,currentPageNumber,setCurrentPageNumber}) => {
     const pageCount = Math.max(1,Math.ceil(recordCount/pageSize));
     if(pageCount === 0){
         return <></>;
@@ -44,14 +44,6 @@ const Pagination = ({recordCount,pageSize,setPageSize,pageSizeOptions,currentPag
                 }).filter(f => !!f)}
             </ul>
         </nav>
-        <div className="d-flex">
-            <span className="flex-shrink-0 align-self-center me-3">
-            Results per page:
-            </span>
-            <select onChange={e => setPageSize(e.target.value)} className="form-select">
-                {pageSizeOptions.map(ps => <option key={ps} value={ps} selected={ps === pageSize}>{ps}</option>)}
-            </select>
-        </div>
     </div>;
 };
 
