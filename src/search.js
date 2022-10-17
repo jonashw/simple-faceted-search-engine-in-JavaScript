@@ -1,4 +1,5 @@
 import React from "react";
+import SearchBox from './ui/SearchBox';
 import { useSearchParams } from "react-router-dom";
 import {
   SearchFilters,
@@ -83,7 +84,15 @@ const Search = ({ ix,debug }) => {
         />
       </div>
       <div className={"col-" + mainCols}>
-        <ActiveFilters query={query} setQuery={setQuery} ix={ix}/>
+        <SearchBox
+          terms={ix.terms}
+          searchResult={searchResult}
+          toggleTerm={(facet_id, term) => {
+              let newQuery = ix.toggleQueryTerm(query, facet_id, term);
+              setQueryFromUI(newQuery);
+          }}
+        />
+        <ActiveFilters query={query} setQuery={setQueryFromUI} ix={ix}/>
         <div className="d-flex justify-content-start">
           {Object.values(layoutControls).map(control => 
             <div key={control.label} className="mb-3 me-3">

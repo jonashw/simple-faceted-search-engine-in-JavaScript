@@ -40,6 +40,7 @@ const FacetedIndex = (records, config) => {
   let i = 0;
   let all_ids = [];
   let display_records = [];
+  let termsDict = {};
   for (let r of records) {
     for (let k of Object.keys(r)) {
       candidate_facet_fields.add(k);
@@ -49,6 +50,7 @@ const FacetedIndex = (records, config) => {
       ix[k] = ix[k] || {};
       for (let term of Array.isArray(r[k]) ? r[k] : [r[k]]) {
         ix[k][term] = ix[k][term] || new Set();
+        termsDict[term] = term;
         ix[k][term].add(i);
       }
     }
@@ -56,6 +58,8 @@ const FacetedIndex = (records, config) => {
     all_ids.push(i);
     i++;
   }
+
+  const terms = Object.keys(termsDict);
 
   const facetIds = Object.keys(ix).filter(allowableFacetId);
 
@@ -101,16 +105,21 @@ const FacetedIndex = (records, config) => {
         }))
         .filter((term) => term.count > 0 || term.in_query);
       return { facet_id, term_buckets };
-    });
+    }) || [];
 
     let term_buckets_by_facet_id = Object.fromEntries((facets || []).map(f => [
       f.facet_id,
       Object.fromEntries(f.term_buckets.map(tb => [tb.term, tb]))
     ]));
 
+    let terms = facets.flatMap(f => 
+      f.term_buckets.map(tb => 
+        Object.assign({}, tb, {facet_id: f.facet_id})));
+
     return {
       query: { ...query },
       facets: facets || [],
+      terms,
       term_buckets_by_facet_id,
       facetTermCount: (facet,term) => 
         //((ix.data[facet] || new Set())[term]  || new Set()).size;
@@ -140,7 +149,8 @@ const FacetedIndex = (records, config) => {
     },
     display_fields: 
     candidate_facet_fields,
-    data: ix
+    data: ix,
+    terms
   };
 };
 
