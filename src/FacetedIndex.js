@@ -1,3 +1,5 @@
+import {unionAll,intersectAll } from './SetOperations.js';
+
 const GetDefaultSearchResult = () => 
 ({
   query: {},
@@ -56,22 +58,6 @@ const FacetedIndex = (records, config) => {
   }
 
   const facetIds = Object.keys(ix).filter(allowableFacetId);
-  const intersectAll = (sets) => {
-    var result = sets[0] || new Set();
-    for (let s of sets.slice(1)) {
-      result = new Set([...result].filter((x) => s.has(x)));
-    }
-    return result;
-  };
-  const unionAll = (sets) => {
-    let result = new Set();
-    for (let s of sets) {
-      for (let x of s) {
-        result.add(x);
-      }
-    }
-    return result;
-  };
 
   const record_ids_matching_query = (query) => {
     //alert(JSON.stringify(query,null,2))
