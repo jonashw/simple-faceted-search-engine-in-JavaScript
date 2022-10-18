@@ -3,18 +3,23 @@
   "version": "1.0.0",
   "description": "",
   "keywords": [],
-  "main": "src/index.js",
+  "main": "src/index.tsx",
+  "browser": "chrome",
   "dependencies": {
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "@types/jest": "^29.2.0",
+    "@types/node": "^18.11.0",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-router-dom": "6.1.1",
-    "react-scripts": "4.0.0",
+    "react-scripts": "5.0.0",
     "react-select": "^5.2.1",
+    "typescript": "^4.8.4",
     "ultimate-pagination": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/runtime": "7.13.8",
-    "typescript": "4.1.3"
+    "@babel/runtime": "7.13.8"
   },
   "scripts": {
     "start": "react-scripts start",

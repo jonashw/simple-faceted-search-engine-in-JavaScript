@@ -1,4 +1,4 @@
-import {unionAll,intersectAll } from './SetOperations.js';
+import {unionAll,intersectAll } from './SetOperations';
 
 const GetDefaultSearchResult = () => 
 ({
@@ -7,6 +7,19 @@ const GetDefaultSearchResult = () =>
   facets: []
 });
 
+type Query = {[facetId: string] : string[]};
+
+type FacetedIndexInstance = {
+  search: (query: Query) => any,
+  actual_facet_fields: string[],
+  getResultsPage: (results: {}[], pageNumber: number, pageSize: number) => {}[],
+  toggleQueryTerm: (query: Query, facetKey: string, term: string) => {},
+  display_fields: Set<string>, 
+  candidate_facet_fields: Set<string>, 
+  data: any,
+  terms: any
+};
+
 /*
 Expectations:
 - all records have simple key-value pairs.  
@@ -14,8 +27,12 @@ Expectations:
 - all record values are simple primitives (string, number)
 - multi-value fields are not yet supported
 */
-const FacetedIndex = (records, config) => {
-  const candidate_facet_fields = new Set();
+type FacetedIndexConfig = {
+  display_fields: string[],
+  facet_fields: string[],
+}
+const FacetedIndex = (records: {[key: string]: any}[], config: FacetedIndexConfig): FacetedIndexInstance => {
+  const candidate_facet_fields = new Set<string>();
   const expectedFacetIds =
     !!config && Array.isArray(config.facet_fields)
       ? new Set(config.facet_fields)
@@ -23,24 +40,24 @@ const FacetedIndex = (records, config) => {
 
   const convertToDisplayRecord = (() => {
     if(!config || !Array.isArray(config.display_fields) || config.display_fields.length === 0){
-      return r => r;
+      return (r: {}): {} => r;
     }
     var dfields = new Set(config.display_fields);
     //console.log('dfields',dfields);
-    return r => {
+    return (r: {}): {} => {
       var displayEntries = Object.entries(r).filter(([k,v]) => dfields.has(k));
       return Object.fromEntries(displayEntries);
     };
   })();
 
-  const allowableFacetId = (id) =>
+  const allowableFacetId = (id: string) =>
     expectedFacetIds.size === 0 || expectedFacetIds.has(id);
 
-  var ix = {};
+  var ix: {[facetId: string]: {[term: string]: Set<number>}} = {};
   let i = 0;
-  let all_ids = [];
-  let display_records = [];
-  let termsDict = {};
+  let all_ids: number[] = [];
+  let display_records: {}[] = [];
+  let termsDict: {[term: string]: string} = {};
   for (let r of records) {
     for (let k of Object.keys(r)) {
       candidate_facet_fields.add(k);
@@ -63,7 +80,7 @@ const FacetedIndex = (records, config) => {
 
   const facetIds = Object.keys(ix).filter(allowableFacetId);
 
-  const record_ids_matching_query = (query) => {
+  const record_ids_matching_query = (query: Query): Set<number> => {
     //alert(JSON.stringify(query,null,2))
     return intersectAll(
       facetIds
@@ -78,7 +95,7 @@ const FacetedIndex = (records, config) => {
     );
   };
 
-  const search = (query) => {
+  const search = (query: Query) => {
     var matching_ids =
       Object.keys(query).length === 0
         ? new Set(all_ids)
@@ -121,7 +138,7 @@ const FacetedIndex = (records, config) => {
       facets: facets || [],
       terms,
       term_buckets_by_facet_id,
-      facetTermCount: (facet,term) => 
+      facetTermCount: (facet: string, term: string) => 
         //((ix.data[facet] || new Set())[term]  || new Set()).size;
         ((term_buckets_by_facet_id[facet] || {})[term]  || {count:0}).count,
       records: Array.from(matching_ids).map((i) => display_records[i])
@@ -147,7 +164,7 @@ const FacetedIndex = (records, config) => {
       }
       return newQuery;
     },
-    display_fields: 
+    display_fields: candidate_facet_fields,
     candidate_facet_fields,
     data: ix,
     terms

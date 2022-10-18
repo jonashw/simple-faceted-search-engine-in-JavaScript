@@ -1,12 +1,8 @@
-import "./styles.css";
 import {FacetedIndex} from "./FacetedIndex";
-import React from "react";
+import React  from "react";
 import SimpleDemo from "./SimpleDemo";
 import {
   BrowserRouter as Router,
-  Routes,
-  Route,
-  NavLink,
   useNavigate,
   useSearchParams
 } from "react-router-dom";
@@ -20,58 +16,85 @@ const qs_cfg = {
   records_url: 'url',
   records_key: 'key'
 }
+type UISettings = {[key:string]: string}
+type UISettingControl<T> = {
+    label: string,
+    options: T[]
+    defaultOption: T
+    fromUrl: (str: string) => T,
+    key: string
+}
 
-const uiSettingControls = [
+const uiSettingControls: UISettingControl<any>[] = [
   {
     label: 'Horizontal split',
     options: ['1/11','2/10','3/9','4/8'],
     defaultOption: '2/10',
-    fromUrl: str => str,
+    fromUrl: (str: string) => str,
     key: 'horizontalSplit'
   },
   {
     label: 'Records per row',
     options: [1, 2, 3, 4, 5],
     defaultOption: 2,
-    fromUrl: parseInt,
+    fromUrl: str => parseInt(str),
     key: 'recordsPerRow'
   },
   {
     label: "Results per page",
     options: [10, 20, 50, 100],
     defaultOption: 20,
-    fromUrl: parseInt,
+    fromUrl: str => parseInt(str),
     key: 'pageSize'
   }
 ];
 
+type AppSettings = {
+  records: {}[],
+  candidate_facet_fields: Set<string>,
+  config: {},
+  ui: UISettings
+};
+
+type AppState = {
+  records: {}[],
+  settings: AppSettings
+}
+
 export default function App() {
   const useRouterNav = false;
   const navigateViaRouter = useNavigate();
-  const navigateViaBrowser = (path) => window.location.href = window.location.origin + path;
+  const navigateViaBrowser = (path: string) => window.location.href = window.location.origin + path;
   const navigate = useRouterNav ? navigateViaRouter : navigateViaBrowser;
   const [settingsVisible, setSettingsVisible] = React.useState(false);
 
   const [settings, setSettings] = React.useState({
     records: [],
     config: {},
-    candidate_facet_fields: [],
+    candidate_facet_fields: new Set([]),
     ui: Object.fromEntries(uiSettingControls.map(c => [c.key, c.defaultOption]))
-  });
+  } as AppSettings);
   const [debug, setDebug] = React.useState(false);
-  const [ix, setIx] = React.useState(FacetedIndex([], { facet_fields: [] }));
+  const [ix, setIx] = React.useState(FacetedIndex([], { facet_fields: [], display_fields: [] }));
   const [searchParams] = useSearchParams();
   const searchParamsObject = Array.from(searchParams.entries()).reduce(
     (dict, [key, value]) => {
       (dict[key] = dict[key] || []).push(value);
       return dict;
     },
-    {}
+    {} as {[key:string]: string[]}
   );
 
   const demo = !!searchParams.get('demo');
 
-  const makeUrl = (records_url, records_key, facet_fields, display_fields, ui_settings) =>
+
+  const makeUrl = (
+    records_url: string,
+    records_key: string,
+    facet_fields: string[],
+    display_fields: string[],
+    ui_settings: {[key:string]: string}
+  ) =>
   '?' +
     new URLSearchParams([
       [qs_cfg.records_url, records_url],
@@ -82,7 +105,13 @@ export default function App() {
     ].filter(([k,v]) => !!v));
 
   React.useEffect(() => {
-    const init = async (url, records_key, facet_fields, display_fields, ui_settings) => {
+    const init = async (
+      url: string,
+      records_key: string | undefined,
+      facet_fields: string[],
+      display_fields: string[],
+      ui_settings: UISettings) => 
+    {
       let r = await fetch(url);
       let data = await r.json();
       let records = !!records_key ? data[records_key] : data;
@@ -123,7 +152,17 @@ export default function App() {
     }
   }, []);
 
-  const rebuildIndex = (s) => {
+  type IndexRebuildSettings = {
+    ui: UISettings,
+    records_url: string,
+    records: {}[],
+    config: {
+      facet_fields: string[],
+      display_fields: string[]
+    }
+  };
+
+  const rebuildIndex = (s: IndexRebuildSettings) => {
     let ix = FacetedIndex(s.records, s.config);
     setSettings({...s, candidate_facet_fields: ix.candidate_facet_fields});
     setIx(ix);
@@ -151,6 +190,6 @@ export default function App() {
           makeUrl,
           uiSettingControls,
           uiSettings: settings.ui,
-          setUiSettings: ui => setSettings({...settings, ui})}} />
+          setUiSettings: (ui: UISettings) => setSettings({...settings, ui})}} />
       </div>;
 }
