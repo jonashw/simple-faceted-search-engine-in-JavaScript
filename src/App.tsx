@@ -1,4 +1,4 @@
-import {FacetedIndex} from "./FacetedIndex";
+import {FacetedIndex,FacetedIndexConfig} from "./FacetedIndex";
 import React  from "react";
 import SimpleDemo from "./SimpleDemo";
 import {
@@ -75,7 +75,11 @@ export default function App() {
     ui: Object.fromEntries(uiSettingControls.map(c => [c.key, c.defaultOption]))
   } as AppSettings);
   const [debug, setDebug] = React.useState(false);
-  const [ix, setIx] = React.useState(FacetedIndex([], { facet_fields: [], display_fields: [] }));
+  const [ix, setIx] = React.useState(FacetedIndex([], {
+    facet_fields: [],
+    display_fields: [],
+    facet_term_parents: {}
+  }));
   const [searchParams] = useSearchParams();
   const searchParamsObject = Array.from(searchParams.entries()).reduce(
     (dict, [key, value]) => {
@@ -121,7 +125,8 @@ export default function App() {
         records,
         config: {
           facet_fields,
-          display_fields
+          display_fields,
+          facet_term_parents: {}
         }
       });
     };
@@ -156,10 +161,7 @@ export default function App() {
     ui: UISettings,
     records_url: string,
     records: {}[],
-    config: {
-      facet_fields: string[],
-      display_fields: string[]
-    }
+    config: FacetedIndexConfig
   };
 
   const rebuildIndex = (s: IndexRebuildSettings) => {

@@ -1,5 +1,12 @@
 import {unionAll,intersectAll } from './SetOperations';
 
+type FacetedIndexConfig = {
+  display_fields: string[],
+  facet_fields: string[],
+  //The extra level of nesting is just-in-case 2+ facets share a term name
+  facet_term_parents: {[facet_id: string]: {[term: string]: string}}
+}
+
 const GetDefaultSearchResult = () => 
 ({
   query: {},
@@ -10,7 +17,7 @@ const GetDefaultSearchResult = () =>
 type Query = {[facetId: string] : string[]};
 
 type FacetedIndexInstance = {
-  search: (query: Query) => any,
+  search: (query: Query) => SearchResult,
   actual_facet_fields: string[],
   getResultsPage: (results: {}[], pageNumber: number, pageSize: number) => {}[],
   toggleQueryTerm: (query: Query, facetKey: string, term: string) => {},
@@ -20,18 +27,35 @@ type FacetedIndexInstance = {
   terms: any
 };
 
+type FacetTermBucket = {facet_id: string, term_buckets: TermBucket[]};
+
+type TermBucket = {
+  term: string,
+  in_query: boolean,
+  count: number,
+  facet_id: string
+};
+
+type SearchResult = {
+  query: Query,
+  facets: FacetTermBucket[],
+  terms: TermBucket[],
+  term_buckets_by_facet_id: {[facet_id: string]: {[term: string]: TermBucket}},
+  facetTermCount: (facet: string, term: string) => number,
+  records: {[key: string]: any}
+}
+
 /*
 Expectations:
 - all records have simple key-value pairs.  
 - all record keys are strings
-- all record values are simple primitives (string, number)
+- all record values are simple primitives (string, number) or arrays of primitives
 - multi-value fields are not yet supported
 */
-type FacetedIndexConfig = {
-  display_fields: string[],
-  facet_fields: string[],
-}
-const FacetedIndex = (records: {[key: string]: any}[], config: FacetedIndexConfig): FacetedIndexInstance => {
+const FacetedIndex = (
+  records: {[key: string]: any}[],
+  config: FacetedIndexConfig
+): FacetedIndexInstance => {
   const candidate_facet_fields = new Set<string>();
   const expectedFacetIds =
     !!config && Array.isArray(config.facet_fields)
@@ -58,20 +82,41 @@ const FacetedIndex = (records: {[key: string]: any}[], config: FacetedIndexConfi
   let all_ids: number[] = [];
   let display_records: {}[] = [];
   let termsDict: {[term: string]: string} = {};
-  for (let r of records) {
-    for (let k of Object.keys(r)) {
-      candidate_facet_fields.add(k);
-      if (!allowableFacetId(k)) {
+
+  const traverseFacetUpwards = (facetId: string, term: string, recordId: number): void => {
+    if(!(facetId in config.facet_term_parents)){
+      return;
+    }
+    if(!(term in config.facet_term_parents[facetId])){
+      console.log('no parent term found for ' + term);
+      return;
+    }
+    let parentTerm = config.facet_term_parents[facetId][term];
+    ix[facetId][parentTerm] = ix[facetId][parentTerm] || new Set<number>();
+    ix[facetId][parentTerm].add(recordId);
+    termsDict[parentTerm] = parentTerm;
+    traverseFacetUpwards(facetId, parentTerm, recordId);
+  };
+
+  for (let record of records) {
+    for (let fieldName of Object.keys(record)) {
+      candidate_facet_fields.add(fieldName);
+      if (!allowableFacetId(fieldName)) {
         continue;
       }
-      ix[k] = ix[k] || {};
-      for (let term of Array.isArray(r[k]) ? r[k] : [r[k]]) {
-        ix[k][term] = ix[k][term] || new Set();
+      ix[fieldName] = ix[fieldName] || {};
+      let terms = 
+        Array.isArray(record[fieldName])
+        ? record[fieldName]
+        : [record[fieldName]];
+      for (let term of terms) {
+        ix[fieldName][term] = ix[fieldName][term] || new Set();
+        ix[fieldName][term].add(i);
         termsDict[term] = term;
-        ix[k][term].add(i);
+        traverseFacetUpwards(fieldName, term, i);
       }
     }
-    display_records.push(convertToDisplayRecord(r));
+    display_records.push(convertToDisplayRecord(record));
     all_ids.push(i);
     i++;
   }
@@ -88,14 +133,14 @@ const FacetedIndex = (records: {[key: string]: any}[], config: FacetedIndexConfi
           //queries may specify multiple values per facet...
           //...a record tagged with ANY of these terms should be consider a match.  (OR logic)
           return unionAll(
-            (query[facetId] || []).map((term) => ix[facetId][term])
+            (query[facetId] || []).map((term) => ix[facetId][term] || new Set<number>([]))
           );
         })
         .filter((s) => s.size > 0)
     );
   };
 
-  const search = (query: Query) => {
+  const search = (query: Query): SearchResult => {
     var matching_ids =
       Object.keys(query).length === 0
         ? new Set(all_ids)
@@ -112,6 +157,7 @@ const FacetedIndex = (records: {[key: string]: any}[], config: FacetedIndexConfi
       let term_buckets = Object.entries(ids_by_term)
         .map(([term, ids_matching_term]) => ({
           term: term,
+          facet_id: facet_id,
           in_query: facet_id in query && query[facet_id].indexOf(term) > -1,
           count: intersectAll(
             [
@@ -171,4 +217,4 @@ const FacetedIndex = (records: {[key: string]: any}[], config: FacetedIndexConfi
   };
 };
 
-export {GetDefaultSearchResult, FacetedIndex};
+export {GetDefaultSearchResult, FacetedIndex, FacetedIndexConfig};
