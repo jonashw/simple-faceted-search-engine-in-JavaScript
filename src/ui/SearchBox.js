@@ -23,7 +23,7 @@ const termMatches = (terms, q) => !q ? [] : terms.map(t => ({
 	segments: matchSegments(t.term, q)
 })).filter(tsm => !!tsm.segments);
 
-const SearchBox = ({searchResult,toggleTerm}) => {
+const SearchBox = ({searchResult,toggleQueryTerm}) => {
 	const [active,setActive] = React.useState(false);
 	const [q,setQ] = React.useState('');
 	const options = [
@@ -36,7 +36,7 @@ const SearchBox = ({searchResult,toggleTerm}) => {
 					onFocus={e => e.stopPropagation()}
 					onMouseDown={e => e.stopPropagation()}
 					onClick={e => {
-						toggleTerm(termMatch.term.facet_id, termMatch.term.term);
+						toggleQueryTerm(termMatch.term.facet_id, termMatch.term.term);
 					}}
 				>
 					<span className="badge rounded-pill bg-secondary">
