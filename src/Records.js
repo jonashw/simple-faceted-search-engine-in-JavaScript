@@ -14,10 +14,10 @@ var randElements = (arr, n) =>
       { arr: [...arr], elems: [] }
     ).elems;
 
-const days = "Monday Tuesday Wednesday Thursday Friday".split(" ");
+const days = "Monday Tuesday Wednesday Thursday Friday Saturday Sunday".split(" ");
 const colors = "Red Orange Yellow Green Blue Indigo Violet".split(" ");
 const RECORD_COUNT = 1000;
-const localStorageKey = `RECORDS_100_${RECORD_COUNT}`;
+const localStorageKey = `RECORDS_100_with_weekend_${RECORD_COUNT}`;
 const priorities = "Low Medium High".split(" ");
 
 var generateRecords = (n) =>

@@ -28,6 +28,10 @@ type FacetedIndexInstance = {
 };
 
 type FacetTermBucket = {facet_id: string, term_buckets: TermBucket[]};
+type FacetHierarchicalTermBucket = {
+  facet_id: string,
+  term_buckets: HierarchicalTermBucket[]
+}
 
 type TermBucket = {
   term: string,
@@ -36,9 +40,18 @@ type TermBucket = {
   facet_id: string
 };
 
+type HierarchicalTermBucket = {
+  term: string,
+  children: HierarchicalTermBucket[],
+  in_query: boolean,
+  count: number,
+  facet_id: string
+};
+
 type SearchResult = {
   query: Query,
   facets: FacetTermBucket[],
+  facetHierarchies: FacetHierarchicalTermBucket[],
   terms: TermBucket[],
   term_buckets_by_facet_id: {[facet_id: string]: {[term: string]: TermBucket}},
   facetTermCount: (facet: string, term: string) => number,
@@ -88,7 +101,7 @@ const FacetedIndex = (
       return;
     }
     if(!(term in config.facet_term_parents[facetId])){
-      console.log('no parent term found for ' + term);
+      //console.log('no parent term found for ' + term);
       return;
     }
     let parentTerm = config.facet_term_parents[facetId][term];
@@ -140,6 +153,14 @@ const FacetedIndex = (
     );
   };
 
+  function sortBy<T>(arr: T[], selector: (item: T) => any): T[] {
+    return arr.sort((itemA,itemB) => {
+      let a = selector(itemA);
+      let b = selector(itemB);
+      return a < b ? -1 : a > b ? 1 : 0;
+    })
+  }
+
   const search = (query: Query): SearchResult => {
     var matching_ids =
       Object.keys(query).length === 0
@@ -167,7 +188,54 @@ const FacetedIndex = (
           ).size
         }))
         .filter((term) => term.count > 0 || term.in_query);
-      return { facet_id, term_buckets };
+      return {
+        facet_id,
+        term_buckets: sortBy(term_buckets, b => b.term)
+      };
+    }) || [];
+
+    let facetHierarchies = Object.entries(ix).map(([facet_id, ids_by_term]) => {
+      let term_buckets: HierarchicalTermBucket[] = Object.entries(ids_by_term)
+        .map(([term, ids_matching_term]) => ({
+          term: term,
+          children: [],
+          facet_id: facet_id,
+          in_query: facet_id in query && query[facet_id].indexOf(term) > -1,
+          count: intersectAll(
+            [
+              matching_ids_independent_of_facet[facet_id],
+              ids_matching_term
+            ].filter((s) => s.size > 0)
+          ).size
+        }))
+        .filter((term) => term.count > 0 || term.in_query);
+      let byParentTerm: {[parentTerm: string]: HierarchicalTermBucket[]} = {};
+      const ROOT_ID = 'ROOT_' + new Date().getTime();
+      for(let b of term_buckets){
+        if(!(b.facet_id in config.facet_term_parents)){
+          continue;
+        }
+        let parentTerm = 
+          (b.term in config.facet_term_parents[b.facet_id])
+          ? config.facet_term_parents[b.facet_id][b.term]
+          : ROOT_ID;//top-level terms have the singleton parent
+        byParentTerm[parentTerm] = byParentTerm[parentTerm] || [];
+        byParentTerm[parentTerm].push(b);
+      }
+
+      const alphaSortTermBuckets = (tbs: HierarchicalTermBucket[]): HierarchicalTermBucket[] =>
+        sortBy(tbs, b => b.term);
+
+      for(let b of term_buckets){
+        if(!(b.term in byParentTerm)){
+          continue;
+        }
+        b.children = alphaSortTermBuckets(byParentTerm[b.term]);
+      }
+
+      return (ROOT_ID in byParentTerm)
+        ? { facet_id, term_buckets: alphaSortTermBuckets(byParentTerm[ROOT_ID])}
+        : { facet_id, term_buckets: alphaSortTermBuckets(term_buckets) };
     }) || [];
 
     let term_buckets_by_facet_id = Object.fromEntries((facets || []).map(f => [
@@ -182,6 +250,7 @@ const FacetedIndex = (
     return {
       query: { ...query },
       facets: facets || [],
+      facetHierarchies,
       terms,
       term_buckets_by_facet_id,
       facetTermCount: (facet: string, term: string) => 

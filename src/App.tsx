@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Search from "./search";
 import Settings from "./settings";
+import RECORDS from './Records';
 
 const qs_cfg = {
   ui_key: 'ui',
@@ -24,7 +25,6 @@ type UISettingControl<T> = {
     fromUrl: (str: string) => T,
     key: string
 }
-
 const uiSettingControls: UISettingControl<any>[] = [
   {
     label: 'Horizontal split',
@@ -165,7 +165,7 @@ export default function App() {
   };
 
   const rebuildIndex = (s: IndexRebuildSettings) => {
-    let ix = FacetedIndex(s.records, s.config);
+    let ix = FacetedIndex(s.records, {...s.config, facet_term_parents: {}});
     setSettings({...s, candidate_facet_fields: ix.candidate_facet_fields});
     setIx(ix);
   };

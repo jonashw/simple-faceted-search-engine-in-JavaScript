@@ -37,7 +37,7 @@ const SearchFilters = ({ix,query,setQuery,debug,searchResult,setSearchResult}) =
       }));
     let selectedOptions = options.filter(o => o.in_query);
     return <Select 
-      onChange={selectedOptions => setFacetQueryTerms(facet_id, selectedOptions.map(v => v.value) ) }
+      onChange={newSelectedOptions => setFacetQueryTerms(facet_id, newSelectedOptions.map(v => v.value) ) }
       getOptionValue={o => o.value}
       isOptionSelected={o => term_is_selected(o.value) }
       hideSelectedOptions={true}
@@ -46,24 +46,30 @@ const SearchFilters = ({ix,query,setQuery,debug,searchResult,setSearchResult}) =
       isMulti={true} />;
   };
 
-  const TermBucketLinks = ({facet_id, term_buckets, term_is_selected}) =>
+  const TermBucketLinks = ({facet_id, term_buckets, term_is_selected, level}) =>
     term_buckets.map((t) => {
       let selected = term_is_selected(t.term);
       return (
-        <a key={t.term}
-          href="javascript:void(0)"
-          className="link-primary pb-1" 
-          style={{ textDecoration: 'none', fontWeight: selected ? '700' : 'normal', display:'block'}}
-          onClick={() => {
-            let newQuery = ix.toggleQueryTerm(query, facet_id, t.term);
-            setQuery(newQuery);
-          }}
-        >
-          {t.term}
-          <span className={"badge rounded-pill float-end " + (selected ? "bg-success" : "bg-light text-dark")}>
-            {t.count}
-          </span>
-        </a>
+        <>
+          <a key={t.term}
+            href="javascript:void(0)"
+            className="link-primary pb-1"
+            style={{ textDecoration: 'none', fontWeight: selected ? '700' : 'normal', display:'block'}}
+            onClick={() => {
+              let newQuery = ix.toggleQueryTerm(query, facet_id, t.term);
+              setQuery(newQuery);
+            }}
+          >
+            {t.term}
+            <span className={"badge rounded-pill float-end " + (selected ? "bg-success" : "bg-light text-dark")}>
+              {t.count}
+            </span>
+          </a>
+          {('children' in t) && t.children.length > 0 && 
+            <div style={{paddingLeft: `${level*10}px`}}>
+              <TermBucketLinks {...{facet_id, term_buckets: t.children, term_is_selected, level: level + 1}} />
+            </div>}
+        </>
       );
     });
 
@@ -92,7 +98,7 @@ const SearchFilters = ({ix,query,setQuery,debug,searchResult,setSearchResult}) =
     });
       
   return (<>
-    {searchResult.facets
+    {(searchResult.facetHierarchies || [])
       .filter((f) => f.term_buckets.length > 0)
       .map(({ facet_id, term_buckets }) => {
         return (
@@ -100,13 +106,14 @@ const SearchFilters = ({ix,query,setQuery,debug,searchResult,setSearchResult}) =
           <div className="mb-1"><strong>{facet_id}</strong></div>
           { term_buckets.length > 10  
             ? <TermBucketSelectMenu {...{facet_id, term_buckets, term_is_selected}} />
-            : <TermBucketLinks {...{facet_id, term_buckets, term_is_selected}} />
+            : <TermBucketLinks {...{facet_id, term_buckets, term_is_selected, level: 1}} />
           }
         </div>
       );
     })}
     {!!debug &&
           <>
+              <pre>{JSON.stringify(searchResult.facetHierarchies, null, 2)}</pre>
               <pre>{JSON.stringify(query, null, 2)}</pre>
               <pre>{JSON.stringify(Array.from(activeTerms), null, 2)}</pre>
           </>
