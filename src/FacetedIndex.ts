@@ -286,4 +286,4 @@ const FacetedIndex = (
   };
 };
 
-export {GetDefaultSearchResult, FacetedIndex, FacetedIndexConfig};
+export {GetDefaultSearchResult, FacetedIndex, FacetedIndexConfig, FacetedIndexInstance};

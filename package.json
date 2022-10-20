@@ -6,6 +6,7 @@
   "main": "src/index.tsx",
   "browser": "chrome",
   "dependencies": {
+    "@textea/json-viewer": "^2.10.0",
     "@types/jest": "^29.2.0",
     "@types/node": "^18.11.0",
     "@types/react": "^18.0.21",

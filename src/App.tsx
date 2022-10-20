@@ -1,6 +1,7 @@
 import {FacetedIndex,FacetedIndexConfig} from "./FacetedIndex";
 import React  from "react";
 import SimpleDemo from "./SimpleDemo";
+import App2 from './ui/2.0/App';
 import {
   BrowserRouter as Router,
   useNavigate,
@@ -8,7 +9,7 @@ import {
 } from "react-router-dom";
 import Search from "./search";
 import Settings from "./settings";
-import RECORDS from './Records';
+import { defaultUiSettings, uiSettingControls, UISettings } from "./ui/2.0/UISettings";
 
 const qs_cfg = {
   ui_key: 'ui',
@@ -17,47 +18,16 @@ const qs_cfg = {
   records_url: 'url',
   records_key: 'key'
 }
-type UISettings = {[key:string]: string}
-type UISettingControl<T> = {
-    label: string,
-    options: T[]
-    defaultOption: T
-    fromUrl: (str: string) => T,
-    key: string
-}
-const uiSettingControls: UISettingControl<any>[] = [
-  {
-    label: 'Horizontal split',
-    options: ['1/11','2/10','3/9','4/8'],
-    defaultOption: '2/10',
-    fromUrl: (str: string) => str,
-    key: 'horizontalSplit'
-  },
-  {
-    label: 'Records per row',
-    options: [1, 2, 3, 4, 5],
-    defaultOption: 2,
-    fromUrl: str => parseInt(str),
-    key: 'recordsPerRow'
-  },
-  {
-    label: "Results per page",
-    options: [10, 20, 50, 100],
-    defaultOption: 20,
-    fromUrl: str => parseInt(str),
-    key: 'pageSize'
-  }
-];
 
 type AppSettings = {
-  records: {}[],
+  records: {[key:string]: any}[],
   candidate_facet_fields: Set<string>,
   config: {},
   ui: UISettings
 };
 
 type AppState = {
-  records: {}[],
+  records: {[key: string]: any}[],
   settings: AppSettings
 }
 
@@ -72,7 +42,7 @@ export default function App() {
     records: [],
     config: {},
     candidate_facet_fields: new Set([]),
-    ui: Object.fromEntries(uiSettingControls.map(c => [c.key, c.defaultOption]))
+    ui: defaultUiSettings
   } as AppSettings);
   const [debug, setDebug] = React.useState(false);
   const [ix, setIx] = React.useState(FacetedIndex([], {
@@ -175,6 +145,9 @@ export default function App() {
     : settingsVisible 
     ?
       <div className="container mt-3">
+        <div className="mb-5" >
+          <App2/>
+        </div>
         <Settings {...{ settings, rebuildIndex, makeUrl }} />
       </div>
     : <div className="container-fluid bg-light pt-3">
@@ -190,7 +163,7 @@ export default function App() {
           ix,
           debug,
           makeUrl,
-          uiSettingControls,
+          uiSettingControls: uiSettingControls,
           uiSettings: settings.ui,
           setUiSettings: (ui: UISettings) => setSettings({...settings, ui})}} />
       </div>;
