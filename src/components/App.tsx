@@ -1,14 +1,16 @@
 import React  from "react";
-import { FacetedIndex } from "../../FacetedIndex";
-import Search from "../../search";
-import {AppState} from './model';
+import { CreateFacetedIndex, AppState, defaultUiSettings, uiSettingControls } from "../model/index";
+import Search from "./search";
 import RecordsExtractor from "./RecordsExtractor";
 import StartScreen from "./StartScreen";
-import { defaultUiSettings, uiSettingControls } from "./UISettings";
 
-const defaultAppState: AppState = {type:'blank', dataUrl: 'sample-records.json'}
+const defaultAppState: AppState = 
+	{
+		type:'blank',
+		dataUrl: 'sample-records.json', 
+	};
 
-export default function App2() {
+export default function App() {
 	const [state,setState] = React.useState<AppState>(defaultAppState);
 	switch (state.type) {
 			case "blank": 
@@ -34,7 +36,7 @@ export default function App2() {
 							state={state}
 							setState={setState}
 							onSuccess={(records,facet_fields,display_fields) => {
-								let index = FacetedIndex(records,{display_fields,facet_fields,facet_term_parents: {}});
+								let index = CreateFacetedIndex(records,{display_fields,facet_fields,facet_term_parents: {}});
 								setState({
 									type:'withIndex',
 									pageNum: 1,

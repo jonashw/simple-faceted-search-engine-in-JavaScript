@@ -1,5 +1,5 @@
 import React  from "react";
-import {Blank} from './model';
+import {Blank} from '../model';
 type StartScreenProps = {
 	state: Blank,
 	clear?: () => void,

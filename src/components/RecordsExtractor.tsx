@@ -1,6 +1,7 @@
 import React  from "react";
-import {WithRawData} from './model';
+import {WithRawData} from '../model';
 import { JsonViewer } from '@textea/json-viewer'
+import {Record,GetRecordsMetadata} from '../model/index';
 
 const StandardJsonViewer = ({data} : {data: any}) => 
 	<div style={{maxHeight:'300px', overflowY:'auto', border:'1px solid #ddd', padding:'1em'}}>
@@ -68,6 +69,7 @@ const FieldsToggle = ({
 	</div>
 );
 
+
 type RecordsExtractorProps = {
 	state: WithRawData,
 	setState: (newState: WithRawData) => void,
@@ -80,48 +82,21 @@ type RecordsExtractorProps = {
 
 export default ({state,setState,onSuccess,}: RecordsExtractorProps) => {
 	let data = state.recordsKey === '' ? state.data : state.data[state.recordsKey];
-	let records = Array.isArray(data) && data.every(item => typeof item === 'object') ? data : undefined;
+	let records: Record[] | undefined = 
+		Array.isArray(data) && data.every(item => typeof item === 'object') 
+		? data 
+		: undefined;
 
-	let {fieldNames,valuesByFieldName} = 
-		!records 
-		? { fieldNames: [], valuesByFieldName: {} } 
-		: (() => {
-			let ks = new Set<string>();
-			let vs_by_k = new Map<string,Set<string|number>>();
-			for(let record of records){
-				for(let [k,v] of Object.entries(record)){
-					ks.add(k);
-					if(typeof v === "number" || typeof v === "string"){
-						let vs = vs_by_k.get(k)  || new Set<string|number>();
-						vs.add(v);
-						vs_by_k.set(k, vs);
-					}
-					if(Array.isArray(v)){
-						for(let v_ of v){
-							if(typeof v_ === "number" || typeof v_ === "string"){
-								let vs = vs_by_k.get(k)  || new Set<string|number>();
-								vs.add(v_);
-								vs_by_k.set(k, vs);
-							}
-						}
-					}
-				}
-			}
-			return {
-				fieldNames: Array.from(ks),
-				valuesByFieldName: Object.fromEntries(vs_by_k.entries())
-			};
-	})();
+	let {fields,fieldNames,valuesByFieldName} = GetRecordsMetadata(records || []);
 
   const [selectedFieldNames, setSelectedFieldNames] = React.useState({
-		display: new Set<string>(fieldNames),
+		display: new Set<string>(fields.map(f => f.name)),
 		facet: new Set<string>(
-			Object.entries(valuesByFieldName)
-			.filter(([fieldName,values]) =>
+			fields.filter(f =>
 			 	/* A facet is useful only if it has at least 2 values,
 				** and the more values a field gets, the less likely it is a facet. */
-				2 <= values.size && values.size < 10
-			).map(([fieldName,values]) => fieldName))
+				2 <= f.values.size && f.values.size < 10
+			).map(f => f.name))
 	});
 
 	let canBeginFacetedSearch =
@@ -150,7 +125,7 @@ export default ({state,setState,onSuccess,}: RecordsExtractorProps) => {
 		{!!records && <div>
 			<p> Array found with {records.length} records.  Showing first {Math.min(records.length, firstNRecords)}:  </p>
 			<div className="d-flex justify-content-between">
-				{records.slice(0,firstNRecords).map(r => <StandardJsonViewer data={r}/>)}
+				{records.slice(0,firstNRecords).map((r,i) => <StandardJsonViewer key={i} data={r}/>)}
 			</div>
 			<div className="row mt-3">
 				<div className="col">
@@ -162,6 +137,7 @@ export default ({state,setState,onSuccess,}: RecordsExtractorProps) => {
 						selectedFieldNames={selectedFieldNames.facet}
 						setSelectedFieldNames={(fns: Set<string>) => setSelectedFieldNames({...selectedFieldNames, facet: fns} )}
 					/>
+
 				</div>
 				<div className="col">
 					<FieldsToggle 
@@ -172,6 +148,7 @@ export default ({state,setState,onSuccess,}: RecordsExtractorProps) => {
 						setSelectedFieldNames={(fns: Set<string>) => setSelectedFieldNames({...selectedFieldNames, display: fns} )}
 					/>
 				</div>
+
 			</div>
 		</div>}
 		<div className="d-grid mt-3">

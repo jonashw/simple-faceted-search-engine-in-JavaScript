@@ -1,4 +1,4 @@
-import { FacetedIndexInstance } from "../../FacetedIndex";
+import { FacetedIndexInstance } from "./index";
 import { UISettings } from "./UISettings";
 
 interface Blank {

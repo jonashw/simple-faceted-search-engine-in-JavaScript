@@ -1,7 +1,7 @@
-import { FacetedIndex } from "./FacetedIndex";
+import { CreateFacetedIndex } from "./CreateFacetedIndex";
 
 describe("The Faceted Index term hierarchy", () => {
-	const ix = FacetedIndex([
+	const ix = CreateFacetedIndex([
 		{
 			location:'Sacramento',
 			rating: 6
@@ -59,7 +59,7 @@ describe("The Faceted Index term hierarchy", () => {
 })
 
 describe("The Faceted Index", () => {
-	const ix = FacetedIndex([
+	const ix = CreateFacetedIndex([
 		{
 			color:'Yellow',
 			difficulty: 'Medium'
