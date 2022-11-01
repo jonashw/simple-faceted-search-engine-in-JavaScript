@@ -1,6 +1,16 @@
 import React from "react";
 import ultimatePagination from 'ultimate-pagination';
-const Pagination = ({recordCount,pageSize,currentPageNumber,setCurrentPageNumber}) => {
+const Pagination = ({
+    recordCount,
+    pageSize,
+    currentPageNumber,
+    setCurrentPageNumber
+} : {
+    recordCount: number,
+    pageSize: number,
+    currentPageNumber: number,
+    setCurrentPageNumber: (pn: number) => void
+}) => {
     const pageCount = Math.max(1,Math.ceil(recordCount/pageSize));
     if(pageCount === 0){
         return <></>;
@@ -27,17 +37,28 @@ const Pagination = ({recordCount,pageSize,currentPageNumber,setCurrentPageNumber
         <nav aria-label="Results pages">
             <ul className="pagination mb-0">
                 {paginationModel.map((p, i) => {
-                    const onClick = () => setCurrentPageNumber(p.value);
                     switch (p.type) {
                         //case 'PREVIOUS_PAGE_LINK': return <Pagination.Prev {...props}/>
                         //case 'NEXT_PAGE_LINK'    : return <Pagination.Next {...props}/>
                         case 'PAGE':
                             return <li className={"page-item " + (p.isActive ? "active" : "")} key={i}>
-                                <a className="page-link" href="javascript:void(0)" onClick={onClick}>{p.value}</a>
+                                <a  className="page-link" 
+                                    href="" 
+                                    onClick={e => {
+                                        e.preventDefault();
+                                        setCurrentPageNumber(p.value);
+                                    }}
+                                >{p.value}</a>
                             </li>;
                         case 'ELLIPSIS':
                             return <li className={"page-item " + (p.isActive ? "active" : "")} key={i}>
-                                <a className="page-link" href="javascript:void(0)" onClick={onClick}>...</a>
+                                <a  className="page-link"
+                                    href="" 
+                                    onClick={e => {
+                                        e.preventDefault();
+                                        setCurrentPageNumber(p.value);
+                                    }}
+                                >...</a>
                             </li>;
                         default: return undefined;
                     }
