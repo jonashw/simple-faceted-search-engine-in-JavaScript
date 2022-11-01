@@ -13,7 +13,8 @@ const Search = ({
   uiSettings,
   setUiSettings,
   query,
-  setQuery
+  setQuery,
+  viewSettings
 } : {
   ix: FacetedIndexInstance;
   debug: boolean;
@@ -22,6 +23,7 @@ const Search = ({
   setUiSettings: (settings: UISettings) => void;
   query: Query;
   setQuery: (q: Query) => void;
+  viewSettings: () => void;
 }) => {
   const [searchResult, setSearchResult] = React.useState(GetDefaultSearchResult());
   const [currentPageNumber,setCurrentPageNumber] = React.useState(1);
@@ -29,7 +31,7 @@ const Search = ({
 
   const pagination = 
     searchResult.records.length < parseInt(uiSettings.pageSize)
-    ? <></>
+    ? <div></div>
     : <Pagination
       recordCount={searchResult.records.length} 
       {...{
@@ -43,9 +45,31 @@ const Search = ({
     setQuery(newQuery);
   };
 
+  const uiOptions = 
+    <div className="d-flex justify-content-between align-items-end">
+      {pagination}
+      <div className="d-flex justify-content-end">
+        {uiSettingControls.map(control => 
+          <div key={control.label} className="mb-3 ms-3">
+            <label className="mb-1">{control.label}</label>
+            <select
+              className="form-select form-select-sm"
+              value={uiSettings[control.key]}
+              onChange={e => setUiSettings({...uiSettings, [control.key]: e.target.value}) }
+            >
+              {control.options.map(o => <option key={o} value={o}>{o}</option>)}
+            </select>
+          </div>)}
+      </div>
+    </div>;
+
   return (
     <div className="row">
       <div className={"col-" + uiSettings.horizontalSplit.split('/')[0]}>
+        <SearchBox
+          searchResult={searchResult}
+          toggleQueryTerm={toggleQueryTerm}
+        />
         <SearchFilters 
           {...{
             ix,
@@ -58,30 +82,20 @@ const Search = ({
         />
       </div>
       <div className={"col-" + uiSettings.horizontalSplit.split('/')[1]}>
-        <SearchBox
-          searchResult={searchResult}
-          toggleQueryTerm={toggleQueryTerm}
-        />
-        <ActiveFilters 
-          query={query}
-          clearQuery={() => { setQuery({}) }}
-          toggleQueryTerm={toggleQueryTerm} 
-        />
-        <div className="d-flex justify-content-start">
-          {uiSettingControls.map(control => 
-            <div key={control.label} className="mb-3 me-3">
-              <label className="mb-1">{control.label}</label>
-              <select
-                className="form-select"
-                value={uiSettings[control.key]}
-                onChange={e => setUiSettings({...uiSettings, [control.key]: e.target.value}) }
-              >
-                {control.options.map(o => <option key={o} value={o}>{o}</option>)}
-              </select>
-            </div>)}
+        <div className="d-flex justify-content-between align-items-start">
+          <ActiveFilters 
+            query={query}
+            clearQuery={() => { setQuery({}) }}
+            toggleQueryTerm={toggleQueryTerm} 
+          />
+
+          <button className="btn btn-outline-secondary" onClick={() => viewSettings()}>
+            ⚙️
+          </button>
         </div>
+        
         <h5 className="mt-3">Results: {searchResult.records.length}</h5>
-        {pagination}
+        {uiOptions}
         <div className={"row row-cols-" + uiSettings.recordsPerRow}>
           {ix.getResultsPage(searchResult.records, currentPageNumber, parseInt(uiSettings.pageSize)).map((r, i) => (
             <div className="col" key={i}>
@@ -103,7 +117,7 @@ const Search = ({
             </div>
           ))}
         </div>
-        {pagination}
+        {uiOptions}
       </div>
     </div>
   );

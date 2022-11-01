@@ -10,7 +10,7 @@ const uiSettingControls: UISettingControl<any>[] = [
   {
     label: 'Horizontal split',
     options: ['1/11','2/10','3/9','4/8'],
-    defaultOption: '2/10',
+    defaultOption: '3/9',
     fromUrl: (str: string) => str,
     key: 'horizontalSplit'
   },

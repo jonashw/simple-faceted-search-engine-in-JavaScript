@@ -8,6 +8,8 @@ const root = createRoot(container!);
 root.render(
   <StrictMode>
     <Router>
-      <App/>
+      <div className="container pt-3">
+        <App/>
+      </div>
     </Router>
   </StrictMode>);

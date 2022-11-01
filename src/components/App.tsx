@@ -96,10 +96,8 @@ export default function App() {
 				</div>;
 		case 'withIndex':
 			return <div>
-				<button className="float-right" onClick={() => setState(state.previousState)}>
-					Configure
-				</button>
 				<SearchScreen {...{
+					viewSettings: () => setState(state.previousState),
 					ix: state.index,
 					debug: false,
 					uiSettingControls,

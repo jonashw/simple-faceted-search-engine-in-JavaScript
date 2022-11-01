@@ -14,9 +14,9 @@ const ActiveFilters = ({
     const facets = Object.entries(query);
     const selectedTerms = facets.reduce((termCount,[facet_id,terms]) => termCount+terms.length,0);
     if(facets.length === 0){
-        return <></>;
+        return <div className="text-muted"></div>;
     }
-    return <div className="d-flex justify-content-between mb-3">
+    return <div className="d-flex justify-content-between">
         <div>
             {facets.flatMap(([facetId, terms]) =>
                 terms.map((term,i) => (

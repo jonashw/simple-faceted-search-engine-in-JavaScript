@@ -54,21 +54,27 @@ const SearchBox = ({
 				href=""
 				onFocus={e => e.stopPropagation()}
 				onMouseDown={e => e.stopPropagation()}
+				style={{fontWeight: termMatch.term.in_query ? 'bold' : 'normal'}}
 				onClick={e => {
 					e.preventDefault();
 					toggleQueryTerm(termMatch.term.facet_id, termMatch.term.term);
+					setQ('');
+					setActive(false);
 				}}
 			>
-				<span className="badge rounded-pill bg-secondary">
+				<strong>{termMatch.term.facet_id}:</strong> {" "}
+				<span>
 					{termMatch.segments.map((segment,i) =>
 						<span key={segment.text + "-" + i.toString()}>{
 							segment.match
-							? <span className="bg-secondary" style={{filter:'invert(1)'}}>{segment.text}</span> 
+							? <span className="bg-warning">{segment.text}</span> 
 							: <span>{segment.text}</span>
 						}</span>)
 					}
+				</span>{" "}
+				<span className={"badge rounded-pill float-end " + (termMatch.term.in_query ? "bg-secondary" : "bg-light text-dark")}>
+					{termMatch.term.count}
 				</span>
-				{" "}({termMatch.term.facet_id})
 			</a>
 		)
 	];
@@ -85,9 +91,17 @@ const SearchBox = ({
 	>
 		<input type="text"
 			className="form-control"
+			name="search term"
 			placeholder="Search"
+			autoComplete="off"
+			autoCorrect="off"
+			autoFocus={true}
+			value={q}
 			onFocus={e => setActive(true)}
-			onChange={e => setQ(e.target.value)}
+			onChange={e => {
+				e.preventDefault();
+				setQ(e.target.value);
+			}}
 		/>
 		{active && options.length > 0 && <div className="list-group" style={{cursor:'pointer'}}>{options}</div>}
 	</div>;
