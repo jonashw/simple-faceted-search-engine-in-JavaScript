@@ -4,25 +4,11 @@ type StartScreenProps = {
 	state: Blank,
 	clear?: () => void,
 	setState: (newState: Blank) => void,
-	onSuccess: (data: any) => void 
+	onSuccess: (data: any) => void ,
+	getJson: (url: string) => Promise<any>
 };
 
-export default ({state,clear,setState,onSuccess}: StartScreenProps) => {
-	const getJson = async (url:string) => {
-		try {
-			let response = await fetch(url);
-			let data = await response.json();
-			if (!data) {
-				return;
-			} else {
-				return data;
-			}
-		} catch (e) {
-			console.error(e);
-			return;
-		}
-	};
-
+export default ({state,clear,setState,onSuccess, getJson}: StartScreenProps) => {
   const load = async () => {
     let data = await getJson(state.dataUrl);
     console.log('data',data);

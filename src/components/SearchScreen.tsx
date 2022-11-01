@@ -1,45 +1,33 @@
 import React from "react";
-import SearchBox from './ui/SearchBox';
-import { useSearchParams } from "react-router-dom";
-import {
-  SearchFilters,
-  ActiveFilters,
-  KeywordInput,
-  Pagination
-} from "./ui";
-import {GetDefaultSearchResult} from './FacetedIndex';
+import SearchBox from './SearchBox';
+import { GetDefaultSearchResult, FacetedIndexInstance, UISettingControl, UISettings, Query } from "../model";
+import Pagination from "./Pagination";
+import KeywordInput from "./KeywordInput";
+import SearchFilters from "./SearchFilters";
+import ActiveFilters from "./ActiveFilters";
 
-const Search = ({ ix,debug, uiSettingControls, uiSettings, setUiSettings }) => {
-  const [query, setQuery] = React.useState({});
+const Search = ({ 
+  ix,
+  debug,
+  uiSettingControls,
+  uiSettings,
+  setUiSettings,
+  query,
+  setQuery
+} : {
+  ix: FacetedIndexInstance;
+  debug: boolean;
+  uiSettingControls: UISettingControl<number|string>[];
+  uiSettings: UISettings,
+  setUiSettings: (settings: UISettings) => void,
+  query: Query,
+  setQuery: (q: Query) => void
+}) => {
   const [searchResult, setSearchResult] = React.useState(GetDefaultSearchResult());
-  const [searchParams, setSearchParams] = useSearchParams();
   const [currentPageNumber,setCurrentPageNumber] = React.useState(1);
 
-  React.useEffect(() => {
-    const urlQuery = Array.from(searchParams.entries())
-      .filter(([key, value]) => key.indexOf("q_") === 0)
-      .map(([key, value]) => [key.replace("q_", ""), value])
-      .reduce((dict, [key, value]) => {
-        (dict[key] = dict[key] || []).push(value);
-        return dict;
-      }, {});
-    console.log('setting query from url',urlQuery);
-    setQuery(urlQuery);
-  }, [ix,searchParams]);
-
-  const setQueryFromUI = (query) => {
-    let existingPairs = Array.from(searchParams.entries()).filter(
-      ([key, value]) => key.indexOf("q_") === -1
-    );
-    let pairs = Object.entries(query).flatMap(([key, values]) =>
-      values.map((v) => ["q_" + key, v])
-    );
-
-    setSearchParams(new URLSearchParams(existingPairs.concat(pairs)));
-  };
-
   const pagination = 
-    searchResult.records.length < uiSettings.pageSize
+    searchResult.records.length < parseInt(uiSettings.pageSize)
     ? <></>
     : <Pagination
       recordCount={searchResult.records.length} 
@@ -49,35 +37,40 @@ const Search = ({ ix,debug, uiSettingControls, uiSettings, setUiSettings }) => {
         setCurrentPageNumber
       }} />;
 
-  const toggleQueryTerm = (facet_id, term) => {
+  const toggleQueryTerm = (facet_id: string, term: string) => {
     let newQuery = ix.toggleQueryTerm(query, facet_id, term);
-    setQueryFromUI(newQuery);
+    setQuery(newQuery);
   };
 
   return (
     <div className="row">
       <div className={"col-" + uiSettings.horizontalSplit.split('/')[0]}>
+        {/*
+        
         <KeywordInput {...{ix,query,setQuery}} />
+        */}
         <SearchFilters 
           {...{
             ix,
             debug,
             query,
-            setQuery: setQueryFromUI,
+            setQuery,
             searchResult,
             setSearchResult
           }}
         />
       </div>
       <div className={"col-" + uiSettings.horizontalSplit.split('/')[1]}>
+        {/* 
         <SearchBox
           terms={ix.terms}
           searchResult={searchResult}
           toggleQueryTerm={toggleQueryTerm}
         />
+        */}
         <ActiveFilters 
           query={query}
-          clearQuery={() => setQueryFromUI({})}
+          clearQuery={() => { setQuery({}) }}
           toggleQueryTerm={toggleQueryTerm} 
         />
         <div className="d-flex justify-content-start">
@@ -96,7 +89,7 @@ const Search = ({ ix,debug, uiSettingControls, uiSettings, setUiSettings }) => {
         <h5 className="mt-3">Results: {searchResult.records.length}</h5>
         {pagination}
         <div className={"row row-cols-" + uiSettings.recordsPerRow}>
-          {ix.getResultsPage(searchResult.records, currentPageNumber, uiSettings.pageSize).map((r, i) => (
+          {ix.getResultsPage(searchResult.records, currentPageNumber, parseInt(uiSettings.pageSize)).map((r, i) => (
             <div className="col" key={i}>
               <div className="card mb-3">
                 <div className="card-body">
