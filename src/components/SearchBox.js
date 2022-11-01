@@ -32,10 +32,11 @@ const SearchBox = ({searchResult,toggleQueryTerm}) => {
 				<a
 					className={"list-group-item list-group-item-action" + (termMatch.term.in_query ? " active" : "")}
 					key={termMatch.term.facet_id + "-" + termMatch.term.term}
-					href="javascript:void(0)"
+					href=""
 					onFocus={e => e.stopPropagation()}
 					onMouseDown={e => e.stopPropagation()}
 					onClick={e => {
+						e.preventDefault();
 						toggleQueryTerm(termMatch.term.facet_id, termMatch.term.term);
 					}}
 				>

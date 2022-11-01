@@ -27,17 +27,20 @@ const Pagination = ({recordCount,pageSize,currentPageNumber,setCurrentPageNumber
         <nav aria-label="Results pages">
             <ul className="pagination mb-0">
                 {paginationModel.map((p, i) => {
-                    const onClick = () => setCurrentPageNumber(p.value);
+                    const onClick = (e) => {
+                        e.preventDefault();
+                        setCurrentPageNumber(p.value);
+                    };
                     switch (p.type) {
                         //case 'PREVIOUS_PAGE_LINK': return <Pagination.Prev {...props}/>
                         //case 'NEXT_PAGE_LINK'    : return <Pagination.Next {...props}/>
                         case 'PAGE':
                             return <li className={"page-item " + (p.isActive ? "active" : "")} key={i}>
-                                <a className="page-link" href="javascript:void(0)" onClick={onClick}>{p.value}</a>
+                                <a className="page-link" href="" onClick={onClick}>{p.value}</a>
                             </li>;
                         case 'ELLIPSIS':
                             return <li className={"page-item " + (p.isActive ? "active" : "")} key={i}>
-                                <a className="page-link" href="javascript:void(0)" onClick={onClick}>...</a>
+                                <a className="page-link" href="" onClick={onClick}>...</a>
                             </li>;
                         default: return undefined;
                     }

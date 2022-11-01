@@ -47,15 +47,16 @@ const SearchFilters = ({ix,query,setQuery,debug,searchResult,setSearchResult}) =
   };
 
   const TermBucketLinks = ({facet_id, term_buckets, term_is_selected, level}) =>
-    term_buckets.map((t) => {
+    term_buckets.map((t,i) => {
       let selected = term_is_selected(t.term);
       return (
-        <>
+        <div key={i}>
           <a key={t.term}
-            href="javascript:void(0)"
+            href=""
             className="link-primary pb-1"
             style={{ textDecoration: 'none', fontWeight: selected ? '700' : 'normal', display:'block'}}
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
               let newQuery = ix.toggleQueryTerm(query, facet_id, t.term);
               setQuery(newQuery);
             }}
@@ -69,7 +70,7 @@ const SearchFilters = ({ix,query,setQuery,debug,searchResult,setSearchResult}) =
             <div style={{paddingLeft: `${level*10}px`}}>
               <TermBucketLinks {...{facet_id, term_buckets: t.children, term_is_selected, level: level + 1}} />
             </div>}
-        </>
+        </div>
       );
     });
 
