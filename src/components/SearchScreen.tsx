@@ -2,9 +2,9 @@ import React from "react";
 import SearchBox from './SearchBox';
 import { GetDefaultSearchResult, FacetedIndexInstance, UISettingControl, UISettings, Query } from "../model";
 import Pagination from "./Pagination";
-import KeywordInput from "./KeywordInput";
 import SearchFilters from "./SearchFilters";
 import ActiveFilters from "./ActiveFilters";
+import RecordTermTable from "./RecordTermTable";
 
 const Search = ({ 
   ix,
@@ -18,13 +18,14 @@ const Search = ({
   ix: FacetedIndexInstance;
   debug: boolean;
   uiSettingControls: UISettingControl<number|string>[];
-  uiSettings: UISettings,
-  setUiSettings: (settings: UISettings) => void,
-  query: Query,
-  setQuery: (q: Query) => void
+  uiSettings: UISettings;
+  setUiSettings: (settings: UISettings) => void;
+  query: Query;
+  setQuery: (q: Query) => void;
 }) => {
   const [searchResult, setSearchResult] = React.useState(GetDefaultSearchResult());
   const [currentPageNumber,setCurrentPageNumber] = React.useState(1);
+  const [showTermTables, setShowTermTables] = React.useState(false);
 
   const pagination = 
     searchResult.records.length < parseInt(uiSettings.pageSize)
@@ -32,7 +33,7 @@ const Search = ({
     : <Pagination
       recordCount={searchResult.records.length} 
       {...{
-        pageSize: uiSettings.pageSize,
+        pageSize: parseInt(uiSettings.pageSize),
         currentPageNumber,
         setCurrentPageNumber
       }} />;
@@ -45,10 +46,6 @@ const Search = ({
   return (
     <div className="row">
       <div className={"col-" + uiSettings.horizontalSplit.split('/')[0]}>
-        {/*
-        
-        <KeywordInput {...{ix,query,setQuery}} />
-        */}
         <SearchFilters 
           {...{
             ix,
@@ -61,13 +58,10 @@ const Search = ({
         />
       </div>
       <div className={"col-" + uiSettings.horizontalSplit.split('/')[1]}>
-        {/* 
         <SearchBox
-          terms={ix.terms}
           searchResult={searchResult}
           toggleQueryTerm={toggleQueryTerm}
         />
-        */}
         <ActiveFilters 
           query={query}
           clearQuery={() => { setQuery({}) }}
@@ -95,6 +89,14 @@ const Search = ({
                 <div className="card-body">
                   <div className="card-text">
                     <pre className="mb-0">{JSON.stringify(r, null, 2)}</pre>
+                    {showTermTables && <RecordTermTable
+                      record={r}
+                      facetIds={searchResult.facets.map(f => f.facet_id)}
+                      onClick={toggleQueryTerm}
+                      facetTermCount={searchResult.facetTermCount}
+                      thWidth={undefined}
+                      className={"mb-0"}
+                    />}
                   </div>
                 </div>
               </div>

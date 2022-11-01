@@ -8,11 +8,15 @@ import {
 
 import {unionAll,intersectAll } from './SetOperations';
 
-const GetDefaultSearchResult = () => 
+const GetDefaultSearchResult = (): SearchResult => 
 ({
   query: {},
   records: [],
-  facets: []
+  facets: [],
+  facetHierarchies: [],
+  facetTermCount: (f,t) => 0,
+  term_buckets_by_facet_id: {},
+  terms: []
 });
 
 /*

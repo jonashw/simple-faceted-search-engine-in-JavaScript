@@ -1,7 +1,16 @@
 import React from "react";
+import { Query } from "../model";
 import './ActiveFilters.css';
 
-const ActiveFilters = ({query,clearQuery,toggleQueryTerm}) =>  {
+const ActiveFilters = ({
+    query,
+    clearQuery,
+    toggleQueryTerm
+} : {
+    query: Query,
+    clearQuery: () => void,
+    toggleQueryTerm: (facet_id: string, term: string) => void
+}) =>  {
     const facets = Object.entries(query);
     const selectedTerms = facets.reduce((termCount,[facet_id,terms]) => termCount+terms.length,0);
     if(facets.length === 0){
