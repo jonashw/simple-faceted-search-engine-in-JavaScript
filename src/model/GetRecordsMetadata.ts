@@ -2,7 +2,15 @@ import {Field, FieldValue, Record, RecordsMetadata} from './types';
 
 const GetRecordsMetadata = (records: Record[]): RecordsMetadata => {
 	if(!records || records.length === 0){
-		return { fields: [], fieldNames: [], valuesByFieldName: {} } ;
+		return {
+			fields: [],
+			fieldNames: [],
+			valuesByFieldName: {},
+			recommended_selections: {
+				display: new Set<string>(),
+				facet: new Set<string>()
+			}
+		};
 	}
 	let ks = new Set<string>();
 	let vs_by_k = new Map<string,Set<string|number>>();
@@ -34,10 +42,20 @@ const GetRecordsMetadata = (records: Record[]): RecordsMetadata => {
 		name: fn,
 		values: valuesByFieldName[fn] || new Set<FieldValue>()
 	}));
+
 	return {
 		fields,
 		fieldNames,
-		valuesByFieldName
+		valuesByFieldName,
+		recommended_selections: {
+			display: new Set<string>(fields.map(f => f.name)),
+			facet: new Set<string>(
+				fields.filter(f =>
+					/* A facet is useful only if it has at least 2 values,
+					** and the more values a field gets, the less likely it is a facet. */
+					2 <= f.values.size && f.values.size < 15
+				).map(f => f.name))
+		}
 	};
 };
 

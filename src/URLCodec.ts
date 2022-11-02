@@ -1,12 +1,14 @@
 import {
   AppState,
   Blank,
+  WithRecords,
   CreateFacetedIndex,
   defaultUiSettings,
   Query,
   uiSettingControls,
   UISettings,
-  WithRawData 
+  WithRawData, 
+  GetRecordsMetadata
 } from "./model";
 
 const qs_cfg = {
@@ -47,10 +49,19 @@ const stateToDto = (state: AppState): AppStateDto => {
         ui_settings: undefined,
         query: {}
       };
-    case 'withIndex':
+    case 'withRecords':
       return {
         url: state.previousState.previousState.dataUrl,
         records_key: state.previousState.recordsKey,
+        facet_fields: Array.from(state.selectedFieldNames.facet),
+        display_fields: Array.from(state.selectedFieldNames.display),
+        ui_settings: undefined,
+        query: {}
+      };
+    case 'withIndex':
+      return {
+        url: state.previousState.previousState.previousState.dataUrl,
+        records_key: state.previousState.previousState.recordsKey,
         facet_fields: state.index.actual_facet_fields,
         display_fields: Array.from(state.index.display_fields),
         ui_settings: state.uiSettings,
@@ -127,6 +138,17 @@ const dtoToState = async (
   if(!Array.isArray(records)){
     return withRawData;
   }
+  let metadata = GetRecordsMetadata(records);
+  let withRecords: WithRecords = {
+    type: "withRecords",
+    records: records,
+    selectedFieldNames: {
+      facet: new Set<string>(dto.facet_fields.length === 0 ? metadata.recommended_selections.facet : dto.facet_fields),
+      display: new Set<string>(dto.display_fields.length === 0 ? metadata.recommended_selections.display : dto.display_fields)
+    },
+    metadata,
+    previousState: withRawData
+  }
   if(dto.facet_fields.length > 0 && dto.display_fields.length > 0){
     let index = CreateFacetedIndex(records, {
       display_fields: dto.display_fields,
@@ -135,7 +157,7 @@ const dtoToState = async (
     });
     return {
       type: 'withIndex',
-      previousState: withRawData,
+      previousState: withRecords,
       index,
       pageNum: 1,
       pageSize:200,
@@ -143,7 +165,7 @@ const dtoToState = async (
       uiSettings: dto.ui_settings || defaultUiSettings
     };
   }
-  return Promise.resolve(withRawData);
+  return Promise.resolve(withRecords);
 }
 
 const serialize = (dto: AppStateDto) => 

@@ -4,10 +4,19 @@ type Field = {
 	name: string;
 	values: Set<FieldValue>;
 }
+type SelectedFieldNames = 
+{
+	display: Set<string>;
+	facet: Set<string>;
+}
 type RecordsMetadata = {
 	fields: Field[];
 	fieldNames: string[];
 	valuesByFieldName: {[fieldName:string]: Set<FieldValue>} 
+	recommended_selections: {
+    display: Set<string>,
+    facet: Set<string>
+  }
 }
 type ChildParentRelations = {[childTerm: FieldValue]: FieldValue};
 
@@ -73,5 +82,6 @@ export {
 	FacetHierarchicalTermBucket,
 	HierarchicalTermBucket,
 	TermBucket,
-	SearchResult
+	SearchResult,
+  SelectedFieldNames
 };

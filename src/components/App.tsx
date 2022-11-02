@@ -1,10 +1,11 @@
 import React, { useEffect }  from "react";
-import { CreateFacetedIndex, AppState, defaultUiSettings, uiSettingControls, UISettings } from "../model";
+import { CreateFacetedIndex, AppState, defaultUiSettings, uiSettingControls, UISettings, GetRecordsMetadata, WithRawData } from "../model";
 import SearchScreen from "./SearchScreen";
 import RecordsExtractor from "./RecordsExtractor";
 import StartScreen from "./StartScreen";
 import { URLCodec } from "../URLCodec";
 import { useSearchParams } from "react-router-dom";
+import IndexConfiguration from "./IndexConfiguration";
 
 const defaultAppState: AppState = 
 	{
@@ -50,6 +51,38 @@ export default function App() {
 		setUrlParams(urlParams);
 	}, [state]);
 
+	const extractor = (state: WithRawData) =>
+		<>
+			<div className="mb-3">
+				<StartScreen
+					getJson={getJson}
+					state={state.previousState}
+					clear={() => setState(state.previousState)}
+					setState={s => setState({...state, previousState:s})}
+					onSuccess={data => 
+						setState({
+							type:'withRawData',
+							data: data,
+							recordsKey: '',
+							previousState: state.previousState
+						})}/>
+			</div>
+			<RecordsExtractor 
+				state={state}
+				setState={setState}
+				onSuccess={(records) => {
+					let metadata = GetRecordsMetadata(records);
+					setState({
+						type:'withRecords',
+						records: records,
+						metadata,
+						selectedFieldNames: metadata.recommended_selections,
+						previousState: state
+					})
+				}}
+			/>
+		</>;
+
 	switch (state.type) {
 		case "blank": 
 			return <StartScreen
@@ -64,25 +97,22 @@ export default function App() {
 							})}/>;
 		case "withRawData":
 			return <div>
-				<div className="mb-3">
-					<StartScreen
-						getJson={getJson}
-						state={state.previousState}
-						clear={() => setState(state.previousState)}
-						setState={s => setState({...state, previousState:s})}
-						onSuccess={data => 
-							setState({
-								type:'withRawData',
-								data: data,
-								recordsKey: '',
-								previousState: state.previousState
-							})}/>
-				</div>
-				<RecordsExtractor 
+				{extractor(state)}
+				</div>;
+		case 'withRecords':
+			return <div>
+				{extractor(state.previousState)}
+				<IndexConfiguration
 					state={state}
 					setState={setState}
-					onSuccess={(records,facet_fields,display_fields) => {
-						let index = CreateFacetedIndex(records,{display_fields,facet_fields,facet_term_parents: {}});
+					onSuccess={() => {
+						let index = CreateFacetedIndex(
+							state.records,
+							{
+								display_fields: Array.from(state.selectedFieldNames.display),
+								facet_fields: Array.from(state.selectedFieldNames.facet),
+								facet_term_parents: {}
+							});
 						setState({
 							type:'withIndex',
 							pageNum: 1,
@@ -92,8 +122,9 @@ export default function App() {
 							uiSettings: defaultUiSettings,
 							previousState: state
 						})
-					}}/>
-				</div>;
+					}}
+				/>
+			</div>;
 		case 'withIndex':
 			return <div>
 				<SearchScreen {...{

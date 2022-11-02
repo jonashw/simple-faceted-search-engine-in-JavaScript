@@ -1,4 +1,4 @@
-import { FacetedIndexInstance } from "./index";
+import { FacetedIndexInstance, Record,RecordsMetadata, SelectedFieldNames  } from "./index";
 import { UISettings } from "./UISettings";
 
 interface Blank {
@@ -11,6 +11,13 @@ interface WithRawData {
 	recordsKey: string;
 	previousState: Blank;
 };
+interface WithRecords {
+	type: 'withRecords';
+	records: Record[];
+	metadata: RecordsMetadata;
+	selectedFieldNames: SelectedFieldNames;
+	previousState: WithRawData;
+};
 interface WithIndex {
 	type: 'withIndex'
 	index: FacetedIndexInstance,
@@ -18,8 +25,8 @@ interface WithIndex {
 	pageNum: number;
 	query: {[facetName: string]: string[]};
 	uiSettings: UISettings;
-	previousState: WithRawData;
+	previousState: WithRecords;
 }
-type AppState = Blank | WithRawData | WithIndex;
+type AppState = Blank | WithRawData | WithRecords | WithIndex;
 
-export {Blank, WithRawData, WithIndex, AppState};
+export {Blank, WithRecords, WithRawData, WithIndex, AppState};
