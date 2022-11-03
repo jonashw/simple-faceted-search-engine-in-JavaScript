@@ -1,26 +1,22 @@
 import React  from "react";
-import {SelectedFieldNames, WithRecords} from '../model';
+import {RecordsMetadata, SelectedFieldNames } from '../model';
 import FieldsToggle from "./FieldsToggle";
 
 export default ({
-	state,
-	setState,
-	onSuccess
+	metadata,
+	onSuccess,
+	selectedFieldNames,
+	setSelectedFieldNames
 }: {
-	state: WithRecords,
-	setState: (newState: WithRecords) => void,
-	onSuccess: () => void
+	metadata: RecordsMetadata,
+	onSuccess: () => void,
+	selectedFieldNames: SelectedFieldNames,
+	setSelectedFieldNames: (sfns: SelectedFieldNames) => void
 }) => {
-	let md = state.metadata;
-
-  const [selectedFieldNames, setSelectedFieldNames] = [
-		state.selectedFieldNames,
-		(sfns: SelectedFieldNames) => setState(({...state, selectedFieldNames: sfns}))
-	];
 
 	let canBeginFacetedSearch =
 		//gotta have fields to search at all!
-		state.selectedFieldNames.facet.size > 0 && state.selectedFieldNames.display.size > 0;
+		selectedFieldNames.facet.size > 0 && selectedFieldNames.display.size > 0;
 
 	return <div>
 		<div>
@@ -29,8 +25,8 @@ export default ({
 					<FieldsToggle 
 						label="Facet Fields"
 						description="Select the fields that should be used as facets"
-						fieldNames={md.fieldNames}
-						fieldValues={md.valuesByFieldName}
+						fieldNames={metadata.fieldNames}
+						fieldValues={metadata.valuesByFieldName}
 						selectedFieldNames={selectedFieldNames.facet}
 						setSelectedFieldNames={(fns: Set<string>) => setSelectedFieldNames({...selectedFieldNames, facet: fns} )}
 					/>
@@ -39,7 +35,7 @@ export default ({
 					<FieldsToggle 
 						label="Display Fields"
 						description="Select the fields that should be displayed in search results"
-						fieldNames={md.fieldNames}
+						fieldNames={metadata.fieldNames}
 						selectedFieldNames={selectedFieldNames.display}
 						setSelectedFieldNames={(fns: Set<string>) => setSelectedFieldNames({...selectedFieldNames, display: fns} )}
 					/>

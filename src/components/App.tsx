@@ -1,19 +1,38 @@
 import React, { useEffect }  from "react";
-import { CreateFacetedIndex, AppState, defaultUiSettings, uiSettingControls, UISettings, GetRecordsMetadata, WithRawData } from "../model";
-import SearchScreen from "./SearchScreen";
+import {
+	AppState,
+	DataState,
+	IndexConfigState,
+	SearchState,
+	CreateFacetedIndex,
+	defaultUiSettings,
+	uiSettingControls,
+	UISettings,
+	GetRecordsMetadata 
+} from "../model";
+import Search from "./Search";
 import RecordsExtractor from "./RecordsExtractor";
-import StartScreen from "./StartScreen";
+import DataSourceForm from "./DataSourceForm";
 import {serialize,deserialize} from "../persistence/AppStateDtoURLCodec";
-import AppStateConverter from "../persistence/AppStateConverter";
 import { useSearchParams } from "react-router-dom";
 import IndexConfiguration from "./IndexConfiguration";
-import AppStateImprovedConverter from "../persistence/AppStateImprovedConverter";
+import AppStateConverter from "../persistence/AppStateConverter";
 
 const defaultAppState: AppState = 
 	{
-		type:'blank',
-		dataUrl: 'sample-records.json', 
+		dataUrl: 'sample-records.json',
+		dataState: undefined
 	};
+
+function withNonNull<T>(
+	ambiguousValue: T|undefined,
+	handleNonNull: (actualValue: T) => JSX.Element
+) {
+	if(ambiguousValue === undefined){
+		return;
+	}
+	return handleNonNull(ambiguousValue as T);
+}
 
 const getJson = async (url:string): Promise<any> => {
 	try {
@@ -36,13 +55,16 @@ const getJson = async (url:string): Promise<any> => {
 export default function App() {
 	const [urlParams, setUrlParams] = useSearchParams();
 	const [state,setState] = React.useState<AppState>(defaultAppState);
+	const [settingsVisible,setSettingsVisible] = React.useState<boolean>(
+		state.dataState?.indexConfigState?.searchState === undefined
+	);
 	useEffect(() => {
 		const effect = async () => {
 			let dto = deserialize(urlParams);
 			console.log('AppStateDto',dto);
-			let state = await AppStateConverter.fromDto(dto, getJson, 'sample-records.json');
-			let newState = await AppStateImprovedConverter.fromDto(dto,getJson);
-			setState(state);
+			//let state = await AppStateConverter.fromDto(dto, getJson, 'sample-records.json');
+			let newState = await AppStateConverter.fromDto(dto,getJson);
+			setState(newState);
 			console.log('from URL',state,newState);
 		};
 		effect();
@@ -60,95 +82,122 @@ export default function App() {
 		setUrlParams(urlParams);
 	}, [state]);
 
-	const extractor = (state: WithRawData) =>
-		<>
-			<div className="mb-3">
-				<StartScreen
-					getJson={getJson}
-					state={state.previousState}
-					clear={() => setState(state.previousState)}
-					setState={s => setState({...state, previousState:s})}
-					onSuccess={data => 
-						setState({
-							type:'withRawData',
-							data: data,
-							recordsKey: '',
-							previousState: state.previousState
-						})}/>
-			</div>
-			<RecordsExtractor 
-				state={state}
-				setState={setState}
-				onSuccess={(records) => {
-					let metadata = GetRecordsMetadata(records);
-					setState({
-						type:'withRecords',
-						records: records,
-						metadata,
-						selectedFieldNames: metadata.recommended_selections,
-						previousState: state
-					})
-				}}
-			/>
-		</>;
+	const setDataState = (dataState: DataState | undefined) =>
+		setState({...state, dataState});
 
-	switch (state.type) {
-		case "blank": 
-			return <StartScreen
-							getJson={getJson}
-							state={state}
-							setState={setState}
-							onSuccess={data => setState({
-								type:'withRawData',
-								data: data,
-								recordsKey: '',
-								previousState: state
-							})}/>;
-		case "withRawData":
-			return <div>
-				{extractor(state)}
-				</div>;
-		case 'withRecords':
-			return <div>
-				{extractor(state.previousState)}
-				<IndexConfiguration
-					state={state}
-					setState={setState}
-					onSuccess={() => {
-						let index = CreateFacetedIndex(
-							state.records,
-							{
-								display_fields: Array.from(state.selectedFieldNames.display),
-								facet_fields: Array.from(state.selectedFieldNames.facet),
-								facet_term_parents: {}
-							});
-						setState({
-							type:'withIndex',
-							pageNum: 1,
-							pageSize: 100,
-							query: {},
-							index, 
-							uiSettings: defaultUiSettings,
-							previousState: state
-						})
+	const setIndexConfigState = (indexConfigState: IndexConfigState | undefined) =>
+		setDataState(
+			state.dataState === undefined 
+			? undefined 
+			: {
+				...state.dataState,
+				indexConfigState
+			});
+
+	const setSearchState = (searchState: SearchState | undefined) =>
+		setIndexConfigState(
+			state.dataState?.indexConfigState === undefined 
+			? undefined 
+			: {
+				...state.dataState?.indexConfigState,
+				searchState
+			});
+
+	return (
+		<div>
+			<div className="mb-3">
+				<DataSourceForm
+					getJson={getJson}
+					dataUrl={state.dataUrl || defaultAppState.dataUrl || ""}
+					clear={state.dataState === undefined ? undefined : () => {
+						setState(defaultAppState);
+						setSettingsVisible(true);
 					}}
-				/>
-			</div>;
-		case 'withIndex':
-			return <div>
-				<SearchScreen {...{
-					viewSettings: () => setState(state.previousState),
-					currentPageNumber: state.pageNum,
-					setCurrentPageNumber: (p: number) => setState({...state, pageNum: p}),
-					ix: state.index,
-					debug: false,
-					uiSettingControls,
-					query: state.query,
-					setQuery: q => setState({...state, query: q}),
-					setUiSettings: (ui: UISettings) => setState({...state, uiSettings: ui}),
-					uiSettings: state.uiSettings }}/>
-			</div>;
-		default: 
-			throw("Unexpected state type: " + eval("state.type"));
-	}
+					setDataUrl={dataUrl => setState({...state, dataUrl})}
+					onSuccess={rawData => setState({
+						...state,
+						dataState: {
+							rawData, 
+							recordsKey: '',
+							indexConfigState: undefined
+						}
+					})}/>
+			</div>
+			{settingsVisible && 
+				<div>
+					{withNonNull(state.dataState, dataState =>
+						<div className="mb-3">
+							<RecordsExtractor 
+								rawData={dataState.rawData}
+								recordsKey={dataState.recordsKey || ''}
+								setRecordsKey={(recordsKey: string) => 
+									setDataState({
+										...dataState,
+										recordsKey
+									})}
+								onSuccess={(records) => {
+									let metadata = GetRecordsMetadata(records);
+									setDataState({
+										...dataState,
+										indexConfigState: {
+											metadata,
+											records,
+											selectedFieldNames: metadata.recommended_selections,
+											searchState: undefined
+										}
+									})
+								}}
+							/>
+						</div>
+					)}
+					{withNonNull(state.dataState?.indexConfigState, indexConfigState => 
+						<div className="mb-3">
+							<IndexConfiguration
+								metadata={indexConfigState.metadata}
+								selectedFieldNames={indexConfigState.selectedFieldNames}
+								setSelectedFieldNames={selectedFieldNames => setIndexConfigState({...indexConfigState, selectedFieldNames})}
+								onSuccess={() => {
+									setSettingsVisible(false);
+									let index = CreateFacetedIndex(
+										indexConfigState.records,
+										{
+											display_fields: Array.from(indexConfigState.selectedFieldNames.display),
+											facet_fields: Array.from(indexConfigState.selectedFieldNames.facet),
+											facet_term_parents: {}
+										});
+									setIndexConfigState({
+										...indexConfigState,
+										searchState: {
+											index,
+											pageNum: 1,
+											pageSize: 100,//REQUIRED?
+											query: {},
+											uiSettings: defaultUiSettings
+										}
+									});
+								}}
+							/>
+						</div>
+					)}
+				</div>
+			}
+			{withNonNull(state.dataState?.indexConfigState?.searchState, searchState => 
+				<div className="mb-3">
+					<Search {...{
+						viewSettings: () => {
+							setSettingsVisible(true);
+						},
+						currentPageNumber: searchState.pageNum,
+						setCurrentPageNumber: (p: number) => setSearchState({...searchState, pageNum: p}),
+						ix: searchState.index,
+						debug: false,
+						uiSettingControls,
+						query: searchState.query,
+						setQuery: q => setSearchState({...searchState, query: q}),
+						setUiSettings: (ui: UISettings) => setSearchState({...searchState, uiSettings: ui}),
+						uiSettings: searchState.uiSettings }}/>
+				</div>
+			)}
+		</div>
+	);
 }

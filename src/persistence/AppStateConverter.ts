@@ -1,117 +1,82 @@
-import {serialize, deserialize} from "./AppStateDtoURLCodec";
 import {
+	Record,
+	GetRecordsMetadata,
+	CreateFacetedIndex,
+	defaultUiSettings,
   AppState,
-  Blank,
-  WithRecords,
-  CreateFacetedIndex,
-  defaultUiSettings,
-  WithRawData, 
-  GetRecordsMetadata
-} from "../model";
+  IndexConfigState,
+  SearchState
+} from '../model';
+import AppStateDto from './AppStateDto';
 
-import AppStateDto from "./AppStateDto";
+const tryGetIndexConfigState = (dto: AppStateDto, data: any): IndexConfigState | undefined => {
+	let recordsCandidate = !!dto.records_key ? data[dto.records_key] : data;
+	if(!Array.isArray(recordsCandidate)){
+		return undefined;
+	}
+	let records: Record[] = recordsCandidate;
+	let metadata = GetRecordsMetadata(records);
+	return {
+		metadata,
+		records,
+		selectedFieldNames: {
+			facet  : new Set<string>(dto.  facet_fields.length === 0 ? metadata.recommended_selections.  facet : dto.facet_fields  ),
+			display: new Set<string>(dto.display_fields.length === 0 ? metadata.recommended_selections.display : dto.display_fields)
+		},
+		searchState: tryGetSearchState(dto, records)
+	};
+};
 
-export default {
-  toDto: (state: AppState): AppStateDto => {
-    switch (state.type) {
-      case "blank": 
-        return {
-          url: state.dataUrl,
-          records_key: undefined,
-          facet_fields: [],
-          display_fields: [],
-          ui_settings: undefined,
-          query: {},
-          pageNum: undefined
-        };
-      case "withRawData": 
-        return {
-          url: state.previousState.dataUrl,
-          records_key: state.recordsKey,
-          facet_fields: [],
-          display_fields: [],
-          ui_settings: undefined,
-          query: {},
-          pageNum: undefined
-        };
-      case 'withRecords':
-        return {
-          url: state.previousState.previousState.dataUrl,
-          records_key: state.previousState.recordsKey,
-          facet_fields: Array.from(state.selectedFieldNames.facet),
-          display_fields: Array.from(state.selectedFieldNames.display),
-          ui_settings: undefined,
-          query: {},
-          pageNum: undefined
-        };
-      case 'withIndex':
-        return {
-          url: state.previousState.previousState.previousState.dataUrl,
-          records_key: state.previousState.previousState.recordsKey,
-          facet_fields: state.index.actual_facet_fields,
-          display_fields: Array.from(state.index.display_fields),
-          ui_settings: state.uiSettings,
-          query: state.query,
-          pageNum: state.pageNum
-        };
-      default:
-        throw("Unexpected state type: " + eval("state.type"));
-    }
-  },
-  fromDto: async (
-    dto: AppStateDto | undefined,
-    getJson: (url: string) => Promise<any>,
-    defaultDataUrl: string
-  ): Promise<AppState> => {
-    let defaultState: Blank = {
-      type:'blank',
-      dataUrl: defaultDataUrl, 
-    };
-    if(dto === undefined || !dto.url){
-      return Promise.resolve(defaultState);
-    }
-    let blank: Blank = {type:'blank', dataUrl: dto.url};
-    let data = await getJson(dto.url);
-    if(!data){
-      return blank;
-    }
-    let records = !!dto.records_key ? data[dto.records_key] : data;
-    let withRawData: WithRawData = {
-      type:'withRawData',
-      recordsKey: dto.records_key || "", //?????
-      data: data,
-      previousState: blank
-    };
-    if(!Array.isArray(records)){
-      return withRawData;
-    }
-    let metadata = GetRecordsMetadata(records);
-    let withRecords: WithRecords = {
-      type: "withRecords",
-      records: records,
-      selectedFieldNames: {
-        facet: new Set<string>(dto.facet_fields.length === 0 ? metadata.recommended_selections.facet : dto.facet_fields),
-        display: new Set<string>(dto.display_fields.length === 0 ? metadata.recommended_selections.display : dto.display_fields)
-      },
-      metadata,
-      previousState: withRawData
-    }
-    if(dto.facet_fields.length > 0 && dto.display_fields.length > 0){
-      let index = CreateFacetedIndex(records, {
-        display_fields: dto.display_fields,
-        facet_fields: dto.facet_fields,
-        facet_term_parents: {}
-      });
-      return {
-        type: 'withIndex',
-        previousState: withRecords,
-        index,
-        pageNum: dto.pageNum || 1,
-        pageSize:200,
-        query:dto.query,
-        uiSettings: dto.ui_settings || defaultUiSettings
-      };
-    }
-    return Promise.resolve(withRecords);
+const tryGetSearchState = (dto: AppStateDto, records: Record[]): undefined | SearchState => {
+  if(dto.facet_fields.length === 0 || dto.display_fields.length === 0){
+    return undefined;
+  }
+  let index = CreateFacetedIndex(records, {
+    display_fields: dto.display_fields,
+    facet_fields: dto.facet_fields,
+    facet_term_parents: {}
+  });
+  return {
+    index,
+    pageNum: 1,
+    pageSize: 200,
+    query: dto.query,
+    uiSettings: dto.ui_settings || defaultUiSettings
   }
 };
+
+export default {
+  toDto: (state: AppState): AppStateDto => ({
+    url: state.dataUrl,
+    records_key: state.dataState?.recordsKey,
+    facet_fields: Array.from(state.dataState?.indexConfigState?.selectedFieldNames?.facet || new Set<string>()),
+    display_fields: Array.from(state.dataState?.indexConfigState?.selectedFieldNames?.display || new Set<string>()),
+    ui_settings: state.dataState?.indexConfigState?.searchState?.uiSettings,
+    pageNum: state.dataState?.indexConfigState?.searchState?.pageNum || undefined,
+    query: state.dataState?.indexConfigState?.searchState?.query || {}
+  }),
+  fromDto: async (
+    dto: AppStateDto | undefined,
+    getJson: (url: string) => Promise<any>
+  ): Promise<AppState> => {
+    let defaultAppState: AppState = {
+      dataUrl: undefined,
+      dataState: undefined
+    };
+    if(dto === undefined || !dto.url){
+      return Promise.resolve(defaultAppState);
+    }
+    let data = await getJson(dto.url);
+    if(!data){
+      return defaultAppState;
+    }
+    return {
+      dataUrl: dto.url,
+      dataState: {
+        rawData: data,
+        recordsKey: dto.records_key,
+        indexConfigState: tryGetIndexConfigState(dto, data)
+      }
+    };
+  },
+}

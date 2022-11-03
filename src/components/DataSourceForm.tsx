@@ -1,16 +1,20 @@
 import React  from "react";
-import {Blank} from '../model';
-type StartScreenProps = {
-	state: Blank,
+
+export default ({
+	dataUrl,
+	setDataUrl,
+	clear,
+	onSuccess,
+	getJson
+}: {
+	dataUrl: string,
+	setDataUrl: (du: string) => void,
 	clear?: () => void,
-	setState: (newState: Blank) => void,
 	onSuccess: (data: any) => void ,
 	getJson: (url: string) => Promise<any>
-};
-
-export default ({state,clear,setState,onSuccess, getJson}: StartScreenProps) => {
+}) => {
   const load = async () => {
-    let data = await getJson(state.dataUrl);
+    let data = await getJson(dataUrl);
     console.log('data',data);
     if(!data){
       alert("invalid URL or JSON data");
@@ -26,8 +30,8 @@ export default ({state,clear,setState,onSuccess, getJson}: StartScreenProps) => 
 						id="json_url"
 						disabled={!!clear}
 						className="form-control"
-						defaultValue={state.dataUrl}
-						onChange={e => setState({...state, dataUrl: e.target.value}) 
+						defaultValue={dataUrl}
+						onChange={e => setDataUrl(e.target.value) 
 					}/>
 					<label htmlFor="json_url">URL to JSON data</label>
 			</div>

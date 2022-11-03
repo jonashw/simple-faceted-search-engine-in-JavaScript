@@ -1,32 +1,28 @@
-import { FacetedIndexInstance, Record,RecordsMetadata, SelectedFieldNames  } from "./index";
+import { FacetedIndexInstance, Record } from "./index";
+import { RecordsMetadata, SelectedFieldNames } from "./types";
 import { UISettings } from "./UISettings";
 
-interface Blank {
-	type:'blank';
-	dataUrl: string;
+type AppState = {
+	dataUrl: undefined | string;
+	dataState: undefined | DataState
 };
-interface WithRawData {
-	type: 'withRawData';
-	data: any;
-	recordsKey: string;
-	previousState: Blank;
+type DataState = {
+	rawData: any;
+	recordsKey: undefined | string;
+	indexConfigState: undefined | IndexConfigState;
 };
-interface WithRecords {
-	type: 'withRecords';
+type IndexConfigState = {
 	records: Record[];
 	metadata: RecordsMetadata;
 	selectedFieldNames: SelectedFieldNames;
-	previousState: WithRawData;
+	searchState: undefined | SearchState;
 };
-interface WithIndex {
-	type: 'withIndex'
-	index: FacetedIndexInstance,
+type SearchState = {
+	index: FacetedIndexInstance;
 	pageSize: number;
 	pageNum: number;
 	query: {[facetName: string]: string[]};
 	uiSettings: UISettings;
-	previousState: WithRecords;
-}
-type AppState = Blank | WithRawData | WithRecords | WithIndex;
+};
 
-export {Blank, WithRecords, WithRawData, WithIndex, AppState};
+export {AppState, DataState, IndexConfigState, SearchState};

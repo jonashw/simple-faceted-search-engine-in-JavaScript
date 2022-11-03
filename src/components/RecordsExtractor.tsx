@@ -1,8 +1,6 @@
 import React  from "react";
-import {SelectedFieldNames, WithRawData} from '../model';
+import {Record} from '../model';
 import { JsonViewer } from '@textea/json-viewer'
-import {Record,GetRecordsMetadata} from '../model/index';
-import FieldsToggle from "./FieldsToggle";
 
 const StandardJsonViewer = ({
 	data
@@ -21,15 +19,17 @@ const StandardJsonViewer = ({
 	</div>;
 
 export default ({
-	state,
-	setState,
+	rawData,
+	recordsKey,
+	setRecordsKey,
 	onSuccess
 }: {
-	state: WithRawData,
-	setState: (newState: WithRawData) => void,
+	rawData: any,
+	recordsKey: string,
+	setRecordsKey: (recordsKey: string) => void,
 	onSuccess: (records: Record[]) => void
 }) => {
-	let data = state.recordsKey === '' ? state.data : state.data[state.recordsKey];
+	let data = recordsKey === '' ? rawData : rawData[recordsKey];
 	let records: Record[] | undefined = 
 		Array.isArray(data) && data.every(item => typeof item === 'object') 
 		? data 
@@ -44,19 +44,21 @@ export default ({
 	const firstNRecords = 4;
 	return <div>
 		<div className="form-floating form-floating-group flex-grow-1 mb-3">
-				<input type="text"
-					id="records_key"
-					className="form-control"
-					defaultValue={state.recordsKey}
-					onChange={e => setState({...state, recordsKey: e.target.value}) 
-				}/>
-				<label htmlFor="records_key">Key for records array (leave blank for top-level)</label>
+			<input type="text"
+				id="records_key"
+				className="form-control"
+				defaultValue={recordsKey}
+				onChange={e => setRecordsKey(e.target.value) 
+			}/>
+			<label htmlFor="records_key">Key for records array (leave blank for root-level)</label>
 		</div>
 		{!records && <div>
-			<p>
-				Didn't find array of objects.  Please provide property name that holds an array of objects.
-			</p>
-			<StandardJsonViewer data={state.data}/>
+			<div className="alert alert-danger">
+				<span className="badge rounded-pill bg-danger me-2">OOPS</span>
+				Didn't find array of objects.
+				Please provide property name that holds an array of objects.
+			</div>
+			<StandardJsonViewer data={rawData}/>
 		</div>}
 		{!!records && <div>
 			<p> Array found with {records.length} records.  Showing first {Math.min(records.length, firstNRecords)}:  </p>
