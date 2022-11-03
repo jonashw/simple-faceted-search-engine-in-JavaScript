@@ -7,12 +7,14 @@ const qs_cfg = {
   display_fields: 'df',
   records_url: 'url',
   records_key: 'key',
-  query_facet: 'q_'
+  query_facet: 'q_',
+  page_num: 'p',
 }
 
 const serialize = (dto: AppStateDto) => 
   new URLSearchParams([
     ...(!dto.url ? [] : [[qs_cfg.records_url, dto.url]]),
+    ...(!dto.pageNum ? [] : [[qs_cfg.page_num, dto.pageNum.toString()]]),
     ...(!dto.records_key ? [] : [[qs_cfg.records_key, dto.records_key]]),
     ...(!dto.ui_settings ? [] : Object.entries(dto.ui_settings).map(([k,v]) => [qs_cfg.ui_key + k, v])),
     ...dto.facet_fields.map((f) => [qs_cfg.facet_fields, f]),
@@ -51,6 +53,7 @@ const deserialize = (params: URLSearchParams): AppStateDto | undefined => {
     console.log('query',query);
   return {
     url: paramsDict[qs_cfg.records_url][0],
+    pageNum: paramsDict[qs_cfg.page_num] ? (parseInt(paramsDict[qs_cfg.page_num][0]) || undefined) : undefined,
     records_key: paramsDict[qs_cfg.records_key] ? paramsDict[qs_cfg.records_key][0] : undefined,
     facet_fields: paramsDict[qs_cfg.facet_fields] || [],
     display_fields: paramsDict[qs_cfg.display_fields] || [],

@@ -138,6 +138,8 @@ export default function App() {
 			return <div>
 				<SearchScreen {...{
 					viewSettings: () => setState(state.previousState),
+					currentPageNumber: state.pageNum,
+					setCurrentPageNumber: (p: number) => setState({...state, pageNum: p}),
 					ix: state.index,
 					debug: false,
 					uiSettingControls,

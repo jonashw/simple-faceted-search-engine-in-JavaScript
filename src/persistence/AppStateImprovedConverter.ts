@@ -50,6 +50,7 @@ export default {
     facet_fields: Array.from(state.dataState?.indexConfigState?.selectedFieldNames?.facet || new Set<string>()),
     display_fields: Array.from(state.dataState?.indexConfigState?.selectedFieldNames?.display || new Set<string>()),
     ui_settings: state.dataState?.indexConfigState?.searchState?.uiSettings,
+    pageNum: state.dataState?.indexConfigState?.searchState?.pageNum || undefined,
     query: state.dataState?.indexConfigState?.searchState?.query || {}
   }),
   fromDto: async (

@@ -10,6 +10,7 @@ type AppStateDto = {
   display_fields: string[];
   ui_settings: UISettings | undefined;
   query: Query;
+  pageNum: undefined | number;
 }
 
 export default AppStateDto;

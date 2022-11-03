@@ -14,7 +14,9 @@ const Search = ({
   setUiSettings,
   query,
   setQuery,
-  viewSettings
+  viewSettings,
+  currentPageNumber,
+  setCurrentPageNumber
 } : {
   ix: FacetedIndexInstance;
   debug: boolean;
@@ -24,9 +26,10 @@ const Search = ({
   query: Query;
   setQuery: (q: Query) => void;
   viewSettings: () => void;
+  currentPageNumber: number,
+  setCurrentPageNumber: (p: number) => void
 }) => {
   const [searchResult, setSearchResult] = React.useState(GetDefaultSearchResult());
-  const [currentPageNumber,setCurrentPageNumber] = React.useState(1);
   const [showTermTables, setShowTermTables] = React.useState(false);
 
   const pagination = 

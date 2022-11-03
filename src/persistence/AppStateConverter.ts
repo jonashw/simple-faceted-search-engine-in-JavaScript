@@ -21,7 +21,8 @@ export default {
           facet_fields: [],
           display_fields: [],
           ui_settings: undefined,
-          query: {}
+          query: {},
+          pageNum: undefined
         };
       case "withRawData": 
         return {
@@ -30,7 +31,8 @@ export default {
           facet_fields: [],
           display_fields: [],
           ui_settings: undefined,
-          query: {}
+          query: {},
+          pageNum: undefined
         };
       case 'withRecords':
         return {
@@ -39,7 +41,8 @@ export default {
           facet_fields: Array.from(state.selectedFieldNames.facet),
           display_fields: Array.from(state.selectedFieldNames.display),
           ui_settings: undefined,
-          query: {}
+          query: {},
+          pageNum: undefined
         };
       case 'withIndex':
         return {
@@ -48,7 +51,8 @@ export default {
           facet_fields: state.index.actual_facet_fields,
           display_fields: Array.from(state.index.display_fields),
           ui_settings: state.uiSettings,
-          query: state.query
+          query: state.query,
+          pageNum: state.pageNum
         };
       default:
         throw("Unexpected state type: " + eval("state.type"));
@@ -102,7 +106,7 @@ export default {
         type: 'withIndex',
         previousState: withRecords,
         index,
-        pageNum: 1,
+        pageNum: dto.pageNum || 1,
         pageSize:200,
         query:dto.query,
         uiSettings: dto.ui_settings || defaultUiSettings
