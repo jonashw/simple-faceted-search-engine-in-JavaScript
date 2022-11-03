@@ -33,15 +33,15 @@ const Search = ({
   const [showTermTables, setShowTermTables] = React.useState(false);
 
   const pagination = 
-    searchResult.records.length < parseInt(uiSettings.pageSize)
-    ? <div></div>
-    : <Pagination
+    <div className="mb-3">
+     <Pagination
       recordCount={searchResult.records.length} 
       {...{
         pageSize: parseInt(uiSettings.pageSize),
         currentPageNumber,
         setCurrentPageNumber
-      }} />;
+      }} />
+    </div>;
 
   const toggleQueryTerm = (facet_id: string, term: string) => {
     let newQuery = ix.toggleQueryTerm(query, facet_id, term);

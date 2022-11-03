@@ -12,14 +12,32 @@ const Pagination = ({
     setCurrentPageNumber: (pn: number) => void
 }) => {
     const pageCount = Math.max(1,Math.ceil(recordCount/pageSize));
-    if(pageCount === 0){
-        return <></>;
-    }
     const actualCurrentPageNumber = Math.min(currentPageNumber, pageCount);
     if(actualCurrentPageNumber != currentPageNumber){
-        // something changed about our result set, so let's just start at the beginning.
         setCurrentPageNumber(1);
     }
+    React.useEffect(() => {
+        console.log({currentPageNumber,actualCurrentPageNumber});
+        if(currentPageNumber !== actualCurrentPageNumber){
+            /* something changed about our result set, so let's just start at the beginning.
+            ** if we don't, the user will be stranded on a page that doesn't exist with no
+            ** means to navigate back to safety. */
+            setCurrentPageNumber(actualCurrentPageNumber);
+        }
+    }, []);
+    if(pageCount === 0){
+        return <div/>;
+    }
+    if(pageCount === 1){
+        return <nav aria-label="Results pages">
+            <ul className="pagination mb-0">
+                <li className="page-item disabled">
+                    <a className="page-link" aria-disabled={true}>Page 1 of 1</a>
+                </li>
+            </ul>
+        </nav>;
+    }
+
     var paginationModel = ultimatePagination.getPaginationModel({
         // Required
         currentPage: actualCurrentPageNumber,
@@ -32,8 +50,9 @@ const Pagination = ({
         hidePreviousAndNextPageLinks: false,
         hideFirstAndLastPageLinks: false
     });
+
     //console.log('pagination',paginationModel);
-    return <div className="d-flex justify-content-between mb-3">
+    return <div className="d-flex justify-content-between">
         <nav aria-label="Results pages">
             <ul className="pagination mb-0">
                 {paginationModel.map((p, i) => {
