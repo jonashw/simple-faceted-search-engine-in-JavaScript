@@ -3,9 +3,11 @@ import { CreateFacetedIndex, AppState, defaultUiSettings, uiSettingControls, UIS
 import SearchScreen from "./SearchScreen";
 import RecordsExtractor from "./RecordsExtractor";
 import StartScreen from "./StartScreen";
-import { URLCodec } from "../URLCodec";
+import {serialize,deserialize} from "../persistence/AppStateDtoURLCodec";
+import AppStateConverter from "../persistence/AppStateConverter";
 import { useSearchParams } from "react-router-dom";
 import IndexConfiguration from "./IndexConfiguration";
+import AppStateImprovedConverter from "../persistence/AppStateImprovedConverter";
 
 const defaultAppState: AppState = 
 	{
@@ -36,17 +38,24 @@ export default function App() {
 	const [state,setState] = React.useState<AppState>(defaultAppState);
 	useEffect(() => {
 		const effect = async () => {
-			let state = await URLCodec.deserialize(urlParams, getJson, 'sample-records.json');
+			let dto = deserialize(urlParams);
+			console.log('AppStateDto',dto);
+			let state = await AppStateConverter.fromDto(dto, getJson, 'sample-records.json');
+			let newState = await AppStateImprovedConverter.fromDto(dto,getJson);
 			setState(state);
-			console.log('from URL',state);
+			console.log('from URL',state,newState);
 		};
 		effect();
 		/* We want the URL -> state conversion to happen only once, and not repeatedly,
-		** so as to avoid a circular update loop. */
+		** so as to avoid an infinite update loop, hence the empty dependency array.
+		** If we were to add `urlParams` to the array, we would get the infinite update loop.
+		** Let it's commented-out presence stand as a reminder of its peril.  */
 	}, [/*urlParams*/]); 
 
 	useEffect(() => {
-		let urlParams = URLCodec.serialize(state);
+		let dto = AppStateConverter.toDto(state);
+		console.log('dto',dto);
+		let urlParams = serialize(dto);
 		console.log(`to url: ?${urlParams}`);
 		setUrlParams(urlParams);
 	}, [state]);
