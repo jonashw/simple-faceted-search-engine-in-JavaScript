@@ -38,6 +38,7 @@ const tryGetSearchState = (dto: AppStateDto, records: RecordValue[]): undefined 
   });
   return {
     index,
+    searchString: dto.search_string || "",
     pageNum: 1,
     pageSize: 200,
     query: dto.query,
@@ -48,6 +49,7 @@ const tryGetSearchState = (dto: AppStateDto, records: RecordValue[]): undefined 
 export default {
   toDto: (state: AppState): AppStateDto => ({
     url: state.dataUrl,
+    search_string: state.dataState?.indexConfigState?.searchState?.searchString,
     records_key: state.dataState?.recordsKey,
     facet_fields: Array.from(state.dataState?.indexConfigState?.selectedFieldNames?.facet || new Set<string>()),
     display_fields: Array.from(state.dataState?.indexConfigState?.selectedFieldNames?.display || new Set<string>()),

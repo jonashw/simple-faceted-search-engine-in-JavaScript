@@ -16,7 +16,9 @@ const Search = ({
   setQuery,
   viewSettings,
   currentPageNumber,
-  setCurrentPageNumber
+  setCurrentPageNumber,
+	searchString,
+	setSearchString
 } : {
   ix: FacetedIndexInstance;
   debug: boolean;
@@ -24,13 +26,26 @@ const Search = ({
   uiSettings: UISettings;
   setUiSettings: (settings: UISettings) => void;
   query: Query;
-  setQuery: (q: Query) => void;
+  setQuery: (fn: (q: Query) => Query) => void;
   viewSettings: () => void;
   currentPageNumber: number,
-  setCurrentPageNumber: (p: number) => void
+  setCurrentPageNumber: (p: number) => void,
+	searchString: string;
+	setSearchString: (ss: string) => void;
 }) => {
   const [searchResult, setSearchResult] = React.useState(GetDefaultSearchResult());
   //const [showTermTables, setShowTermTables] = React.useState(false);
+
+	React.useEffect(() => {
+    new Promise((resolve) => {
+      setTimeout(() => {
+        console.log('SEARCHING');
+        let r = ix.search(query,searchString);
+        setSearchResult(r);
+        resolve(r);
+      }, 0);
+    });
+  },[query, searchString]);
 
   const pagination = 
     <div className="mb-3">
@@ -44,8 +59,7 @@ const Search = ({
     </div>;
 
   const toggleQueryTerm = (facet_id: string, term: string) => {
-    let newQuery = ix.toggleQueryTerm(query, facet_id, term);
-    setQuery(newQuery);
+    setQuery((query: Query) => ix.toggleQueryTerm(query, facet_id, term));
   };
 
   const uiOptions = 
@@ -70,6 +84,8 @@ const Search = ({
     <div className="row">
       <div className={"col-" + uiSettings.horizontalSplit.split('/')[0]}>
         <SearchBox
+          searchString={searchString}
+          setSearchString={setSearchString}
           searchResult={searchResult}
           toggleQueryTerm={toggleQueryTerm}
         />
@@ -79,8 +95,7 @@ const Search = ({
             debug,
             query,
             setQuery,
-            searchResult,
-            setSearchResult
+            searchResult
           }}
         />
       </div>
@@ -88,7 +103,7 @@ const Search = ({
         <div className="d-flex justify-content-between align-items-start">
           <ActiveFilters 
             query={query}
-            clearQuery={() => { setQuery({}) }}
+            clearQuery={() => { setQuery(_ => ({})) }}
             toggleQueryTerm={toggleQueryTerm} 
           />
 
@@ -104,7 +119,7 @@ const Search = ({
             <div className="col" key={i}>
               <div className="card mb-3">
                 <div className="card-body">
-                  <div className="card-text">
+                  <div className="card-text" style={{overflow:'auto'}}>
                     <pre className="mb-3">{JSON.stringify(r.paired_down_record, null, 2)}</pre>
                     <RecordTermTable
                       record={r.tags as RecordValue}
@@ -114,6 +129,11 @@ const Search = ({
                       thWidth={undefined}
                       className={"mb-0"}
                     />
+                    {/*
+                      <pre className="mt-3 mb-0">
+                        {JSON.stringify(r.searchable_text, null, 2)}
+                      </pre>
+                    */}
                   </div>
                 </div>
               </div>

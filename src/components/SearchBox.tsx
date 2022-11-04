@@ -38,16 +38,32 @@ const termMatches = (terms: TermBucket[], q: string): TermMatch[] =>
 
 const SearchBox = ({
 	searchResult,
+	searchString,
+	setSearchString,
 	toggleQueryTerm
 } : {
-	searchResult: SearchResult,
-	toggleQueryTerm: (facetId: string, term: string) => void
+	searchString: string;
+	setSearchString: (ss: string) => void;
+	searchResult: SearchResult;
+	toggleQueryTerm: (facetId: string, term: string) => void;
 }) => {
 	const [active,setActive] = React.useState(false);
-	const [q,setQ] = React.useState('');
+	const [boxValue, setBoxValue] = React.useState(searchString);
+	const searchTaxonomy = false;
 	const options = [
-		...(!q || true  /* enable text search later */ ? [] : [<div className="list-group-item list-group-item-action ">Search for {q}</div>]),
-		...termMatches(searchResult.terms,q).map(termMatch => 
+		...(!boxValue || true ? [] : [
+					<div className="list-group-item list-group-item-action ">
+						<a
+							onClick={e => {
+								e.preventDefault();
+								setActive(false);
+								setSearchString(boxValue);
+							}}
+						>
+							Search for {boxValue}
+						</a>
+					</div>]),
+		...(!searchTaxonomy ? [] : termMatches(searchResult.terms,boxValue).map(termMatch => 
 			<a
 				className={"list-group-item list-group-item-action" + (termMatch.term.in_query ? " active" : "")}
 				key={termMatch.term.facet_id + "-" + termMatch.term.term}
@@ -58,8 +74,8 @@ const SearchBox = ({
 				onClick={e => {
 					e.preventDefault();
 					toggleQueryTerm(termMatch.term.facet_id, termMatch.term.term);
-					setQ('');
-					setActive(false);
+					//setActive(false);
+					//setSearchString('');
 				}}
 			>
 				<strong>{termMatch.term.facet_id}:</strong> {" "}
@@ -76,7 +92,7 @@ const SearchBox = ({
 					{termMatch.term.count}
 				</span>
 			</a>
-		)
+		))
 	];
 	return <div className="mb-3"
 		onBlur={e => {
@@ -89,18 +105,19 @@ const SearchBox = ({
 			}
 		}}
 	>
-		<input type="text"
+		<input type="search"
 			className="form-control"
 			name="search term"
-			placeholder="Search"
+			placeholder="Text Search"
 			autoComplete="off"
 			autoCorrect="off"
 			autoFocus={true}
-			value={q}
+			value={boxValue}
 			onFocus={e => setActive(true)}
 			onChange={e => {
 				e.preventDefault();
-				setQ(e.target.value);
+				setSearchString(e.target.value);
+				setBoxValue(e.target.value);
 			}}
 		/>
 		{active && options.length > 0 && <div className="list-group" style={{cursor:'pointer'}}>{options}</div>}

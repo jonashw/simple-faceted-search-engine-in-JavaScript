@@ -8,15 +8,13 @@ const SearchFilters = (
     query,
     setQuery,
     debug,
-    searchResult,
-    setSearchResult
+    searchResult
   } : {
     ix: FacetedIndexInstance,
     query: Query,
-    setQuery: (q: Query) => void,
+    setQuery: (fn: (q: Query) => Query) => void,
     debug: boolean,
-    searchResult: SearchResult,
-    setSearchResult: (sr: SearchResult) => void
+    searchResult: SearchResult
   }) => {
   const [activeTerms,setActiveTerms] = React.useState(new Set());
   const term_is_selected = (t: string) => activeTerms.has(t);
@@ -26,24 +24,14 @@ const SearchFilters = (
     setActiveTerms(new Set(allTerms));
   }, [query])
 
-  React.useEffect(() => {
-    new Promise((resolve) => {
-      setTimeout(() => {
-        let r = ix.search(query);
-        setSearchResult(r);
-        resolve(r);
-        //console.log('searching',query,r);
-      }, 0);
-    })
-  }, [query])
-
-  const setFacetQueryTerms = (facet_id: string, terms: string[]) => {
-    let newQuery = { ...query, [facet_id]: terms }
-    if (newQuery[facet_id].length === 0) {
-      delete newQuery[facet_id];
-    }
-    setQuery(newQuery);
-  };
+  const setFacetQueryTerms = (facet_id: string, terms: string[]): void => 
+    setQuery((query: Query) => {
+      let newQuery = { ...query, [facet_id]: terms }
+      if (newQuery[facet_id].length === 0) {
+        delete newQuery[facet_id];
+      }
+      return newQuery;
+    });
 
   const TermBucketSelectMenu = ({
     facet_id,
@@ -92,8 +80,7 @@ const SearchFilters = (
               style={{ textDecoration: 'none', fontWeight: selected ? '700' : 'normal', display:'block'}}
               onClick={(e) => {
                 e.preventDefault();
-                let newQuery = ix.toggleQueryTerm(query, facet_id, t.term);
-                setQuery(newQuery);
+                setQuery(query => ix.toggleQueryTerm(query, facet_id, t.term));
               }}
             >
               {t.term}

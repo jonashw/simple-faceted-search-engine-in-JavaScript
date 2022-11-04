@@ -37,11 +37,17 @@ type FacetedIndexConfig = {
 }
 type Query = {[facetId: string] : string[]};
 
+type TextIndex = {
+  text: string;
+  record_id: number;
+}[];
+
 type FacetedIndexInstance = {
-  search: (query: Query) => SearchResult,
+  text_index: TextIndex,
+  search: (query: Query, seachKeyWord?: string | undefined) => SearchResult,
   actual_facet_fields: string[],
   getResultsPage: (results: RecordWithMetadata[], pageNumber: number, pageSize: number) => RecordWithMetadata[],
-  toggleQueryTerm: (query: Query, facetKey: string, term: string) => {},
+  toggleQueryTerm: (query: Query, facetKey: string, term: string) => Query,
   display_fields: Set<string>, 
   candidate_facet_fields: Set<string>, 
   data: any,
@@ -93,5 +99,6 @@ export {
 	TermBucket,
 	SearchResult,
   SelectedFieldNames,
-  RecordWithMetadata
+  RecordWithMetadata,
+  TextIndex
 };

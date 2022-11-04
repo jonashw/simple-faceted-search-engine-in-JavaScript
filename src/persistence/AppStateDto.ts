@@ -4,6 +4,7 @@ import {
 } from "../model";
 
 type AppStateDto = {
+  search_string: string | undefined,
   url: string | undefined;
   records_key: string | undefined;
   facet_fields: string[];

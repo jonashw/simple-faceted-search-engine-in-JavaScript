@@ -2,6 +2,7 @@ import { uiSettingControls, UISettings } from "../model/UISettings";
 import AppStateDto from "./AppStateDto";
 
 const qs_cfg = {
+  search_string: 'q',
   ui_key: 'ui_',
   facet_fields: 'ff',
   display_fields: 'df',
@@ -14,6 +15,7 @@ const qs_cfg = {
 const serialize = (dto: AppStateDto) => 
   new URLSearchParams([
     ...(!dto.url ? [] : [[qs_cfg.records_url, dto.url]]),
+    ...(!dto.search_string ? [] : [[qs_cfg.search_string, dto.search_string]]),
     ...(!dto.pageNum ? [] : [[qs_cfg.page_num, dto.pageNum.toString()]]),
     ...(!dto.records_key ? [] : [[qs_cfg.records_key, dto.records_key]]),
     ...(!dto.ui_settings ? [] : Object.entries(dto.ui_settings).map(([k,v]) => [qs_cfg.ui_key + k, v])),
@@ -52,6 +54,7 @@ const deserialize = (params: URLSearchParams): AppStateDto | undefined => {
     }, {});
     console.log('query',query);
   return {
+    search_string: (paramsDict[qs_cfg.search_string] || [undefined])[0],
     url: paramsDict[qs_cfg.records_url][0],
     pageNum: paramsDict[qs_cfg.page_num] ? (parseInt(paramsDict[qs_cfg.page_num][0]) || undefined) : undefined,
     records_key: paramsDict[qs_cfg.records_key] ? paramsDict[qs_cfg.records_key][0] : undefined,

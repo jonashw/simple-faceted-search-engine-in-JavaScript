@@ -168,6 +168,7 @@ export default function App() {
 									setIndexConfigState({
 										...indexConfigState,
 										searchState: {
+											searchString: '',
 											index,
 											pageNum: 1,
 											pageSize: 100,//REQUIRED?
@@ -193,7 +194,9 @@ export default function App() {
 						debug: false,
 						uiSettingControls,
 						query: searchState.query,
-						setQuery: q => setSearchState({...searchState, query: q}),
+						searchString: searchState.searchString,
+						setSearchString: (searchString: string) => setSearchState({...searchState, searchString}),
+						setQuery: fn => setSearchState({...searchState, query: fn(searchState.query)}),
 						setUiSettings: (ui: UISettings) => setSearchState({...searchState, uiSettings: ui}),
 						uiSettings: searchState.uiSettings }}/>
 				</div>

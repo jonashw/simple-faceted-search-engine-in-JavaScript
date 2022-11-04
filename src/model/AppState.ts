@@ -18,6 +18,7 @@ type IndexConfigState = {
 	searchState: undefined | SearchState;
 };
 type SearchState = {
+	searchString: string;
 	index: FacetedIndexInstance;
 	pageSize: number;
 	pageNum: number;
