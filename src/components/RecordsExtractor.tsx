@@ -1,5 +1,5 @@
 import React  from "react";
-import {Record} from '../model';
+import {RecordValue} from '../model';
 import { JsonViewer } from '@textea/json-viewer'
 
 const StandardJsonViewer = ({
@@ -27,10 +27,10 @@ export default ({
 	rawData: any,
 	recordsKey: string,
 	setRecordsKey: (recordsKey: string) => void,
-	onSuccess: (records: Record[]) => void
+	onSuccess: (records: RecordValue[]) => void
 }) => {
 	let data = recordsKey === '' ? rawData : rawData[recordsKey];
-	let records: Record[] | undefined = 
+	let records: RecordValue[] | undefined = 
 		Array.isArray(data) && data.every(item => typeof item === 'object') 
 		? data 
 		: undefined;

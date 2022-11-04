@@ -1,5 +1,5 @@
 type FieldValue = string | number;
-type Record = { [key: string]: FieldValue };
+type RecordValue = { [key: string]: FieldValue };
 type Field = {
 	name: string;
 	values: Set<FieldValue>;
@@ -18,6 +18,15 @@ type RecordsMetadata = {
     facet: Set<string>
   }
 }
+type RecordWithMetadata = {
+  //TODO: reconcile with RecordsMetadata type
+  id: number;
+  tags: RecordValue;
+  paired_down_record: RecordValue;
+  original_record: RecordValue;
+  searchable_text: string[];
+}
+
 type ChildParentRelations = {[childTerm: FieldValue]: FieldValue};
 
 type FacetedIndexConfig = {
@@ -31,7 +40,7 @@ type Query = {[facetId: string] : string[]};
 type FacetedIndexInstance = {
   search: (query: Query) => SearchResult,
   actual_facet_fields: string[],
-  getResultsPage: (results: Record[], pageNumber: number, pageSize: number) => {}[],
+  getResultsPage: (results: RecordWithMetadata[], pageNumber: number, pageSize: number) => RecordWithMetadata[],
   toggleQueryTerm: (query: Query, facetKey: string, term: string) => {},
   display_fields: Set<string>, 
   candidate_facet_fields: Set<string>, 
@@ -43,7 +52,6 @@ type FacetHierarchicalTermBucket = {
   facet_id: string,
   term_buckets: HierarchicalTermBucket[]
 }
-
 type TermBucket = {
   term: string,
   in_query: boolean,
@@ -66,12 +74,13 @@ type SearchResult = {
   terms: TermBucket[],
   term_buckets_by_facet_id: {[facet_id: string]: {[term: string]: TermBucket}},
   facetTermCount: (facet: string, term: string) => number,
-  records: Record[]
+  records: RecordWithMetadata[]
 }
+
 
 export {
 	FieldValue,
-	Record,
+	RecordValue as RecordValue,
 	Field,
 	RecordsMetadata,
 	ChildParentRelations,
@@ -83,5 +92,6 @@ export {
 	HierarchicalTermBucket,
 	TermBucket,
 	SearchResult,
-  SelectedFieldNames
+  SelectedFieldNames,
+  RecordWithMetadata
 };

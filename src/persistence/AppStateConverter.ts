@@ -1,5 +1,5 @@
 import {
-	Record,
+	RecordValue,
 	GetRecordsMetadata,
 	CreateFacetedIndex,
 	defaultUiSettings,
@@ -14,7 +14,7 @@ const tryGetIndexConfigState = (dto: AppStateDto, data: any): IndexConfigState |
 	if(!Array.isArray(recordsCandidate)){
 		return undefined;
 	}
-	let records: Record[] = recordsCandidate;
+	let records: RecordValue[] = recordsCandidate;
 	let metadata = GetRecordsMetadata(records);
 	return {
 		metadata,
@@ -27,7 +27,7 @@ const tryGetIndexConfigState = (dto: AppStateDto, data: any): IndexConfigState |
 	};
 };
 
-const tryGetSearchState = (dto: AppStateDto, records: Record[]): undefined | SearchState => {
+const tryGetSearchState = (dto: AppStateDto, records: RecordValue[]): undefined | SearchState => {
   if(dto.facet_fields.length === 0 || dto.display_fields.length === 0){
     return undefined;
   }

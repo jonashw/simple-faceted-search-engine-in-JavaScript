@@ -1,6 +1,6 @@
 import React from "react";
 import SearchBox from './SearchBox';
-import { GetDefaultSearchResult, FacetedIndexInstance, UISettingControl, UISettings, Query } from "../model";
+import { GetDefaultSearchResult, FacetedIndexInstance, UISettingControl, UISettings, Query, RecordValue } from "../model";
 import Pagination from "./Pagination";
 import SearchFilters from "./SearchFilters";
 import ActiveFilters from "./ActiveFilters";
@@ -30,7 +30,7 @@ const Search = ({
   setCurrentPageNumber: (p: number) => void
 }) => {
   const [searchResult, setSearchResult] = React.useState(GetDefaultSearchResult());
-  const [showTermTables, setShowTermTables] = React.useState(false);
+  //const [showTermTables, setShowTermTables] = React.useState(false);
 
   const pagination = 
     <div className="mb-3">
@@ -105,15 +105,15 @@ const Search = ({
               <div className="card mb-3">
                 <div className="card-body">
                   <div className="card-text">
-                    <pre className="mb-0">{JSON.stringify(r, null, 2)}</pre>
-                    {showTermTables && <RecordTermTable
-                      record={r}
+                    <pre className="mb-3">{JSON.stringify(r.paired_down_record, null, 2)}</pre>
+                    <RecordTermTable
+                      record={r.tags as RecordValue}
                       facetIds={searchResult.facets.map(f => f.facet_id)}
                       onClick={toggleQueryTerm}
                       facetTermCount={searchResult.facetTermCount}
                       thWidth={undefined}
                       className={"mb-0"}
-                    />}
+                    />
                   </div>
                 </div>
               </div>

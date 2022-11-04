@@ -1,5 +1,5 @@
 import React from "react";
-import { FieldValue, Record } from "../model";
+import { FieldValue, RecordValue } from "../model";
 
 const RecordTermTable = ({
     record,
@@ -9,7 +9,7 @@ const RecordTermTable = ({
     thWidth,
     className
 } : {
-    record: Record;
+    record: RecordValue;
     facetIds: string[];
     onClick?: undefined | ((facetName: string, term: string) => void);
     facetTermCount: (facetName: string, term: string) => number;

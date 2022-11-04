@@ -1,4 +1,4 @@
-import { FacetedIndexInstance, Record } from "./index";
+import { FacetedIndexInstance, RecordValue } from "./index";
 import { RecordsMetadata, SelectedFieldNames } from "./types";
 import { UISettings } from "./UISettings";
 
@@ -12,7 +12,7 @@ type DataState = {
 	indexConfigState: undefined | IndexConfigState;
 };
 type IndexConfigState = {
-	records: Record[];
+	records: RecordValue[];
 	metadata: RecordsMetadata;
 	selectedFieldNames: SelectedFieldNames;
 	searchState: undefined | SearchState;

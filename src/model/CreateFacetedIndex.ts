@@ -2,8 +2,10 @@ import {
   FacetedIndexConfig,
   FacetedIndexInstance,
   HierarchicalTermBucket,
-  Query,
-  SearchResult 
+  RecordWithMetadata,
+  SearchResult ,
+  RecordValue,
+  Query
 } from './types';
 
 import {unionAll,intersectAll } from './SetOperations';
@@ -18,6 +20,7 @@ const GetDefaultSearchResult = (): SearchResult =>
   term_buckets_by_facet_id: {},
   terms: []
 });
+
 
 /*
 Expectations:
@@ -36,25 +39,11 @@ const CreateFacetedIndex = (
       ? new Set(config.facet_fields)
       : new Set();
 
-  const convertToDisplayRecord = (() => {
-    if(!config || !Array.isArray(config.display_fields) || config.display_fields.length === 0){
-      return (r: {}): {} => r;
-    }
-    var dfields = new Set(config.display_fields);
-    //console.log('dfields',dfields);
-    return (r: {}): {} => {
-      var displayEntries = Object.entries(r).filter(([k,v]) => dfields.has(k));
-      return Object.fromEntries(displayEntries);
-    };
-  })();
 
   const allowableFacetId = (id: string) =>
     expectedFacetIds.size === 0 || expectedFacetIds.has(id);
 
   var ix: {[facetId: string]: {[term: string]: Set<number>}} = {};
-  let i = 0;
-  let all_ids: number[] = [];
-  let display_records: {}[] = [];
   let termsDict: {[term: string]: string} = {};
 
   const traverseFacetUpwards = (facetId: string, term: string, recordId: number): void => {
@@ -72,7 +61,12 @@ const CreateFacetedIndex = (
     traverseFacetUpwards(facetId, parentTerm, recordId);
   };
 
+  let record_id = 0;
+  let all_ids: number[] = [];
+  let record_tags: {[recordId: number]: RecordValue} = {};
+
   for (let record of records) {
+    record_tags[record_id] = {};
     for (let fieldName of Object.keys(record)) {
       candidate_facet_fields.add(fieldName);
       if (!allowableFacetId(fieldName)) {
@@ -83,21 +77,47 @@ const CreateFacetedIndex = (
         Array.isArray(record[fieldName])
         ? record[fieldName]
         : [record[fieldName]];
+      record_tags[record_id][fieldName] = terms;
       for (let term of terms) {
         ix[fieldName][term] = ix[fieldName][term] || new Set();
-        ix[fieldName][term].add(i);
+        ix[fieldName][term].add(record_id);
         termsDict[term] = term;
-        traverseFacetUpwards(fieldName, term, i);
+        traverseFacetUpwards(fieldName, term, record_id);
       }
     }
-    display_records.push(convertToDisplayRecord(record));
-    all_ids.push(i);
-    i++;
+    all_ids.push(record_id);
+    record_id++;
   }
 
   const terms = Object.keys(termsDict);
-
   const facetIds = Object.keys(ix).filter(allowableFacetId);
+
+  const process = (() => {
+    let searchable_text: string[] = [];//TODO
+    if(!config || !Array.isArray(config.display_fields) || config.display_fields.length === 0){
+      return (
+        (id: number, r: {}): RecordWithMetadata => ({
+          id,
+          tags: record_tags[id],
+          searchable_text,
+          paired_down_record: r,
+          original_record: r
+        }));
+    }
+    var dfields = new Set(config.display_fields);
+    //console.log('dfields',dfields);
+    return (id: number, r: {}): RecordWithMetadata => {
+      var displayEntries = 
+        Object.entries(r).filter(([k,v]) => dfields.has(k));
+      return {
+        id: id,
+        paired_down_record: Object.fromEntries(displayEntries) as RecordValue,
+        original_record: r,
+        tags: record_tags[id],
+        searchable_text
+      };
+    };
+  })();
 
   const record_ids_matching_query = (query: Query): Set<number> => {
     //alert(JSON.stringify(query,null,2))
@@ -217,7 +237,7 @@ const CreateFacetedIndex = (
       facetTermCount: (facet: string, term: string) => 
         //((ix.data[facet] || new Set())[term]  || new Set()).size;
         ((term_buckets_by_facet_id[facet] || {})[term]  || {count:0}).count,
-      records: Array.from(matching_ids).map((i) => display_records[i])
+      records: Array.from(matching_ids).map((record_id) => process(record_id, records[record_id]))
     };
   };
 

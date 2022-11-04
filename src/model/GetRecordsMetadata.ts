@@ -1,6 +1,6 @@
-import {Field, FieldValue, Record, RecordsMetadata} from './types';
+import {Field, FieldValue, RecordValue, RecordsMetadata} from './types';
 
-const GetRecordsMetadata = (records: Record[]): RecordsMetadata => {
+const GetRecordsMetadata = (records: RecordValue[]): RecordsMetadata => {
 	if(!records || records.length === 0){
 		return {
 			fields: [],
@@ -43,18 +43,21 @@ const GetRecordsMetadata = (records: Record[]): RecordsMetadata => {
 		values: valuesByFieldName[fn] || new Set<FieldValue>()
 	}));
 
+	let facet = 
+		new Set<string>(
+			fields.filter(f =>
+				/* A facet is useful only if it has at least 2 values,
+				** and the more values a field gets, the less likely it is a facet. */
+				2 <= f.values.size && f.values.size < 15
+			).map(f => f.name));
+
 	return {
 		fields,
 		fieldNames,
 		valuesByFieldName,
 		recommended_selections: {
-			display: new Set<string>(fields.map(f => f.name)),
-			facet: new Set<string>(
-				fields.filter(f =>
-					/* A facet is useful only if it has at least 2 values,
-					** and the more values a field gets, the less likely it is a facet. */
-					2 <= f.values.size && f.values.size < 15
-				).map(f => f.name))
+			display: new Set<string>(fields.map(f => f.name).filter(fn => !facet.has(fn))),
+			facet
 		}
 	};
 };
