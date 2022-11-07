@@ -1,4 +1,43 @@
+import { stringify } from "querystring";
+import FacetedHierarchyConverter from "../persistence/FacetedTaxonomyConverter";
 import { CreateFacetedIndex } from "./CreateFacetedIndex";
+import { TaxonomyNode } from "./types";
+
+describe("Faceted Taxonomy parser", () => {
+	let tax = 
+`location
+	Europe
+		Belgium
+		Croatia
+		England
+		Finland
+		Germany
+	Asia
+	North America
+		Mexico
+		USA
+			New York
+				New York City
+			California
+				Sacramento
+				Los Angeles
+				San Francisco
+				San Diego`;
+	let result = FacetedHierarchyConverter.parseTabIndentedString(tax);
+	it('parses a tab-indented string into a taxonomy tree', () => {
+		let childNameList = (t: TaxonomyNode): string => t.children.map(n => n.name).join(', ');
+		if(typeof result === "string"){
+			throw('parse error: ' + result);
+		}
+		let tree = result;
+		expect(tree)
+		expect(tree).toHaveLength(1);
+		expect(tree[0].name).toBe("location");
+		expect(tree[0].children).toHaveLength(3);
+		expect(childNameList(tree[0])).toBe('Europe, Asia, North America');
+		expect(childNameList(tree[0].children[0])).toBe("Belgium, Croatia, England, Finland, Germany");
+	});
+});
 
 describe("The Faceted Index term hierarchy", () => {
 	const ix = CreateFacetedIndex([
@@ -23,8 +62,10 @@ describe("The Faceted Index term hierarchy", () => {
 			rating: 10
 		},
 	],{
-		facet_fields: [],
-		display_fields: [],
+		fields: {
+			facet: new Set([]),
+			display: new Set([]),
+		},
 		facet_term_parents: {
 			location: {
 				'Sacramento': 'California',
@@ -47,7 +88,7 @@ describe("The Faceted Index term hierarchy", () => {
 		let result = ix.search(q);
 		expect(result.records).toHaveLength(5);
 	});
-	it('can offers hierarchical facets available to the UI, alpha-sorted', () => {
+	it('can offer hierarchical facets available to the UI, alpha-sorted', () => {
 		let q = {location:['USA']};
 		let result = ix.search(q);
 		let locationFacet = result.facetHierarchies.filter(f => f.facet_id === 'location')[0];
@@ -73,8 +114,10 @@ describe("The Faceted Index", () => {
 			difficulty: 'Easy'
 		}
 	],{
-		facet_fields: [],
-		display_fields: [],
+		fields: {
+			facet: new Set([]),
+			display: new Set([]),
+		},
 		facet_term_parents: { }
 	});
 

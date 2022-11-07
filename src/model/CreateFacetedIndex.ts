@@ -35,13 +35,9 @@ const CreateFacetedIndex = (
   config: FacetedIndexConfig
 ): FacetedIndexInstance => {
   const candidate_facet_fields = new Set<string>();
-  const expectedFacetIds =
-    !!config && Array.isArray(config.facet_fields)
-      ? new Set(config.facet_fields)
-      : new Set();
 
   const allowableFacetId = (id: string) =>
-    expectedFacetIds.size === 0 || expectedFacetIds.has(id);
+    config.fields.facet.size === 0 || config.fields.facet.has(id);
 
   var facetTermIndex: {[facetId: string]: {[term: string]: Set<number>}} = {};
   let termsDict: {[term: string]: string} = {};
@@ -97,9 +93,9 @@ const CreateFacetedIndex = (
     **
     */
     var dfields = 
-      !config || !Array.isArray(config.display_fields) || config.display_fields.length === 0
+      !config || config.fields.display.size === 0
       ? undefined
-      : new Set(config.display_fields);
+      : config.fields.display;
     return (
       (id: number, r: {}): RecordWithMetadata => {
         let recordEntriesForDisplay = 

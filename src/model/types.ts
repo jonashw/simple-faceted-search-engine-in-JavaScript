@@ -28,10 +28,11 @@ type RecordWithMetadata = {
 }
 
 type ChildParentRelations = {[childTerm: FieldValue]: FieldValue};
+type TaxonomyNode = {name:string, children: TaxonomyNode[]};
+type Taxonomy = TaxonomyNode[];
 
 type FacetedIndexConfig = {
-  display_fields: string[],
-  facet_fields: string[],
+  fields: SelectedFieldNames,
   //The extra level of nesting is just-in-case 2+ facets share a term name
   facet_term_parents: {[facet_id: string]: {[term: string]: string}}
 }
@@ -100,5 +101,7 @@ export {
 	SearchResult,
   SelectedFieldNames,
   RecordWithMetadata,
-  TextIndex
+  TextIndex,
+  Taxonomy,
+  TaxonomyNode
 };

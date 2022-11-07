@@ -32,9 +32,11 @@ const tryGetSearchState = (dto: AppStateDto, records: RecordValue[]): undefined 
     return undefined;
   }
   let index = CreateFacetedIndex(records, {
-    display_fields: dto.display_fields,
-    facet_fields: dto.facet_fields,
-    facet_term_parents: {}
+    facet_term_parents: {},
+    fields: {
+      display: new Set(dto.display_fields),
+      facet:  new Set(dto.facet_fields)
+    }
   });
   return {
     index,

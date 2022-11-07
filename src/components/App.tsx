@@ -161,9 +161,11 @@ export default function App() {
 									let index = CreateFacetedIndex(
 										indexConfigState.records,
 										{
-											display_fields: Array.from(indexConfigState.selectedFieldNames.display),
-											facet_fields: Array.from(indexConfigState.selectedFieldNames.facet),
-											facet_term_parents: {}
+											facet_term_parents: {},
+											fields: {
+												facet: new Set(indexConfigState.selectedFieldNames.facet),
+												display: new Set(indexConfigState.selectedFieldNames.display),
+											}
 										});
 									setIndexConfigState({
 										...indexConfigState,
