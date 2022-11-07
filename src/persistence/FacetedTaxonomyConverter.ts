@@ -1,6 +1,16 @@
 import { Taxonomy,TaxonomyNode } from "../model/types";
 type ParseError = string;
 const FacetedHierarchyConverter = {
+    serializeToTabIndentedString: (t: Taxonomy): string => {
+        const tabs = (n: number): string =>
+            Array(n).fill('\t').join('');
+        const traverse = (n: TaxonomyNode, indentLevel: number): string => 
+            [
+                tabs(indentLevel) + n.name,
+                ...n.children.map(c => traverse(c, indentLevel+1))
+            ].join('\n');
+        return t.map(f => traverse(f,0)).join('\n');
+    },
 	parseTabIndentedString: (str:string): Taxonomy | ParseError => {
 		const tree: Taxonomy = [];
 		const lines = str.split('\n');

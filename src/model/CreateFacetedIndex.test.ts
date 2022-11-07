@@ -3,7 +3,7 @@ import FacetedHierarchyConverter from "../persistence/FacetedTaxonomyConverter";
 import { CreateFacetedIndex } from "./CreateFacetedIndex";
 import { TaxonomyNode } from "./types";
 
-describe("Faceted Taxonomy parser", () => {
+describe("Faceted Taxonomy converter", () => {
 	let tax = 
 `location
 	Europe
@@ -36,6 +36,13 @@ describe("Faceted Taxonomy parser", () => {
 		expect(tree[0].children).toHaveLength(3);
 		expect(childNameList(tree[0])).toBe('Europe, Asia, North America');
 		expect(childNameList(tree[0].children[0])).toBe("Belgium, Croatia, England, Finland, Germany");
+	});
+	it('serializes back to the same tab-indented string', () => {
+		if(typeof result === "string"){
+			throw('parse error: ' + result);
+		}
+		let str = FacetedHierarchyConverter.serializeToTabIndentedString(result);
+		expect(str).toBe(tax);
 	});
 });
 
