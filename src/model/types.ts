@@ -76,6 +76,11 @@ type HierarchicalTermBucket = {
   facet_id: string
 };
 
+type RecordCounts = {
+  total: number;
+  filtered: number;
+}
+
 type SearchResult = {
   query: Query,
   facets: FacetTermBucket[],
@@ -84,6 +89,7 @@ type SearchResult = {
   term_buckets_by_facet_id: {[facet_id: string]: {[term: string]: TermBucket}},
   facetTermCount: (facet: string, term: string) => number,
   records: RecordWithMetadata[]
+  recordCounts: RecordCounts
 }
 
 
@@ -108,5 +114,6 @@ export {
   Taxonomy,
   TaxonomyNode,
   FacetTermParents,
-  FacetTermRecordIndex
+  FacetTermRecordIndex,
+  RecordCounts
 };

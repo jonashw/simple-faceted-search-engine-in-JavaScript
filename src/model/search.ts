@@ -152,6 +152,10 @@ const search = (
     searchKeyWord);
 
   return {
+    recordCounts: {
+      total: records_with_metadata.length,
+      filtered:  matching_ids.size
+    },
     query: { ...query },
     facets: facets || [],
     facetHierarchies,

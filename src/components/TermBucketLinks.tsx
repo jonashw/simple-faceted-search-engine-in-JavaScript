@@ -9,13 +9,13 @@ const TermBucketLinks = ({
 } : {
   facet_id: string,
   term_buckets: HierarchicalTermBucket[],
-  term_is_selected: (t: string) => boolean,
+  term_is_selected: (f: string, t: string) => boolean,
   level: number,
   toggleFacetTerm: (f: string, t: string) => void
 }) =>
   <div>
     {term_buckets.map((t,i) => {
-      let selected = term_is_selected(t.term);
+      let selected = term_is_selected(facet_id, t.term);
       return (
         <div key={i}>
           <a key={t.term}

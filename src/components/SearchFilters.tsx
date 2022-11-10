@@ -9,21 +9,15 @@ const SearchFilters = (
     query,
     setQuery,
     debug,
-    searchResult
+    searchResult,
+    term_is_selected
   } : {
     query: Query,
     setQuery: QuerySetter,
     debug: boolean,
-    searchResult: SearchResult
+    searchResult: SearchResult,
+    term_is_selected: (k: string, t: string) => boolean
   }) => {
-  const [activeTerms,setActiveTerms] = React.useState(new Set());
-  const term_is_selected = (t: string) => activeTerms.has(t);
-
-  React.useEffect(() => {
-    let allTerms = Object.values(query).flatMap(terms => terms);
-    setActiveTerms(new Set(allTerms));
-  }, [query])
-
   const setFacetQueryTerms = (facet_id: string, terms: string[]): void => 
     setQuery((query: Query) => QueryUtil.setFacetTerms(query, facet_id, terms));
 
@@ -47,7 +41,6 @@ const SearchFilters = (
       <>
         <pre>{JSON.stringify(searchResult.facetHierarchies, null, 2)}</pre>
         <pre>{JSON.stringify(query, null, 2)}</pre>
-        <pre>{JSON.stringify(Array.from(activeTerms), null, 2)}</pre>
       </>
     }
   </>);

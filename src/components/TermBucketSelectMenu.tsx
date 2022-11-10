@@ -9,7 +9,7 @@ const TermBucketSelectMenu = ({
 } : {
   facet_id: string,
   term_buckets: TermBucket[],
-  term_is_selected: (t: string) => boolean,
+  term_is_selected: (f: string, t: string) => boolean,
   setFacetQueryTerms:  (f: string, ts: string[]) => void
 }) => {
   let options = term_buckets.map(t => ({
@@ -21,7 +21,7 @@ const TermBucketSelectMenu = ({
   return <Select 
     onChange={newSelectedOptions => setFacetQueryTerms(facet_id, newSelectedOptions.map(v => v.value) ) }
     getOptionValue={o => o.value}
-    isOptionSelected={o => term_is_selected(o.value) }
+    isOptionSelected={o => term_is_selected(facet_id,o.value) }
     hideSelectedOptions={true}
     value={selectedOptions}
     options={options}

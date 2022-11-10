@@ -39,6 +39,14 @@ const Search = ({
   const [searchResult, setSearchResult] = React.useState(GetDefaultSearchResult());
   //const [showTermTables, setShowTermTables] = React.useState(false);
 
+  const [activeTerms,setActiveTerms] = React.useState(new Set());
+  const term_is_selected = (k: string, t: string) => activeTerms.has(`${k}:${t}`);
+
+  React.useEffect(() => {
+    let allTerms = Object.entries(query).flatMap(([facet,terms]) => terms.map(t => `${facet}:${t}`));
+    setActiveTerms(new Set(allTerms));
+  }, [query])
+
 	React.useEffect(() => {
     new Promise((resolve) => {
       setTimeout(() => {
@@ -88,7 +96,7 @@ const Search = ({
       (pageNumber-1)*pageSize,
       (pageNumber-0)*pageSize);
 
-  const [offCanvasOpen, setOffCanvasOpen] = React.useState(true);
+  const [offCanvasOpen, setOffCanvasOpen] = React.useState(false);
 
   return (
     <div className="row">
@@ -103,6 +111,7 @@ const Search = ({
         ? <>
             <button onClick={() => setOffCanvasOpen(true)}>Touch Filters</button>
             <OffCanvasSearchFilters 
+              recordCounts={searchResult.recordCounts}
               facetHierarchies={searchResult.facetHierarchies}
               open={offCanvasOpen}
               setOpen={setOffCanvasOpen}
@@ -110,9 +119,9 @@ const Search = ({
                 debug,
                 query,
                 setQuery,
-                searchResult
-              }}
-            />
+                searchResult,
+                term_is_selected
+              }}            />
           </>
           : 
           <SearchFilters 
@@ -120,7 +129,8 @@ const Search = ({
               debug,
               query,
               setQuery,
-              searchResult
+              searchResult,
+              term_is_selected
             }}
           />
         }

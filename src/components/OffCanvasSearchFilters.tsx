@@ -1,21 +1,27 @@
 import React from "react";
-import { FacetHierarchicalTermBucket, QuerySetter } from "../model";
+import { FacetHierarchicalTermBucket, Query, QuerySetter, RecordCounts } from "../model";
 import QueryUtil from "../model/QueryUtil";
 import TermBucketLinks from "./TermBucketLinks";
+import ActiveFilters from './ActiveFilters';
 
 const OffCanvasSearchFilters = ({
 	facetHierarchies,
+	query,
 	setQuery,
 	open,
-	setOpen
+	setOpen,
+	term_is_selected,
+	recordCounts
 } : {
 	facetHierarchies: FacetHierarchicalTermBucket[],
+	query: Query,
 	setQuery: QuerySetter,
 	open: boolean,
-	setOpen: (o: boolean) => void
+	setOpen: (o: boolean) => void,
+	term_is_selected: (f:string,t:string) => boolean,
+	recordCounts: RecordCounts
 }) => {
 	const [openFacet,setOpenFacet] = React.useState<string|undefined>();
-	const term_is_selected = (t:string): boolean => false;
 	const toggleFacetTerm = (facet_id: string, term: string) =>
 		setQuery(query => QueryUtil.toggleFacetTerm(query, facet_id, term));
 	return (
@@ -30,13 +36,23 @@ const OffCanvasSearchFilters = ({
 		</div>
 		<div className="offcanvas-body">
 			<div className="accordion accordion-flush">
+				<div>
+					Showing {recordCounts.filtered} of {recordCounts.total}
+				</div>
+				{Object.values(query).length > 0 && <div className="mb-3">
+					<ActiveFilters
+						toggleQueryTerm={toggleFacetTerm}
+						query={query}
+						clearQuery={() => setQuery(_ => ({}))
+					}/>
+				</div>}
 				{(facetHierarchies || [])
 					.filter((f) => f.term_buckets.length > 0)
 					.map(({ facet_id, term_buckets }) => {
 						let expanded = openFacet === facet_id;
 						let facet_slug = facet_id.replace(/ /g, '');
 						return (
-							<div className="accordion-item">
+							<div className="accordion-item" key={facet_id}>
 								<h2 className="accordion-header">
 									<button
 										id={"accordion-header-" + facet_slug}
@@ -44,6 +60,7 @@ const OffCanvasSearchFilters = ({
 										type="button"
 										aria-expanded={expanded}
 										aria-controls={"flush-" + facet_slug}
+										style={{fontWeight:'bold'}}
 										onClick={_ => {
 											setOpenFacet(openFacet === facet_id ? undefined : facet_id);
 										}}

@@ -16,6 +16,10 @@ const GetDefaultSearchResult = (): SearchResult =>
 ({
   query: {},
   records: [],
+  recordCounts: {
+    total: 0,
+    filtered: 0
+  },
   facets: [],
   facetHierarchies: [],
   facetTermCount: (f,t) => 0,
