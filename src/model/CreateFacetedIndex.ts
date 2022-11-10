@@ -144,22 +144,6 @@ const CreateFacetedIndex = (
         searchKeyWord),
     text_index,
     actual_facet_fields: facetIds,
-    getResultsPage: (results, pageNumber, pageSize) => 
-      results.slice(
-        (pageNumber-1)*pageSize,
-        (pageNumber-0)*pageSize),
-    toggleQueryTerm: (query, facetKey, term) => {
-      let existingFacetTerms = query[facetKey] || [];
-      let newFacetTerms =
-        existingFacetTerms.indexOf(term) > -1
-          ? existingFacetTerms.filter((t) => t !== term)
-          : [...existingFacetTerms, term];
-      let newQuery = { ...query, [facetKey]: newFacetTerms };
-      if (newQuery[facetKey].length === 0) {
-        delete newQuery[facetKey];
-      }
-      return newQuery;
-    },
     display_fields: candidate_facet_fields,
     candidate_facet_fields,
     data: facetTermRecordIndex,

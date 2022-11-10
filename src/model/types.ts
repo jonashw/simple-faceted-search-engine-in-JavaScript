@@ -39,6 +39,7 @@ type FacetedIndexConfig = {
   facet_term_parents: FacetTermParents
 }
 type Query = {[facetId: string] : string[]};
+type QuerySetter = (fn: (q: Query) => Query) => void;
 
 type TextIndex = {
   text: string;
@@ -49,8 +50,6 @@ type FacetedIndexInstance = {
   text_index: TextIndex,
   search: (query: Query, seachKeyWord?: string | undefined) => SearchResult,
   actual_facet_fields: string[],
-  getResultsPage: (results: RecordWithMetadata[], pageNumber: number, pageSize: number) => RecordWithMetadata[],
-  toggleQueryTerm: (query: Query, facetKey: string, term: string) => Query,
   display_fields: Set<string>, 
   candidate_facet_fields: Set<string>, 
   data: any,
@@ -95,6 +94,7 @@ export {
 	RecordsMetadata,
 	ChildParentRelations,
 	Query,
+	QuerySetter,
 	FacetedIndexConfig,
 	FacetedIndexInstance,
 	FacetTermBucket,

@@ -1,10 +1,11 @@
 import React from "react";
 import SearchBox from './SearchBox';
-import { GetDefaultSearchResult, FacetedIndexInstance, UISettingControl, UISettings, Query, RecordValue } from "../model";
+import { GetDefaultSearchResult, FacetedIndexInstance, UISettingControl, UISettings, Query, RecordValue, RecordWithMetadata } from "../model";
 import Pagination from "./Pagination";
 import SearchFilters from "./SearchFilters";
 import ActiveFilters from "./ActiveFilters";
 import RecordTermTable from "./RecordTermTable";
+import QueryUtil from "../model/QueryUtil";
 
 const Search = ({ 
   ix,
@@ -59,7 +60,7 @@ const Search = ({
     </div>;
 
   const toggleQueryTerm = (facet_id: string, term: string) => {
-    setQuery((query: Query) => ix.toggleQueryTerm(query, facet_id, term));
+    setQuery((query: Query) => QueryUtil.toggleFacetTerm(query, facet_id, term));
   };
 
   const uiOptions = 
@@ -80,6 +81,11 @@ const Search = ({
       </div>
     </div>;
 
+  const getResultsPage = (results: RecordWithMetadata[], pageNumber: number, pageSize: number) => 
+    results.slice(
+      (pageNumber-1)*pageSize,
+      (pageNumber-0)*pageSize);
+
   return (
     <div className="row">
       <div className={"col-" + uiSettings.horizontalSplit.split('/')[0]}>
@@ -91,7 +97,6 @@ const Search = ({
         />
         <SearchFilters 
           {...{
-            ix,
             debug,
             query,
             setQuery,
@@ -115,7 +120,7 @@ const Search = ({
         <h5 className="mt-3">Results: {searchResult.records.length}</h5>
         {uiOptions}
         <div className={"row row-cols-" + uiSettings.recordsPerRow}>
-          {ix.getResultsPage(searchResult.records, currentPageNumber, parseInt(uiSettings.pageSize)).map((r, i) => (
+          {getResultsPage(searchResult.records, currentPageNumber, parseInt(uiSettings.pageSize)).map((r, i) => (
             <div className="col" key={i}>
               <div className="card mb-3">
                 <div className="card-body">
