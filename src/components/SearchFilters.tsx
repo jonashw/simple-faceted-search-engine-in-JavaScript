@@ -29,7 +29,6 @@ const SearchFilters = (
 
   const toggleFacetTerm = (facet_id: string, term: string) =>
     setQuery(query => QueryUtil.toggleFacetTerm(query, facet_id, term));
-      
   return (<>
     {(searchResult.facetHierarchies || [])
       .filter((f) => f.term_buckets.length > 0)

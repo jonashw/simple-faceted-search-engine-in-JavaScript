@@ -1,0 +1,1 @@
+export default () => window.matchMedia("(pointer: coarse) and (hover: none)").matches;

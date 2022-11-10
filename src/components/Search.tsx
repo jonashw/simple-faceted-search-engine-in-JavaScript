@@ -6,6 +6,8 @@ import SearchFilters from "./SearchFilters";
 import ActiveFilters from "./ActiveFilters";
 import RecordTermTable from "./RecordTermTable";
 import QueryUtil from "../model/QueryUtil";
+import OffCanvasSearchFilters from "./OffCanvasSearchFilters";
+import isTouchDevice from "./isTouchDevice";
 
 const Search = ({ 
   ix,
@@ -86,6 +88,8 @@ const Search = ({
       (pageNumber-1)*pageSize,
       (pageNumber-0)*pageSize);
 
+  const [offCanvasOpen, setOffCanvasOpen] = React.useState(true);
+
   return (
     <div className="row">
       <div className={"col-" + uiSettings.horizontalSplit.split('/')[0]}>
@@ -95,14 +99,31 @@ const Search = ({
           searchResult={searchResult}
           toggleQueryTerm={toggleQueryTerm}
         />
-        <SearchFilters 
-          {...{
-            debug,
-            query,
-            setQuery,
-            searchResult
-          }}
-        />
+        {isTouchDevice() 
+        ? <>
+            <button onClick={() => setOffCanvasOpen(true)}>Touch Filters</button>
+            <OffCanvasSearchFilters 
+              facetHierarchies={searchResult.facetHierarchies}
+              open={offCanvasOpen}
+              setOpen={setOffCanvasOpen}
+              {...{
+                debug,
+                query,
+                setQuery,
+                searchResult
+              }}
+            />
+          </>
+          : 
+          <SearchFilters 
+            {...{
+              debug,
+              query,
+              setQuery,
+              searchResult
+            }}
+          />
+        }
       </div>
       <div className={"col-" + uiSettings.horizontalSplit.split('/')[1]}>
         <div className="d-flex justify-content-between align-items-start">
