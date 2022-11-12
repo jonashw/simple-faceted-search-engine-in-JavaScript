@@ -20,7 +20,7 @@ import AppStateConverter from "../persistence/AppStateConverter";
 
 const defaultAppState: AppState = 
 	{
-		dataUrl: 'sample-records.json',
+		dataUrl: '',
 		dataState: undefined
 	};
 
@@ -58,6 +58,7 @@ export default function App() {
 	const [settingsVisible,setSettingsVisible] = React.useState<boolean>(
 		state.dataState?.indexConfigState?.searchState === undefined
 	);
+
 	useEffect(() => {
 		const effect = async () => {
 			let dto = deserialize(urlParams);
