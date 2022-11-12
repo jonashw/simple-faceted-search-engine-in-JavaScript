@@ -16,6 +16,7 @@ const GetDefaultSearchResult = (): SearchResult =>
 ({
   query: {},
   records: [],
+  getPageOfRecords: (_: number, __: number) => [],
   recordCounts: {
     total: 0,
     filtered: 0
@@ -134,6 +135,7 @@ const CreateFacetedIndex = (
     text: r.searchable_text.join(' '),
     record_id: r.id
   }));
+
 
   return {
     search: (query: Query, searchKeyWord: string | undefined) =>

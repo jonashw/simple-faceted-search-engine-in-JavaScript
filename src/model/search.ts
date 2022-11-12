@@ -10,6 +10,10 @@ function sortBy<T>(arr: T[], selector: (item: T) => any): T[] {
   })
 }
 
+const getResultsPage = (results: RecordWithMetadata[], pageNumber: number, pageSize: number) => 
+  results.slice(
+    (pageNumber-1)*pageSize,
+    (pageNumber-0)*pageSize);
 
 const alphaSortTermBuckets = (tbs: HierarchicalTermBucket[]): HierarchicalTermBucket[] =>
   sortBy(tbs, b => b.term);
@@ -43,8 +47,6 @@ const record_ids_matching_query = (
   //console.log({searchStringMatches})
   return intersectAll([facetMatches, new Set<number>(searchStringMatches)]);
 };
-
-
 
 const search = (
   facetIds: string[],
@@ -151,6 +153,10 @@ const search = (
     query,
     searchKeyWord);
 
+  let records = 
+    Array.from(matching_ids)
+    .map((record_id) => records_with_metadata[record_id]);
+
   return {
     recordCounts: {
       total: records_with_metadata.length,
@@ -164,7 +170,8 @@ const search = (
     facetTermCount: (facet: string, term: string) => 
       //((facetTermIndex.data[facet] || new Set())[term]  || new Set()).size;
       ((term_buckets_by_facet_id[facet] || {})[term]  || {count:0}).count,
-    records: Array.from(matching_ids).map((record_id) => records_with_metadata[record_id])
+    records,
+    getPageOfRecords: (pageNumber: number, pageSize: number) => getResultsPage(records,pageNumber,pageSize)
   };
 };
 

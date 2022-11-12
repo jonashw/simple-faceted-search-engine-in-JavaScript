@@ -1,13 +1,13 @@
 import React from "react";
 import SearchBox from './SearchBox';
-import { GetDefaultSearchResult, FacetedIndexInstance, UISettingControl, UISettings, Query, RecordValue, RecordWithMetadata } from "../model";
+import { GetDefaultSearchResult, FacetedIndexInstance, UISettingControl, UISettings, Query, RecordValue, RecordWithMetadata, SearchResult } from "../model";
 import Pagination from "./Pagination";
 import SearchFilters from "./SearchFilters";
 import ActiveFilters from "./ActiveFilters";
-import RecordTermTable from "./RecordTermTable";
 import QueryUtil from "../model/QueryUtil";
 import OffCanvasSearchFilters from "./OffCanvasSearchFilters";
 import isTouchDevice from "./isTouchDevice";
+import RecordRows from "./RecordRows";
 
 const Search = ({ 
   ix,
@@ -150,32 +150,13 @@ const Search = ({
         
         <h5 className="mt-3">Results: {searchResult.records.length}</h5>
         {uiOptions}
-        <div className={"row row-cols-" + uiSettings.recordsPerRow}>
-          {getResultsPage(searchResult.records, currentPageNumber, parseInt(uiSettings.pageSize)).map((r, i) => (
-            <div className="col" key={i}>
-              <div className="card mb-3">
-                <div className="card-body">
-                  <div className="card-text" style={{overflow:'auto'}}>
-                    <pre className="mb-3">{JSON.stringify(r.paired_down_record, null, 2)}</pre>
-                    <RecordTermTable
-                      record={r.tags as RecordValue}
-                      facetIds={searchResult.facets.map(f => f.facet_id)}
-                      onClick={toggleQueryTerm}
-                      facetTermCount={searchResult.facetTermCount}
-                      thWidth={undefined}
-                      className={"mb-0"}
-                    />
-                    {/*
-                      <pre className="mt-3 mb-0">
-                        {JSON.stringify(r.searchable_text, null, 2)}
-                      </pre>
-                    */}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+          <RecordRows {...{
+            searchResult,
+            currentPageNumber,
+            pageSize: parseInt(uiSettings.pageSize),
+            recordsPerRow: parseInt(uiSettings.recordsPerRow),
+            toggleQueryTerm
+          }} />
         {uiOptions}
       </div>
     </div>
