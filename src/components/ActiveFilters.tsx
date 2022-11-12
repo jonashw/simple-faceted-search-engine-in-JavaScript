@@ -20,7 +20,7 @@ const ActiveFilters = ({
         <div>
             {facets.flatMap(([facetId, terms]) =>
                 terms.map((term,i) => (
-                    <button className="btn btn-outline-success me-2" onClick={() => toggleQueryTerm(facetId,term) } key={facetId + i}>
+                    <button className="btn btn-outline-success me-2 mb-2" onClick={() => toggleQueryTerm(facetId,term) } key={facetId + i}>
                         {facetId}: {term}
                         <span className="btn-close ms-2" />
                     </button>

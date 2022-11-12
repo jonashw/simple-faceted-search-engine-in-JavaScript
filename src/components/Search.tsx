@@ -115,6 +115,7 @@ const Search = ({
         </div>
 
       </div>
+      {pagination}
 
       <OffCanvasSearchFilters 
         recordCounts={searchResult.recordCounts}
@@ -136,6 +137,7 @@ const Search = ({
         recordsPerRow: parseInt(uiSettings.recordsPerRow),
         toggleQueryTerm
       }} />
+      {pagination}
     </>
     : <div className="row">
         <div className={"col-" + uiSettings.horizontalSplit.split('/')[0]}>
