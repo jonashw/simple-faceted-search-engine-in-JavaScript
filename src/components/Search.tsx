@@ -91,39 +91,61 @@ const Search = ({
       </div>
     </div>;
 
-  const getResultsPage = (results: RecordWithMetadata[], pageNumber: number, pageSize: number) => 
-    results.slice(
-      (pageNumber-1)*pageSize,
-      (pageNumber-0)*pageSize);
-
   const [offCanvasOpen, setOffCanvasOpen] = React.useState(false);
 
-  return (
-    <div className="row">
-      <div className={"col-" + uiSettings.horizontalSplit.split('/')[0]}>
-        <SearchBox
-          searchString={searchString}
-          setSearchString={setSearchString}
-          searchResult={searchResult}
-          toggleQueryTerm={toggleQueryTerm}
-        />
-        {isTouchDevice() 
-        ? <>
-            <button onClick={() => setOffCanvasOpen(true)}>Touch Filters</button>
-            <OffCanvasSearchFilters 
-              recordCounts={searchResult.recordCounts}
-              facetHierarchies={searchResult.facetHierarchies}
-              open={offCanvasOpen}
-              setOpen={setOffCanvasOpen}
-              {...{
-                debug,
-                query,
-                setQuery,
-                searchResult,
-                term_is_selected
-              }}            />
-          </>
-          : 
+  return isTouchDevice() 
+    ? <>
+      <div style={{
+        position:'sticky',
+        top:0,
+        zIndex:100,
+        borderBottom:'1px solid #ddd'
+      }} className="bg-white py-2 mb-3">
+        <div className="d-flex justify-content-between align-items-center">
+          <span>
+            Showing {searchResult.recordCounts.filtered} of {searchResult.recordCounts.total} records
+          </span>
+          <button
+            onClick={() => setOffCanvasOpen(true)}
+            className="btn btn-outline-secondary"
+          >
+            Filter
+            <img src="/filter.svg" alt="Filters" className="ps-2"/>
+          </button>
+        </div>
+
+      </div>
+
+      <OffCanvasSearchFilters 
+        recordCounts={searchResult.recordCounts}
+        facetHierarchies={searchResult.facetHierarchies}
+        open={offCanvasOpen}
+        setOpen={setOffCanvasOpen}
+        {...{
+          debug,
+          query,
+          setQuery,
+          searchResult,
+          term_is_selected
+        }}
+      />
+      <RecordRows {...{
+        searchResult,
+        currentPageNumber,
+        pageSize: parseInt(uiSettings.pageSize),
+        recordsPerRow: parseInt(uiSettings.recordsPerRow),
+        toggleQueryTerm
+      }} />
+    </>
+    : <div className="row">
+        <div className={"col-" + uiSettings.horizontalSplit.split('/')[0]}>
+          <SearchBox
+            searchString={searchString}
+            setSearchString={setSearchString}
+            searchResult={searchResult}
+            toggleQueryTerm={toggleQueryTerm}
+          />
+            
           <SearchFilters 
             {...{
               debug,
@@ -133,23 +155,23 @@ const Search = ({
               term_is_selected
             }}
           />
-        }
-      </div>
-      <div className={"col-" + uiSettings.horizontalSplit.split('/')[1]}>
-        <div className="d-flex justify-content-between align-items-start">
-          <ActiveFilters 
-            query={query}
-            clearQuery={() => { setQuery(_ => ({})) }}
-            toggleQueryTerm={toggleQueryTerm} 
-          />
-
-          <button className="btn btn-outline-secondary" onClick={() => viewSettings()}>
-            ⚙️
-          </button>
+          
         </div>
-        
-        <h5 className="mt-3">Results: {searchResult.records.length}</h5>
-        {uiOptions}
+        <div className={"col-" + uiSettings.horizontalSplit.split('/')[1]}>
+          <div className="d-flex justify-content-between align-items-start">
+            <ActiveFilters 
+              query={query}
+              clearQuery={() => { setQuery(_ => ({})) }}
+              toggleQueryTerm={toggleQueryTerm} 
+            />
+
+            <button className="btn btn-outline-secondary" onClick={() => viewSettings()}>
+              ⚙️
+            </button>
+          </div>
+          
+          <h5 className="mt-3">Results: {searchResult.records.length}</h5>
+          {uiOptions}
           <RecordRows {...{
             searchResult,
             currentPageNumber,
@@ -157,10 +179,9 @@ const Search = ({
             recordsPerRow: parseInt(uiSettings.recordsPerRow),
             toggleQueryTerm
           }} />
-        {uiOptions}
-      </div>
-    </div>
-  );
+          {uiOptions}
+        </div>
+      </div>;
 };
 
 export default Search;
