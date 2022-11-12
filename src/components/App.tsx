@@ -115,8 +115,9 @@ export default function App() {
 						setSettingsVisible(true);
 					}}
 					setDataUrl={dataUrl => setState({...state, dataUrl})}
-					onSuccess={rawData => setState({
+					onSuccess={(dataUrl,rawData) => setState({
 						...state,
+						dataUrl,
 						dataState: {
 							rawData, 
 							recordsKey: '',

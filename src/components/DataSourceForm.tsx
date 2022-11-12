@@ -10,29 +10,30 @@ export default ({
 	dataUrl: string,
 	setDataUrl: (du: string) => void,
 	clear?: () => void,
-	onSuccess: (data: any) => void ,
+	onSuccess: (dataUrl: string, data: any) => void ,
 	getJson: (url: string) => Promise<any>
 }) => {
-	const load = async (dataUrl: string) => {
+	const [sampleDataUrls, setSampleDataUrls] = React.useState<{name:string,path:string}[]>([]);
+	React.useEffect(() => {
+		const effect = async () => {
+			let response = await fetch('/sample-data/index.json');
+			let sampleDataUrls: {name:string,path:string}[] = await response.json();
+			setSampleDataUrls(sampleDataUrls);
+		};
+		effect();
+	}, []);
+
+	const [localDataUrl,setLocalDataUrl] = React.useState<string>(dataUrl);
+	const continueWithDataUrl = async (dataUrl: string) => {
 		let data = await getJson(dataUrl);
 		console.log('data', data);
 		if (!data) {
 			alert("invalid URL or JSON data");
 			return;
 		}
-		onSuccess(data);
+		setLocalDataUrl(dataUrl);
+		onSuccess(dataUrl,data);
 	};
-
-	const [sampleDataUrls, setSampleDataUrls] = React.useState<string[]>([]);
-
-	React.useEffect(() => {
-		const effect = async () => {
-			let response = await fetch('/sample-data/index.json');
-			let sampleDataUrls: string[] = await response.json();
-			setSampleDataUrls(sampleDataUrls);
-		};
-		effect();
-	}, []);
 
 	return <div>
 		<div className="input-group input-group-lg">
@@ -41,10 +42,10 @@ export default ({
 						id="json_url"
 						disabled={!!clear}
 						className="form-control"
-						value={dataUrl}
+						value={localDataUrl}
 						onChange={e => {
 							e.preventDefault();
-							setDataUrl(e.target.value);
+							setLocalDataUrl(e.target.value);
 						}}
 					/>
 					<label htmlFor="json_url">URL to JSON data</label>
@@ -58,7 +59,7 @@ export default ({
 			:
 				<button
 					className="btn btn-success"
-					onClick={() => load(dataUrl)}
+					onClick={() => continueWithDataUrl(localDataUrl)}
 				>Continue with JSON data</button>
 			}
 		</div>
@@ -73,9 +74,9 @@ export default ({
 							{sampleDataUrls.map(url => 
 								<a className="list-group-item list-group-action" href="" onClick={e => {
 									e.preventDefault();
-									setDataUrl(url);
+									continueWithDataUrl(url.path);
 								}}>
-									{url}
+									{url.name}
 								</a>
 							)}
 						</div>
