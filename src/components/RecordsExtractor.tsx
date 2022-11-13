@@ -1,6 +1,7 @@
 import React  from "react";
 import {RecordValue} from '../model';
 import { JsonViewer } from '@textea/json-viewer'
+import isTouchDevice from "./isTouchDevice";
 
 const StandardJsonViewer = ({
 	data
@@ -41,7 +42,7 @@ export default ({
 		}
 	},[records]);
 
-	const firstNRecords = 4;
+	const firstNRecords = isTouchDevice() ? 1 : 4;
 	return <div>
 		<div className="form-floating form-floating-group flex-grow-1 mb-3">
 			<input type="text"
@@ -61,7 +62,7 @@ export default ({
 			<StandardJsonViewer data={rawData}/>
 		</div>}
 		{!!records && <div>
-			<p> Array found with {records.length} records.  Showing first {Math.min(records.length, firstNRecords)}:  </p>
+			<p> Array found with {records.length} records.  First {Math.min(records.length, firstNRecords)}:  </p>
 			<div className="d-flex justify-content-between">
 				{records.slice(0,firstNRecords).map((r,i) => <StandardJsonViewer key={i} data={r}/>)}
 			</div>

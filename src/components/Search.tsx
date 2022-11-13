@@ -115,8 +115,6 @@ const Search = ({
         </div>
 
       </div>
-      {pagination}
-
       <OffCanvasSearchFilters 
         recordCounts={searchResult.recordCounts}
         facetHierarchies={searchResult.facetHierarchies}
@@ -134,7 +132,7 @@ const Search = ({
         searchResult,
         currentPageNumber,
         pageSize: parseInt(uiSettings.pageSize),
-        recordsPerRow: parseInt(uiSettings.recordsPerRow),
+        recordsPerRow: 1/*parseInt(uiSettings.recordsPerRow)*/,
         toggleQueryTerm
       }} />
       {pagination}

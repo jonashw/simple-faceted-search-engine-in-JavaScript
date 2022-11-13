@@ -1,6 +1,7 @@
 import React  from "react";
 import {RecordsMetadata, SelectedFieldNames } from '../model';
 import FieldsToggle from "./FieldsToggle";
+import isTouchDevice from "./isTouchDevice";
 
 export default ({
 	metadata,
@@ -21,7 +22,7 @@ export default ({
 	return <div>
 		<div>
 			<div className="row mt-3">
-				<div className="col">
+				<div className="col-md-6 mb-4">
 					<FieldsToggle 
 						label="Facet Fields"
 						description="Select the fields that should be used as facets"
@@ -31,7 +32,7 @@ export default ({
 						setSelectedFieldNames={(fns: Set<string>) => setSelectedFieldNames({...selectedFieldNames, facet: fns} )}
 					/>
 				</div>
-				<div className="col">
+				<div className="col-md-6 mb-4">
 					<FieldsToggle 
 						label="Display Fields"
 						description="Select the fields that should be displayed in search results"
@@ -42,14 +43,32 @@ export default ({
 				</div>
 			</div>
 		</div>
-		<div className="d-grid mt-3">
+		{isTouchDevice() 
+		?
 			<button
-				className="btn btn-success btn-lg"
+				className="btn btn-success"
 				disabled={!canBeginFacetedSearch}
 				onClick={onSuccess}
-			>
-				Begin Faceted Search
+				style={{
+					position:'fixed',
+					right:'1em',
+					bottom:'1em',
+					borderRadius:'50%',
+					width:'4em',
+					height:'4em'
+				}}>
+				<img src="/search-white.svg" style={{width:'1.5em'}}/>
 			</button>
-		</div>
+		:
+			<div className="d-grid mt-3">
+				<button
+					className="btn btn-success btn-lg"
+					disabled={!canBeginFacetedSearch}
+					onClick={onSuccess}
+				>
+					Begin Faceted Search
+				</button>
+			</div>
+		}
 	</div>;
 }
