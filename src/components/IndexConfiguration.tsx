@@ -1,6 +1,7 @@
-import React  from "react";
+import React from "react";
 import {RecordsMetadata, SelectedFieldNames } from '../model';
 import FieldsToggle from "./FieldsToggle";
+import FloatingActionButton from "./FloatingActionButton";
 import isTouchDevice from "./isTouchDevice";
 
 export default ({
@@ -43,22 +44,16 @@ export default ({
 				</div>
 			</div>
 		</div>
+
 		{isTouchDevice() 
 		?
-			<button
+			<FloatingActionButton
 				className="btn btn-success"
 				disabled={!canBeginFacetedSearch}
 				onClick={onSuccess}
-				style={{
-					position:'fixed',
-					right:'1em',
-					bottom:'1em',
-					borderRadius:'50%',
-					width:'4em',
-					height:'4em'
-				}}>
+			>
 				<img src="/search-white.svg" style={{width:'1.5em'}}/>
-			</button>
+			</FloatingActionButton>
 		:
 			<div className="d-grid mt-3">
 				<button

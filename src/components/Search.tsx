@@ -8,6 +8,7 @@ import QueryUtil from "../model/QueryUtil";
 import OffCanvasSearchFilters from "./OffCanvasSearchFilters";
 import isTouchDevice from "./isTouchDevice";
 import RecordRows from "./RecordRows";
+import FloatingActionButton from "./FloatingActionButton";
 
 const Search = ({ 
   ix,
@@ -136,6 +137,13 @@ const Search = ({
         toggleQueryTerm
       }} />
       {pagination}
+			<FloatingActionButton
+				className="btn btn-secondary"
+				disabled={false}
+				onClick={viewSettings}
+			>
+				<img src="/settings-white.svg" style={{width:'1.5em'}}/>
+			</FloatingActionButton>
     </>
     : <div className="row">
         <div className={"col-" + uiSettings.horizontalSplit.split('/')[0]}>
@@ -166,7 +174,8 @@ const Search = ({
             />
 
             <button className="btn btn-outline-secondary" onClick={() => viewSettings()}>
-              ⚙️
+              Settings
+              <img src="/settings.svg" style={{width:'1em'}} className="ms-3"/>
             </button>
           </div>
           
