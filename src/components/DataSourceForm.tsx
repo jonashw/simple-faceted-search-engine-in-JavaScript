@@ -23,6 +23,10 @@ export default ({
 		effect();
 	}, []);
 
+	React.useEffect(() => {
+		setLocalDataUrl(dataUrl);
+	},[dataUrl]);
+
 	const [localDataUrl,setLocalDataUrl] = React.useState<string>(dataUrl);
 	const continueWithDataUrl = async (dataUrl: string) => {
 		let data = await getJson(dataUrl);
@@ -31,7 +35,6 @@ export default ({
 			alert("invalid URL or JSON data");
 			return;
 		}
-		setLocalDataUrl(dataUrl);
 		onSuccess(dataUrl,data);
 	};
 
