@@ -1,3 +1,4 @@
+import { FacetTermParents } from "../model";
 import { uiSettingControls, UISettings } from "../model/UISettings";
 import AppStateDto from "./AppStateDto";
 
@@ -12,8 +13,28 @@ const qs_cfg = {
   page_num: 'p',
 }
 
+const serializeFacetTermParents = (ftp: FacetTermParents): [string,string][] => 
+  Object.entries(ftp).map(([facetName,termParents]) => 
+  {
+    let serializedTermParents = Object.entries(termParents).map(([term,parent]) => `${term}_${parent}`).join('__');
+    return ['ftp_' + facetName, serializedTermParents] as [string,string];
+  });
+
+const deserializeFacetTermParents = (params: URLSearchParams): FacetTermParents =>
+  Object.fromEntries(
+    Array.from(params.entries())
+    .filter(([key,value]) => key.indexOf('ftp_') > -1)
+    .map(([key,value]) => [
+      key.replace('ftp_',''),
+      Object.fromEntries(value.split('__').map(pair => {
+        var p = pair.split('_');
+        return [p[0], p[1]];
+      }))
+    ]));
+
 const serialize = (dto: AppStateDto) => 
   new URLSearchParams([
+    ...(!dto.facet_term_parents ? [] : serializeFacetTermParents(dto.facet_term_parents)),
     ...(!dto.url ? [] : [[qs_cfg.records_url, dto.url]]),
     ...(!dto.search_string ? [] : [[qs_cfg.search_string, dto.search_string]]),
     ...(!dto.pageNum ? [] : [[qs_cfg.page_num, dto.pageNum.toString()]]),
@@ -54,6 +75,7 @@ const deserialize = (params: URLSearchParams): AppStateDto | undefined => {
     }, {});
     console.log('query',query);
   return {
+    facet_term_parents: deserializeFacetTermParents(params),
     search_string: (paramsDict[qs_cfg.search_string] || [undefined])[0],
     url: paramsDict[qs_cfg.records_url][0],
     pageNum: paramsDict[qs_cfg.page_num] ? (parseInt(paramsDict[qs_cfg.page_num][0]) || undefined) : undefined,

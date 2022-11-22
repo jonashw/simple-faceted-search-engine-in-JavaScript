@@ -19,6 +19,7 @@ const tryGetIndexConfigState = (dto: AppStateDto, data: any): IndexConfigState |
 	return {
 		metadata,
 		records,
+    facetTermParents: dto.facet_term_parents,
 		selectedFieldNames: {
 			facet  : new Set<string>(dto.  facet_fields.length === 0 ? metadata.recommended_selections.  facet : dto.facet_fields  ),
 			display: new Set<string>(dto.display_fields.length === 0 ? metadata.recommended_selections.display : dto.display_fields)
@@ -53,6 +54,7 @@ export default {
     url: state.dataUrl,
     search_string: state.dataState?.indexConfigState?.searchState?.searchString,
     records_key: state.dataState?.recordsKey,
+    facet_term_parents: state.dataState?.indexConfigState?.facetTermParents || {},
     facet_fields: Array.from(state.dataState?.indexConfigState?.selectedFieldNames?.facet || new Set<string>()),
     display_fields: Array.from(state.dataState?.indexConfigState?.selectedFieldNames?.display || new Set<string>()),
     ui_settings: state.dataState?.indexConfigState?.searchState?.uiSettings,

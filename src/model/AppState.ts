@@ -1,5 +1,5 @@
 import { FacetedIndexInstance, RecordValue } from "./index";
-import { RecordsMetadata, SelectedFieldNames } from "./types";
+import { FacetTermParents, RecordsMetadata, SelectedFieldNames } from "./types";
 import { UISettings } from "./UISettings";
 
 type AppState = {
@@ -16,6 +16,7 @@ type IndexConfigState = {
 	metadata: RecordsMetadata;
 	selectedFieldNames: SelectedFieldNames;
 	searchState: undefined | SearchState;
+	facetTermParents: FacetTermParents;
 };
 type SearchState = {
 	searchString: string;

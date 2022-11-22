@@ -145,6 +145,7 @@ export default function App() {
 											metadata,
 											records,
 											selectedFieldNames: metadata.recommended_selections,
+											facetTermParents: {},
 											searchState: undefined
 										}
 									})
@@ -158,12 +159,14 @@ export default function App() {
 								metadata={indexConfigState.metadata}
 								selectedFieldNames={indexConfigState.selectedFieldNames}
 								setSelectedFieldNames={selectedFieldNames => setIndexConfigState({...indexConfigState, selectedFieldNames})}
+								facetTermParents={indexConfigState.facetTermParents}
+								setFacetTermParents={facetTermParents => setIndexConfigState({...indexConfigState, facetTermParents})}
 								onSuccess={() => {
 									setSettingsVisible(false);
 									let index = CreateFacetedIndex(
 										indexConfigState.records,
 										{
-											facet_term_parents: {},
+											facet_term_parents: indexConfigState.facetTermParents,
 											fields: {
 												facet: new Set(indexConfigState.selectedFieldNames.facet),
 												display: new Set(indexConfigState.selectedFieldNames.display),
