@@ -52,7 +52,7 @@ const getJson = async (url:string): Promise<any> => {
 	}
 };
 
-export default function App() {
+export default function FacetedSearchWizard() {
 	const [urlParams, setUrlParams] = useSearchParams();
 	const [state,setState] = React.useState<AppState>(defaultAppState);
 	const [settingsVisible,setSettingsVisible] = React.useState<boolean>(
@@ -60,10 +60,10 @@ export default function App() {
 	);
 	useEffect(() => {
 		const effect = async () => {
-			let dto = deserialize(urlParams);
+			const dto = deserialize(urlParams);
 			console.log('AppStateDto',dto);
 			//let state = await AppStateConverter.fromDto(dto, getJson, 'sample-records.json');
-			let newState = await AppStateConverter.fromDto(dto,getJson);
+			const newState = await AppStateConverter.fromDto(dto,getJson);
 			setState(newState);
 			console.log('from URL',state,newState);
 		};
