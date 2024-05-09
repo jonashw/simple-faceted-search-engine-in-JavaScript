@@ -26,7 +26,7 @@ const FacetHierarchyEditor = ({
 	terms: FieldValue[]
 }) => {
 	const [availableTerms, setAvailableTerms] = React.useState<FieldValue[]>(terms);
-	const [childParentRelations, setChildParentRelations] = React.useState<ChildParentRelations>({});
+	const [childParentRelations/*, setChildParentRelations*/] = React.useState<ChildParentRelations>({});
 	const [newTerms, setNewTerms] = React.useState<FieldValue[]>([]);
 	return <div>
 		<label className="form-label">

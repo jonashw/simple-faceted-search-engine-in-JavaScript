@@ -14,7 +14,7 @@ const StandardJsonViewer = ({
 			theme={"light"}
 			indentWidth={4}
 			enableClipboard={false}
-			displayObjectSize={true}
+			displaySize={true}
 			displayDataTypes={false}/>
 	</div>;
 

@@ -30,7 +30,7 @@ const Search = ({
   setCurrentPageNumber: (p: number) => void
 }) => {
   const [searchResult, setSearchResult] = React.useState(GetDefaultSearchResult());
-  const [showTermTables, setShowTermTables] = React.useState(false);
+  const [showTermTables/*, setShowTermTables*/] = React.useState(false);
 
   const pagination = 
     <div className="mb-3">

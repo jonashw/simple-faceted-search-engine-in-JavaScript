@@ -20,7 +20,7 @@ const serialize = (dto: AppStateDto) =>
     ...dto.facet_fields.map((f) => [qs_cfg.facet_fields, f]),
     ...dto.display_fields.map((f) => [qs_cfg.display_fields, f]),
     ...Object.entries(dto.query).flatMap(([facetName,terms]) => terms.map(t => [qs_cfg.query_facet + facetName, t] ))
-  ].filter(([k,v]) => !!v));
+  ].filter(pair => !!pair.values));
 
 const deserialize = (params: URLSearchParams): AppStateDto | undefined => {
   const paramsDict: {[key: string]: string[]} = Array.from(params.entries()).reduce(
@@ -33,19 +33,19 @@ const deserialize = (params: URLSearchParams): AppStateDto | undefined => {
   if (!paramsDict[qs_cfg.records_url]) {
     return undefined;
   }
-  let ui_settings: UISettings =
+  const ui_settings: UISettings =
     Object.fromEntries(uiSettingControls.map(c => {
-      let value = c.fromUrl(params.getAll(qs_cfg.ui_key + c.key)[0]);
+      const value = c.fromUrl(params.getAll(qs_cfg.ui_key + c.key)[0]);
       return [
         c.key,
         (c.options.indexOf(value) > -1 ? value : c.defaultOption).toString()
       ];
     }));
-  let query = 
+  const query = 
     Array.from(params.entries())
-    .filter(([key,value] : [string,string]) => key.indexOf(qs_cfg.query_facet) === 0)
+    .filter(([key] : [string,string]) => key.indexOf(qs_cfg.query_facet) === 0)
     .reduce((dict: {[facetName: string]: string[]}, [key,value]: [string,string]) => {
-      let facetName = key.replace(qs_cfg.query_facet, '');
+      const facetName = key.replace(qs_cfg.query_facet, '');
       dict[facetName] = dict[facetName] || [];
       dict[facetName].push(value);
       return dict;

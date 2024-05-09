@@ -1,5 +1,3 @@
-import React  from "react";
-
 type FieldsToggleParams = {
 	label: string,
 	description: string,

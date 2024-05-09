@@ -25,4 +25,4 @@ type SearchState = {
 	uiSettings: UISettings;
 };
 
-export {AppState, DataState, IndexConfigState, SearchState};
+export type {AppState, DataState, IndexConfigState, SearchState};

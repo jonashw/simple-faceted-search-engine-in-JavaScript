@@ -32,4 +32,4 @@ const uiSettingControls: UISettingControl<any>[] = [
 
 const defaultUiSettings = Object.fromEntries(uiSettingControls.map(c => [c.key, c.defaultOption]));
 
-export {uiSettingControls, UISettingControl, UISettings, defaultUiSettings};
+export {uiSettingControls, type UISettingControl, type UISettings, defaultUiSettings};

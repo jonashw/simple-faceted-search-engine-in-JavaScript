@@ -1,4 +1,3 @@
-import React  from "react";
 import {RecordsMetadata, SelectedFieldNames } from '../model';
 import FieldsToggle from "./FieldsToggle";
 

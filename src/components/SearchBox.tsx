@@ -97,7 +97,7 @@ const SearchBox = ({
 			autoCorrect="off"
 			autoFocus={true}
 			value={q}
-			onFocus={e => setActive(true)}
+			onFocus={() => setActive(true)}
 			onChange={e => {
 				e.preventDefault();
 				setQ(e.target.value);

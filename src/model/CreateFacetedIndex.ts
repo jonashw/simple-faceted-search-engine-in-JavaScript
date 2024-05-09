@@ -14,7 +14,7 @@ const GetDefaultSearchResult = (): SearchResult =>
   records: [],
   facets: [],
   facetHierarchies: [],
-  facetTermCount: (f,t) => 0,
+  facetTermCount: () => 0,
   term_buckets_by_facet_id: {},
   terms: []
 });
@@ -40,10 +40,10 @@ const CreateFacetedIndex = (
     if(!config || !Array.isArray(config.display_fields) || config.display_fields.length === 0){
       return (r: {}): {} => r;
     }
-    var dfields = new Set(config.display_fields);
+    const dfields = new Set(config.display_fields);
     //console.log('dfields',dfields);
-    return (r: {}): {} => {
-      var displayEntries = Object.entries(r).filter(([k,v]) => dfields.has(k));
+    return (r: object): object => {
+      const displayEntries = Object.entries(r).filter(([k]) => dfields.has(k));
       return Object.fromEntries(displayEntries);
     };
   })();
@@ -51,11 +51,11 @@ const CreateFacetedIndex = (
   const allowableFacetId = (id: string) =>
     expectedFacetIds.size === 0 || expectedFacetIds.has(id);
 
-  var ix: {[facetId: string]: {[term: string]: Set<number>}} = {};
+  const ix: {[facetId: string]: {[term: string]: Set<number>}} = {};
   let i = 0;
-  let all_ids: number[] = [];
-  let display_records: {}[] = [];
-  let termsDict: {[term: string]: string} = {};
+  const all_ids: number[] = [];
+  const display_records: {}[] = [];
+  const termsDict: {[term: string]: string} = {};
 
   const traverseFacetUpwards = (facetId: string, term: string, recordId: number): void => {
     if(!(facetId in config.facet_term_parents)){
@@ -65,25 +65,25 @@ const CreateFacetedIndex = (
       //console.log('no parent term found for ' + term);
       return;
     }
-    let parentTerm = config.facet_term_parents[facetId][term];
+    const parentTerm = config.facet_term_parents[facetId][term];
     ix[facetId][parentTerm] = ix[facetId][parentTerm] || new Set<number>();
     ix[facetId][parentTerm].add(recordId);
     termsDict[parentTerm] = parentTerm;
     traverseFacetUpwards(facetId, parentTerm, recordId);
   };
 
-  for (let record of records) {
-    for (let fieldName of Object.keys(record)) {
+  for (const record of records) {
+    for (const fieldName of Object.keys(record)) {
       candidate_facet_fields.add(fieldName);
       if (!allowableFacetId(fieldName)) {
         continue;
       }
       ix[fieldName] = ix[fieldName] || {};
-      let terms = 
+      const terms = 
         Array.isArray(record[fieldName])
         ? record[fieldName]
         : [record[fieldName]];
-      for (let term of terms) {
+      for (const term of terms) {
         ix[fieldName][term] = ix[fieldName][term] || new Set();
         ix[fieldName][term].add(i);
         termsDict[term] = term;
@@ -116,27 +116,27 @@ const CreateFacetedIndex = (
 
   function sortBy<T>(arr: T[], selector: (item: T) => any): T[] {
     return arr.sort((itemA,itemB) => {
-      let a = selector(itemA);
-      let b = selector(itemB);
+      const a = selector(itemA);
+      const b = selector(itemB);
       return a < b ? -1 : a > b ? 1 : 0;
     })
   }
 
   const search = (query: Query): SearchResult => {
-    var matching_ids =
+    const matching_ids =
       Object.keys(query).length === 0
         ? new Set(all_ids)
         : record_ids_matching_query(query);
-    var matching_ids_independent_of_facet = Object.fromEntries(
+    const matching_ids_independent_of_facet = Object.fromEntries(
       Object.keys(ix).map((facet_id) => {
-        var query_minus_this_facet = Object.fromEntries(
-          Object.entries(query).filter(([k, v]) => k !== facet_id)
+        const query_minus_this_facet = Object.fromEntries(
+          Object.entries(query).filter(([k]) => k !== facet_id)
         );
         return [facet_id, record_ids_matching_query(query_minus_this_facet)];
       })
     );
-    var facets = Object.entries(ix).map(([facet_id, ids_by_term]) => {
-      let term_buckets = Object.entries(ids_by_term)
+    const facets = Object.entries(ix).map(([facet_id, ids_by_term]) => {
+      const term_buckets = Object.entries(ids_by_term)
         .map(([term, ids_matching_term]) => ({
           term: term,
           facet_id: facet_id,
@@ -155,8 +155,8 @@ const CreateFacetedIndex = (
       };
     }) || [];
 
-    let facetHierarchies = Object.entries(ix).map(([facet_id, ids_by_term]) => {
-      let term_buckets: HierarchicalTermBucket[] = Object.entries(ids_by_term)
+    const facetHierarchies = Object.entries(ix).map(([facet_id, ids_by_term]) => {
+      const term_buckets: HierarchicalTermBucket[] = Object.entries(ids_by_term)
         .map(([term, ids_matching_term]) => ({
           term: term,
           children: [],
@@ -170,13 +170,13 @@ const CreateFacetedIndex = (
           ).size
         }))
         .filter((term) => term.count > 0 || term.in_query);
-      let byParentTerm: {[parentTerm: string]: HierarchicalTermBucket[]} = {};
+      const byParentTerm: {[parentTerm: string]: HierarchicalTermBucket[]} = {};
       const ROOT_ID = 'ROOT_' + new Date().getTime();
-      for(let b of term_buckets){
+      for(const b of term_buckets){
         if(!(b.facet_id in config.facet_term_parents)){
           continue;
         }
-        let parentTerm = 
+        const parentTerm = 
           (b.term in config.facet_term_parents[b.facet_id])
           ? config.facet_term_parents[b.facet_id][b.term]
           : ROOT_ID;//top-level terms have the singleton parent
@@ -187,7 +187,7 @@ const CreateFacetedIndex = (
       const alphaSortTermBuckets = (tbs: HierarchicalTermBucket[]): HierarchicalTermBucket[] =>
         sortBy(tbs, b => b.term);
 
-      for(let b of term_buckets){
+      for(const b of term_buckets){
         if(!(b.term in byParentTerm)){
           continue;
         }
@@ -199,12 +199,12 @@ const CreateFacetedIndex = (
         : { facet_id, term_buckets: alphaSortTermBuckets(term_buckets) };
     }) || [];
 
-    let term_buckets_by_facet_id = Object.fromEntries((facets || []).map(f => [
+    const term_buckets_by_facet_id = Object.fromEntries((facets || []).map(f => [
       f.facet_id,
       Object.fromEntries(f.term_buckets.map(tb => [tb.term, tb]))
     ]));
 
-    let terms = facets.flatMap(f => 
+    const terms = facets.flatMap(f => 
       f.term_buckets.map(tb => 
         Object.assign({}, tb, {facet_id: f.facet_id})));
 
@@ -229,12 +229,12 @@ const CreateFacetedIndex = (
         (pageNumber-1)*pageSize,
         (pageNumber-0)*pageSize),
     toggleQueryTerm: (query, facetKey, term) => {
-      let existingFacetTerms = query[facetKey] || [];
-      let newFacetTerms =
+      const existingFacetTerms = query[facetKey] || [];
+      const newFacetTerms =
         existingFacetTerms.indexOf(term) > -1
           ? existingFacetTerms.filter((t) => t !== term)
           : [...existingFacetTerms, term];
-      let newQuery = { ...query, [facetKey]: newFacetTerms };
+      const newQuery = { ...query, [facetKey]: newFacetTerms };
       if (newQuery[facetKey].length === 0) {
         delete newQuery[facetKey];
       }

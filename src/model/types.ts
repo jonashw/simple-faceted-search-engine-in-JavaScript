@@ -69,7 +69,7 @@ type SearchResult = {
   records: Record[]
 }
 
-export {
+export type {
 	FieldValue,
 	Record,
 	Field,
