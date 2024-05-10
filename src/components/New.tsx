@@ -52,7 +52,7 @@ const ix = CreateFacetedIndex(Array(5).fill([
     ...record,
     name: `${randomWord(colors)} ${randomWord(animals)}`
 }))), {
-        facet_fields: [],
+        facet_fields: ['location','rating'],
         display_fields: [],
         facet_term_parents: {
             location: {
