@@ -4,12 +4,14 @@ const Pagination = ({
     recordCount,
     pageSize,
     currentPageNumber,
-    setCurrentPageNumber
+    setCurrentPageNumber,
+    hideIfPage1of1
 } : {
     recordCount: number,
     pageSize: number,
     currentPageNumber: number,
-    setCurrentPageNumber: (pn: number) => void
+    setCurrentPageNumber: (pn: number) => void,
+    hideIfPage1of1?: boolean
 }) => {
     const pageCount = Math.max(1,Math.ceil(recordCount/pageSize));
     const actualCurrentPageNumber = Math.min(currentPageNumber, pageCount);
@@ -17,7 +19,7 @@ const Pagination = ({
         setCurrentPageNumber(1);
     }
     React.useEffect(() => {
-        console.log({currentPageNumber,actualCurrentPageNumber});
+        //console.log({currentPageNumber,actualCurrentPageNumber});
         if(currentPageNumber !== actualCurrentPageNumber){
             /* something changed about our result set, so let's just start at the beginning.
             ** if we don't, the user will be stranded on a page that doesn't exist with no
@@ -29,6 +31,9 @@ const Pagination = ({
         return <div/>;
     }
     if(pageCount === 1){
+        if(hideIfPage1of1){
+            return <></>;
+        }
         return <nav aria-label="Results pages">
             <ul className="pagination mb-0">
                 <li className="page-item disabled">
@@ -38,7 +43,7 @@ const Pagination = ({
         </nav>;
     }
 
-    var paginationModel = ultimatePagination.getPaginationModel({
+    const paginationModel = ultimatePagination.getPaginationModel({
         // Required
         currentPage: actualCurrentPageNumber,
         totalPages: pageCount,
@@ -51,7 +56,8 @@ const Pagination = ({
         hideFirstAndLastPageLinks: false
     });
 
-    //console.log('pagination',paginationModel);
+
+    //console.log({paginationModel});
     return <div className="d-flex justify-content-between">
         <nav aria-label="Results pages">
             <ul className="pagination mb-0">

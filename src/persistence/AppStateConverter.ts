@@ -1,5 +1,4 @@
 import {
-	Record,
 	GetRecordsMetadata,
 	CreateFacetedIndex,
 	defaultUiSettings,
@@ -9,13 +8,17 @@ import {
 } from '../model';
 import AppStateDto from './AppStateDto';
 
+type Record = {
+  [key: string]: string | number
+};
+
 const tryGetIndexConfigState = (dto: AppStateDto, data: any): IndexConfigState | undefined => {
-	let recordsCandidate = !!dto.records_key ? data[dto.records_key] : data;
+	const recordsCandidate = dto.records_key ? data[dto.records_key] : data;
 	if(!Array.isArray(recordsCandidate)){
 		return undefined;
 	}
-	let records: Record[] = recordsCandidate;
-	let metadata = GetRecordsMetadata(records);
+	const records: Record[] = recordsCandidate;
+	const metadata = GetRecordsMetadata(records);
 	return {
 		metadata,
 		records,

@@ -38,6 +38,7 @@ type FacetedIndexInstance = {
   data: any,
   terms: any
 };
+
 type FacetTermBucket = {facet_id: string, term_buckets: TermBucket[]};
 type FacetHierarchicalTermBucket = {
   facet_id: string,

@@ -1,6 +1,6 @@
 import React from "react";
 import SearchBox from './SearchBox';
-import { GetDefaultSearchResult, FacetedIndexInstance, UISettingControl, UISettings, Query } from "../model";
+import { GetDefaultSearchResult, FacetedIndexInstance, UISettingControl, UISettings, Query, SearchResult } from "../model";
 import Pagination from "./Pagination";
 import SearchFilters from "./SearchFilters";
 import ActiveFilters from "./ActiveFilters";
@@ -16,7 +16,9 @@ const Search = ({
   setQuery,
   viewSettings,
   currentPageNumber,
-  setCurrentPageNumber
+  setCurrentPageNumber,
+  showTermTables,
+  recordTemplate
 } : {
   ix: FacetedIndexInstance;
   debug: boolean;
@@ -25,35 +27,37 @@ const Search = ({
   setUiSettings: (settings: UISettings) => void;
   query: Query;
   setQuery: (q: Query) => void;
-  viewSettings: () => void;
+  viewSettings?: () => void;
   currentPageNumber: number,
-  setCurrentPageNumber: (p: number) => void
+  setCurrentPageNumber: (p: number) => void,
+  showTermTables?: boolean,
+  recordTemplate?: (record: object, searchResult: SearchResult) => React.ReactElement
 }) => {
   const [searchResult, setSearchResult] = React.useState(GetDefaultSearchResult());
-  const [showTermTables/*, setShowTermTables*/] = React.useState(false);
+
+  const pageSize = parseInt(uiSettings.pageSize);
 
   const pagination = 
-    <div className="mb-3">
      <Pagination
       recordCount={searchResult.records.length} 
       {...{
-        pageSize: parseInt(uiSettings.pageSize),
+        hideIfPage1of1: true,
+        pageSize,
         currentPageNumber,
         setCurrentPageNumber
-      }} />
-    </div>;
+      }} />;
 
   const toggleQueryTerm = (facet_id: string, term: string) => {
-    let newQuery = ix.toggleQueryTerm(query, facet_id, term);
+    const newQuery = ix.toggleQueryTerm(query, facet_id, term);
     setQuery(newQuery);
   };
 
   const uiOptions = 
-    <div className="d-flex justify-content-between align-items-end">
+    <div className="d-flex justify-content-between align-items-center mb-3">
       {pagination}
       <div className="d-flex justify-content-end">
         {uiSettingControls.map(control => 
-          <div key={control.label} className="mb-3 ms-3">
+          <div key={control.label} className="ms-3">
             <label className="mb-1">{control.label}</label>
             <select
               className="form-select form-select-sm"
@@ -85,19 +89,21 @@ const Search = ({
         />
       </div>
       <div className={"col-" + uiSettings.horizontalSplit.split('/')[1]}>
-        <div className="d-flex justify-content-between align-items-start">
+        {(viewSettings || Object.keys(query).length > 0) && 
+        <div className="d-flex justify-content-between align-items-start mb-3">
           <ActiveFilters 
             query={query}
             clearQuery={() => { setQuery({}) }}
             toggleQueryTerm={toggleQueryTerm} 
           />
 
-          <button className="btn btn-outline-secondary" onClick={() => viewSettings()}>
+          {viewSettings && <button className="btn btn-outline-secondary" onClick={() => viewSettings()}>
             ⚙️
-          </button>
+          </button>}
         </div>
+        }
         
-        <h5 className="mt-3">Results: {searchResult.records.length}</h5>
+        <h5>Results: {searchResult.records.length}</h5>
         {uiOptions}
         <div className={"row row-cols-" + uiSettings.recordsPerRow}>
           {ix.getResultsPage(searchResult.records, currentPageNumber, parseInt(uiSettings.pageSize)).map((r, i) => (
@@ -105,7 +111,10 @@ const Search = ({
               <div className="card mb-3">
                 <div className="card-body">
                   <div className="card-text">
-                    <pre className="mb-0">{JSON.stringify(r, null, 2)}</pre>
+                    {recordTemplate 
+                      ? recordTemplate(r, searchResult) 
+                      : <pre className="mb-0">{JSON.stringify(r, null, 2)}</pre>
+                    }
                     {showTermTables && <RecordTermTable
                       record={r}
                       facetIds={searchResult.facets.map(f => f.facet_id)}
