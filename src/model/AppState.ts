@@ -1,24 +1,24 @@
 import { FacetedIndexInstance, Record } from "./index";
-import { RecordsMetadata, SelectedFieldNames } from "./types";
+import { BaseRecord, RecordsMetadata, SelectedFieldNames } from "./types";
 import { UISettings } from "./UISettings";
 
-type AppState = {
+type AppState<TRecord extends BaseRecord> = {
 	dataUrl: undefined | string;
-	dataState: undefined | DataState
+	dataState: undefined | DataState<TRecord>
 };
-type DataState = {
+type DataState<TRecord extends BaseRecord> = {
 	rawData: any;
 	recordsKey: undefined | string;
-	indexConfigState: undefined | IndexConfigState;
+	indexConfigState: undefined | IndexConfigState<TRecord>;
 };
-type IndexConfigState = {
+type IndexConfigState<TRecord extends BaseRecord> = {
 	records: Record[];
 	metadata: RecordsMetadata;
 	selectedFieldNames: SelectedFieldNames;
-	searchState: undefined | SearchState;
+	searchState: undefined | SearchState<TRecord>;
 };
-type SearchState = {
-	index: FacetedIndexInstance;
+type SearchState<TRecord extends BaseRecord> = {
+	index: FacetedIndexInstance<TRecord>;
 	pageSize: number;
 	pageNum: number;
 	query: {[facetName: string]: string[]};

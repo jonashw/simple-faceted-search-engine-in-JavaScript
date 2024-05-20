@@ -4,20 +4,17 @@ import {
 	defaultUiSettings,
   AppState,
   IndexConfigState,
-  SearchState
+  SearchState,
+  BaseRecord
 } from '../model';
 import AppStateDto from './AppStateDto';
 
-type Record = {
-  [key: string]: string | number
-};
-
-const tryGetIndexConfigState = (dto: AppStateDto, data: any): IndexConfigState | undefined => {
+const tryGetIndexConfigState = (dto: AppStateDto, data: any): IndexConfigState<BaseRecord> | undefined => {
 	const recordsCandidate = dto.records_key ? data[dto.records_key] : data;
 	if(!Array.isArray(recordsCandidate)){
 		return undefined;
 	}
-	const records: Record[] = recordsCandidate;
+	const records: BaseRecord[] = recordsCandidate;
 	const metadata = GetRecordsMetadata(records);
 	return {
 		metadata,
@@ -30,11 +27,11 @@ const tryGetIndexConfigState = (dto: AppStateDto, data: any): IndexConfigState |
 	};
 };
 
-const tryGetSearchState = (dto: AppStateDto, records: Record[]): undefined | SearchState => {
+const tryGetSearchState = (dto: AppStateDto, records: BaseRecord[]): undefined | SearchState<BaseRecord> => {
   if(dto.facet_fields.length === 0 || dto.display_fields.length === 0){
     return undefined;
   }
-  let index = CreateFacetedIndex(records, {
+  let index = CreateFacetedIndex<BaseRecord>(records, {
     display_fields: dto.display_fields,
     facet_fields: dto.facet_fields,
     facet_term_parents: {}
@@ -49,7 +46,7 @@ const tryGetSearchState = (dto: AppStateDto, records: Record[]): undefined | Sea
 };
 
 export default {
-  toDto: (state: AppState): AppStateDto => ({
+  toDto: (state: AppState<BaseRecord>): AppStateDto => ({
     url: state.dataUrl,
     records_key: state.dataState?.recordsKey,
     facet_fields: Array.from(state.dataState?.indexConfigState?.selectedFieldNames?.facet || new Set<string>()),
@@ -61,15 +58,15 @@ export default {
   fromDto: async (
     dto: AppStateDto | undefined,
     getJson: (url: string) => Promise<any>
-  ): Promise<AppState> => {
-    let defaultAppState: AppState = {
+  ): Promise<AppState<BaseRecord>> => {
+    const defaultAppState: AppState<BaseRecord> = {
       dataUrl: undefined,
       dataState: undefined
     };
     if(dto === undefined || !dto.url){
       return Promise.resolve(defaultAppState);
     }
-    let data = await getJson(dto.url);
+    const data = await getJson(dto.url);
     if(!data){
       return defaultAppState;
     }

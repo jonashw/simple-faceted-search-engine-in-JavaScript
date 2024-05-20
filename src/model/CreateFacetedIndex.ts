@@ -1,14 +1,18 @@
 import {
+  BaseRecord,
   FacetedIndexConfig,
   FacetedIndexInstance,
+  FieldValue,
   HierarchicalTermBucket,
   Query,
+  FacetedIndexData,
   SearchResult 
 } from './types';
 
 import {unionAll,intersectAll } from './SetOperations';
 
-const GetDefaultSearchResult = (): SearchResult => 
+
+const GetDefaultSearchResult = <TRecord extends BaseRecord>(): SearchResult<TRecord> => 
 ({
   query: {},
   records: [],
@@ -26,10 +30,10 @@ Expectations:
 - all record values are simple primitives (string, number) or arrays of primitives
 - multi-value fields are not yet supported
 */
-const CreateFacetedIndex = (
-  records: {[key: string]: any}[],
+const CreateFacetedIndex = <TRecord extends BaseRecord>(
+  records: TRecord[],
   config: FacetedIndexConfig
-): FacetedIndexInstance => {
+): FacetedIndexInstance<TRecord> => {
   const candidate_facet_fields = new Set<string>();
   const expectedFacetIds =
     !!config && Array.isArray(config.facet_fields)
@@ -38,11 +42,11 @@ const CreateFacetedIndex = (
 
   const convertToDisplayRecord = (() => {
     if(!config || !Array.isArray(config.display_fields) || config.display_fields.length === 0){
-      return (r: {}): {} => r;
+      return (r: TRecord): BaseRecord => r;
     }
     const dfields = new Set(config.display_fields);
     //console.log('dfields',dfields);
-    return (r: object): object => {
+    return (r: TRecord): BaseRecord => {
       const displayEntries = Object.entries(r).filter(([k]) => dfields.has(k));
       return Object.fromEntries(displayEntries);
     };
@@ -51,13 +55,13 @@ const CreateFacetedIndex = (
   const allowableFacetId = (id: string) =>
     expectedFacetIds.size === 0 || expectedFacetIds.has(id);
 
-  const ix: {[facetId: string]: {[term: string]: Set<number>}} = {};
+  const ix: FacetedIndexData = {};
   let i = 0;
   const all_ids: number[] = [];
-  const display_records: {}[] = [];
+  const display_records: BaseRecord[] = [];
   const termsDict: {[term: string]: string} = {};
 
-  const traverseFacetUpwards = (facetId: string, term: string, recordId: number): void => {
+  const traverseFacetUpwards = (facetId: string, term: FieldValue, recordId: number): void => {
     if(!(facetId in config.facet_term_parents)){
       return;
     }
@@ -79,14 +83,15 @@ const CreateFacetedIndex = (
         continue;
       }
       ix[fieldName] = ix[fieldName] || {};
-      const terms = 
-        Array.isArray(record[fieldName])
-        ? record[fieldName]
-        : [record[fieldName]];
+      const fieldValue = record[fieldName];
+      const terms: FieldValue[] = 
+        Array.isArray(fieldValue)
+        ? fieldValue
+        : [fieldValue];
       for (const term of terms) {
         ix[fieldName][term] = ix[fieldName][term] || new Set();
         ix[fieldName][term].add(i);
-        termsDict[term] = term;
+        termsDict[term] = term.toString();
         traverseFacetUpwards(fieldName, term, i);
       }
     }
@@ -122,7 +127,7 @@ const CreateFacetedIndex = (
     })
   }
 
-  const search = (query: Query): SearchResult => {
+  const search = (query: Query): SearchResult<TRecord> => {
     const matching_ids =
       Object.keys(query).length === 0
         ? new Set(all_ids)
@@ -217,7 +222,7 @@ const CreateFacetedIndex = (
       facetTermCount: (facet: string, term: string) => 
         //((ix.data[facet] || new Set())[term]  || new Set()).size;
         ((term_buckets_by_facet_id[facet] || {})[term]  || {count:0}).count,
-      records: Array.from(matching_ids).map((i) => display_records[i])
+      records: Array.from(matching_ids).map((i) => records[i])
     };
   };
 

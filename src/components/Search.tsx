@@ -1,12 +1,12 @@
 import React from "react";
 import SearchBox from './SearchBox';
-import { GetDefaultSearchResult, FacetedIndexInstance, UISettingControl, UISettings, Query, SearchResult } from "../model";
+import { GetDefaultSearchResult, FacetedIndexInstance, UISettingControl, UISettings, Query, SearchResult, BaseRecord } from "../model";
 import Pagination from "./Pagination";
 import SearchFilters from "./SearchFilters";
 import ActiveFilters from "./ActiveFilters";
 import RecordTermTable from "./RecordTermTable";
 
-const Search = ({ 
+const Search = <TRecord extends BaseRecord>({ 
   ix,
   debug,
   uiSettingControls,
@@ -20,7 +20,7 @@ const Search = ({
   showTermTables,
   recordTemplate
 } : {
-  ix: FacetedIndexInstance;
+  ix: FacetedIndexInstance<TRecord>;
   debug: boolean;
   uiSettingControls: UISettingControl<number|string>[];
   uiSettings: UISettings;
@@ -31,9 +31,9 @@ const Search = ({
   currentPageNumber: number,
   setCurrentPageNumber: (p: number) => void,
   showTermTables?: boolean,
-  recordTemplate?: (record: object, searchResult: SearchResult) => React.ReactElement
+  recordTemplate?: (record: TRecord, searchResult: SearchResult<TRecord>) => React.ReactElement
 }) => {
-  const [searchResult, setSearchResult] = React.useState(GetDefaultSearchResult());
+  const [searchResult, setSearchResult] = React.useState(GetDefaultSearchResult<TRecord>());
 
   const pageSize = parseInt(uiSettings.pageSize);
 
@@ -77,7 +77,7 @@ const Search = ({
           searchResult={searchResult}
           toggleQueryTerm={toggleQueryTerm}
         />
-        <SearchFilters 
+        <SearchFilters
           {...{
             ix,
             debug,

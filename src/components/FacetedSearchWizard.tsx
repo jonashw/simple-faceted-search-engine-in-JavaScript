@@ -8,7 +8,8 @@ import {
 	defaultUiSettings,
 	uiSettingControls,
 	UISettings,
-	GetRecordsMetadata 
+	GetRecordsMetadata, 
+	BaseRecord
 } from "../model";
 import Search from "./Search";
 import RecordsExtractor from "./RecordsExtractor";
@@ -18,7 +19,7 @@ import { useSearchParams } from "react-router-dom";
 import IndexConfiguration from "./IndexConfiguration";
 import AppStateConverter from "../persistence/AppStateConverter";
 
-const defaultAppState: AppState = 
+const defaultAppState: AppState<BaseRecord> = 
 	{
 		dataUrl: 'sample-records.json',
 		dataState: undefined
@@ -34,12 +35,11 @@ function withNonNull<T>(
 	return handleNonNull(ambiguousValue as T);
 }
 
-const getJson = async (url:string): Promise<any> => {
+const getJson = async (url:string): Promise<BaseRecord[] | undefined> => {
 	try {
-		let response = await fetch(url);
-
+		const response = await fetch(url);
 		console.log('response',response, response.headers.get('last-modified'), Array.from(response.headers.entries()));
-		let data = await response.json();
+		const data = await response.json();
 		if (!data) {
 			return;
 		} else {
@@ -54,7 +54,7 @@ const getJson = async (url:string): Promise<any> => {
 
 export default function FacetedSearchWizard() {
 	const [urlParams, setUrlParams] = useSearchParams();
-	const [state,setState] = React.useState<AppState>(defaultAppState);
+	const [state,setState] = React.useState<AppState<BaseRecord>>(defaultAppState);
 	const [settingsVisible,setSettingsVisible] = React.useState<boolean>(
 		state.dataState?.indexConfigState?.searchState === undefined
 	);
@@ -75,17 +75,17 @@ export default function FacetedSearchWizard() {
 	}, [/*urlParams*/]); 
 
 	useEffect(() => {
-		let dto = AppStateConverter.toDto(state);
+		const dto = AppStateConverter.toDto(state);
 		console.log('dto',dto);
-		let urlParams = serialize(dto);
+		const urlParams = serialize(dto);
 		console.log(`to url: ?${urlParams}`);
 		setUrlParams(urlParams);
 	}, [state]);
 
-	const setDataState = (dataState: DataState | undefined) =>
+	const setDataState = (dataState: DataState<BaseRecord> | undefined) =>
 		setState({...state, dataState});
 
-	const setIndexConfigState = (indexConfigState: IndexConfigState | undefined) =>
+	const setIndexConfigState = (indexConfigState: IndexConfigState<BaseRecord> | undefined) =>
 		setDataState(
 			state.dataState === undefined 
 			? undefined 
@@ -94,7 +94,7 @@ export default function FacetedSearchWizard() {
 				indexConfigState
 			});
 
-	const setSearchState = (searchState: SearchState | undefined) =>
+	const setSearchState = (searchState: SearchState<BaseRecord> | undefined) =>
 		setIndexConfigState(
 			state.dataState?.indexConfigState === undefined 
 			? undefined 

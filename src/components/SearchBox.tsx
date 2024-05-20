@@ -1,5 +1,5 @@
 import React from "react";
-import { SearchResult, TermBucket } from "../model";
+import { BaseRecord, SearchResult, TermBucket } from "../model";
 
 type MatchSegment = {text: string, match: boolean};
 
@@ -36,11 +36,11 @@ const termMatches = (terms: TermBucket[], q: string): TermMatch[] =>
 	.filter(tsm => tsm.segments !== undefined)
 	.map(tm => tm as TermMatch);
 
-const SearchBox = ({
+const SearchBox = <TRecord extends BaseRecord>({
 	searchResult,
 	toggleQueryTerm
 } : {
-	searchResult: SearchResult,
+	searchResult: SearchResult<TRecord>,
 	toggleQueryTerm: (facetId: string, term: string) => void
 }) => {
 	const [active,setActive] = React.useState(false);

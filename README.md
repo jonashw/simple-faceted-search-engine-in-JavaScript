@@ -16,4 +16,7 @@ Features:
 - record values can be single-value or multi-value (a primitive or an array of primitives)
 - The UI allows you to paste your own records data in JSON format and configure the search index appropriately to your data
 
-Try it out: https://faceted-search.netlify.app/
+Try it out: 
+
+- https://faceted-search.jonashw.dev/new (custom display against sample data)
+- https://faceted-search.jonashw.dev (provide your own data)

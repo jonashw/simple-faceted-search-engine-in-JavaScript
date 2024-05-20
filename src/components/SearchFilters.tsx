@@ -1,8 +1,8 @@
 import React from "react";
 import Select from 'react-select';
-import { FacetedIndexInstance, HierarchicalTermBucket, Query, SearchResult, TermBucket } from "../model";
+import { FacetedIndexInstance, BaseRecord, HierarchicalTermBucket, Query, SearchResult, TermBucket } from "../model";
 
-const SearchFilters = (
+const SearchFilters = <TRecord extends BaseRecord>(
   {
     ix,
     query,
@@ -11,18 +11,18 @@ const SearchFilters = (
     searchResult,
     setSearchResult
   } : {
-    ix: FacetedIndexInstance,
+    ix: FacetedIndexInstance<TRecord>,
     query: Query,
     setQuery: (q: Query) => void,
     debug: boolean,
-    searchResult: SearchResult,
-    setSearchResult: (sr: SearchResult) => void
+    searchResult: SearchResult<TRecord>,
+    setSearchResult: (sr: SearchResult<TRecord>) => void
   }) => {
   const [activeTerms,setActiveTerms] = React.useState(new Set());
   const term_is_selected = (t: string) => activeTerms.has(t);
 
   React.useEffect(() => {
-    let allTerms = Object.values(query).flatMap(terms => terms);
+    const allTerms = Object.values(query).flatMap(terms => terms);
     setActiveTerms(new Set(allTerms));
   }, [query])
 
@@ -35,10 +35,10 @@ const SearchFilters = (
         //console.log('searching',query,r);
       }, 0);
     })
-  }, [query])
+  }, [ix, query, setSearchResult])
 
   const setFacetQueryTerms = (facet_id: string, terms: string[]) => {
-    let newQuery = { ...query, [facet_id]: terms }
+    const newQuery = { ...query, [facet_id]: terms }
     if (newQuery[facet_id].length === 0) {
       delete newQuery[facet_id];
     }
@@ -54,12 +54,12 @@ const SearchFilters = (
     term_buckets: TermBucket[],
     term_is_selected: (t: string) => boolean
   }) => {
-    let options = term_buckets.map(t => ({
+    const options = term_buckets.map(t => ({
       value: t.term,
       in_query: t.in_query,
       label: `${t.term} (${t.count})`
     }));
-    let selectedOptions = options.filter(o => o.in_query);
+    const selectedOptions = options.filter(o => o.in_query);
     return <Select 
       onChange={newSelectedOptions => setFacetQueryTerms(facet_id, newSelectedOptions.map(v => v.value) ) }
       getOptionValue={o => o.value}
@@ -83,7 +83,7 @@ const SearchFilters = (
   }) =>
     <div>
       {term_buckets.map((t,i) => {
-        let selected = term_is_selected(t.term);
+        const selected = term_is_selected(t.term);
         return (
           <div key={i}>
             <a key={t.term}
@@ -92,7 +92,7 @@ const SearchFilters = (
               style={{ textDecoration: 'none', fontWeight: selected ? '700' : 'normal', display:'block'}}
               onClick={(e) => {
                 e.preventDefault();
-                let newQuery = ix.toggleQueryTerm(query, facet_id, t.term);
+                const newQuery = ix.toggleQueryTerm(query, facet_id, t.term);
                 setQuery(newQuery);
               }}
             >

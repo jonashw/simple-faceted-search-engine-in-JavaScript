@@ -27,7 +27,7 @@ type MyRecord = {
     name: string;
 };
 
-const ix = CreateFacetedIndex(Array(5).fill([
+const ix = CreateFacetedIndex<MyRecord>(Array(5).fill([
     {
         location: 'Sacramento',
         rating: 2
@@ -96,8 +96,8 @@ export function New(){
             </div>
         </nav>
         <div className="container-fluid">
-            <Search {...{
-                recordTemplate: (r: any, searchResult) => (
+            <Search<MyRecord> {...{
+                recordTemplate: (r, searchResult) => (
                     <>
                         <div className="d-flex justify-content-between">
                             <h5>{r.location}</h5>
